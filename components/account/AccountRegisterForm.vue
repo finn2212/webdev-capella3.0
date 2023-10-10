@@ -32,6 +32,7 @@ watch(isLoggedIn, (isLoggedIn) => {
 const initialState = {
   requestedGroupId: props.customerGroupId,
   salutationId: "",
+  acceptedDataProtection: true,
   firstName: "",
   lastName: "",
   email: "",
