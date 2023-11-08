@@ -93,7 +93,8 @@ export default defineNuxtConfig({
     // for presets, theme config, ... look at the uno.config.ts file
   },
   css: [
-    "@unocss/reset/tailwind-compat.css", // needed to reset styles see https://unocss.dev/guide/style-reset (@unocss/reset)
+    "@unocss/reset/tailwind-compat.css",
+    'bootstrap/dist/css/bootstrap.min.css' // needed to reset styles see https://unocss.dev/guide/style-reset (@unocss/reset)
   ],
   router: {
     options: {
