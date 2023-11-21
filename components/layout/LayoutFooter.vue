@@ -143,7 +143,7 @@ const gridColumns = computed<number>(() =>
           <div class="col-12 col-md-4">
             <div class="col">
               <h5 class="mt-4 pt-4">Wir sind Mitglied im:</h5>
-              <img src="@/assets/svg/bvdm_logo_transparent 1.svg" style="margin-top: 10px;" alt="Avatar">
+              <!-- <img src="@/assets/svg/bvdm_logo_transparent 1.svg" style="margin-top: 10px;" alt="Avatar"> -->
 
             </div>
           </div>
