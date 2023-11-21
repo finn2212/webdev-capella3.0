@@ -11,9 +11,9 @@ export default defineNuxtConfig({
     public: {
       shopware: {
         shopwareEndpoint: "https://s23511.creoline.cloud/webdev-staging",
-        shopwareAccessToken: "SWSCBHPJTKG0ADNQWLF2YVRWUQ",
+        shopwareAccessToken: "SWSCUHZMWDM2TTLINJFXMKG3TW",
         devStorefrontUrl: "",
-      },
+      }
     },
   },
   routeRules: {

@@ -2,6 +2,7 @@
 import { ref, onBeforeMount } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
+import { Product } from "@shopware-pwa/types";
 
 interface ProductItem {
   product: any; // Replace 'any' with a more specific type if known
@@ -72,6 +73,219 @@ const pdfData2 = ref<PdfData>({ name: "" });
 const pdfData3 = ref<PdfData>({ name: "" });
 const isLoading = ref(false);
 const products = ref<ProductItem[]>([]);
+const fetchedProduct = ref<Product>({
+  active: false,
+  apiAlias: 'product',
+  autoIncrement: 0,
+  available: false,
+  availableStock: null,
+  calculatedCheapestPrice: {
+    unitPrice: 0,
+    quantity: 0,
+    totalPrice: 0,
+    calculatedTaxes: [],
+    taxRules: [],
+    referencePrice: {
+      price: 0,
+      purchaseUnit: 0,
+      referenceUnit: '',
+      unitName: '',
+      apiAlias: undefined
+    },
+    hasRange: undefined,
+    listPrice: null,
+    regulationPrice: null,
+    apiAlias: '',
+    variantId: undefined
+  },
+  calculatedListingPrice: null,
+  calculatedMaxPurchase: 0,
+  calculatedPrice: {
+    unitPrice: 0,
+    quantity: 0,
+    totalPrice: 0,
+    calculatedTaxes: [],
+    taxRules: [],
+    referencePrice: {
+      price: 0,
+      purchaseUnit: 0,
+      referenceUnit: '',
+      unitName: '',
+      apiAlias: undefined
+    },
+    hasRange: undefined,
+    listPrice: null,
+    regulationPrice: null,
+    apiAlias: '',
+    variantId: undefined
+  },
+  calculatedPrices: [],
+  canonicalProduct: undefined,
+  canonicalProductId: null,
+  categories: null,
+  categoriesRo: null,
+  categoryIds: [],
+  categoryTree: null,
+  cheapestPrice: null,
+  childCount: null,
+  children: null,
+  cmsPage: null,
+  cmsPageId: null,
+  configuratorSettings: null,
+  cover: {
+    productId: '',
+    mediaId: '',
+    position: 0,
+    media: {
+      mimeType: '',
+      fileExtension: '',
+      fileSize: 0,
+      title: null,
+      metaData: {
+        hash: undefined,
+        type: 0,
+        width: 0,
+        height: 0
+      },
+      uploadedAt: null,
+      alt: null,
+      url: '',
+      fileName: '',
+      translations: null,
+      thumbnails: [],
+      hasFile: false,
+      private: false,
+      _uniqueIdentifier: undefined,
+      versionId: undefined,
+      translated: {
+        alt: null,
+        title: null,
+        customFields: null
+      },
+      createdAt: '',
+      updatedAt: null,
+      extensions: undefined,
+      id: '',
+      customFields: null,
+      apiAlias: 'media'
+    },
+    customFields: null,
+    _uniqueIdentifier: undefined,
+    versionId: '',
+    translated: [],
+    createdAt: '',
+    updatedAt: null,
+    extensions: undefined,
+    id: '',
+    apiAlias: 'product_media'
+  },
+  coverId: null,
+  createdAt: '',
+  crossSellings: null,
+  customFields: {},
+  updatedAt: null,
+  deliveryTime: {
+    id: '',
+    name: null,
+    min: 0,
+    max: 0,
+    unit: '',
+    shippingMethods: undefined,
+    translations: undefined,
+    translated: {
+      customFields: {},
+      name: ''
+    },
+    customFields: null,
+    createdAt: '',
+    updatedAt: null,
+    apiAlias: ''
+  },
+  deliveryTimeId: null,
+  description: null,
+  displayGroup: '',
+  downloads: undefined,
+  ean: null,
+  extensions: [],
+  height: null,
+  id: '',
+  isCloseout: null,
+  isNew: false,
+  keywords: null,
+  length: null,
+  listingPrices: null,
+  mainCategories: null,
+  manufacturer: null,
+  manufacturerId: null,
+  manufacturerNumber: null,
+  markAsTopseller: null,
+  maxPurchase: null,
+  media: [],
+  metaDescription: null,
+  metaTitle: null,
+  minPurchase: null,
+  name: null,
+  options: null,
+  packUnit: null,
+  packUnitPlural: null,
+  parent: null,
+  parentId: null,
+  parentVersionId: null,
+  price: null,
+  prices: null,
+  productManufacturerVersionId: null,
+  productNumber: '',
+  productReviews: null,
+  properties: null,
+  propertyIds: null,
+  purchasePrice: null,
+  purchaseSteps: null,
+  purchaseUnit: null,
+  ratingAverage: null,
+  referenceUnit: null,
+  releaseDate: null,
+  restockTime: 0,
+  sales: 0,
+  seoCategory: null,
+  seoUrls: null,
+  shippingFree: null,
+  sortedProperties: null,
+  states: [],
+  stock: 0,
+  streamIds: null,
+  streams: null,
+  tagIds: null,
+  tags: null,
+  tax: {
+    taxRate: 0,
+    name: '',
+    products: undefined,
+    customFields: null,
+    translated: [],
+    createdAt: '',
+    updatedAt: null,
+    position: 0,
+    id: '',
+    apiAlias: ''
+  },
+  taxId: null,
+  translated: {
+    name: null,
+    description: '',
+    metaDescription: null,
+    keywords: null,
+    metaTitle: null,
+    customFields: {},
+    packUnit: null,
+    packUnitPlural: null
+  },
+  translations: null,
+  unit: null,
+  unitId: null,
+  versionId: '',
+  weight: null,
+  width: null
+});
 
 const voices = ref<Voice[]>([]); // Array of 'Voice'
 const baseVoicePrice = ref(16.4);
@@ -100,9 +314,9 @@ onMounted(() => {
 
 
 const swEnvironment = useRuntimeConfig(); // Nuxt 3 way to access runtime config
-if (typeof swEnvironment.public.shopware_endpoint === 'string' && typeof swEnvironment.public.shopware_accesstoken === 'string') {
-  swEndPoint.value = swEnvironment.public.shopware_endpoint;
-  accesstoken.value = swEnvironment.public.shopware_accesstoken;
+if (typeof swEnvironment.public.shopware.shopwareEndpoint === 'string' && typeof swEnvironment.public.shopware.shopwareAccessToken === 'string') {
+  swEndPoint.value = swEnvironment.public.shopware.shopwareEndpoint;
+  accesstoken.value = swEnvironment.public.shopware.shopwareAccessToken;
 } else {
   console.error('shopware_endpoint is not a string');
 }
@@ -164,8 +378,42 @@ const createProduct = async (accessToken: string, productData: any) => {
     throw error;
   }
 };
+const preCheck = () => {
+  createAndFetch();
+  // if (validate()) {
+  //   createAndFetch();
+  // }
+};
+const validate = () => {
+  if (projectType.value === 1) {
+    if (pdf1.value === "" || productName.value === "") {
+      errorMassage.value = "Bitte laden Sie eine Notendatei hoch und vergeben Sie einen Projektnamen, bevor Sie das Produkt in Ihren Warenkorb legen.";
+      open();
+      return false;
+    } else {
+      return true;
+    }
+  } else if (projectType.value === 2) {
+    if (pdf1.value === "" || productName.value === "" || voices.value.length === 0) {
+      errorMassage.value = "Bitte laden Sie eine Notendatei hoch, vergeben sie einen Projektnamen und fügen Sie eine Stimme hinzu bevor Sie das Produkt in Ihren Warenkorb legen";
+      open();
+      return false;
+    } else {
+      return true;
+    }
+  } else if (projectType.value === 3 || productName.value === "") {
+    if (voices.value.length === 0) {
+      errorMassage.value = "Bitte vergeben Sie eine Stimmenbezeichnung und laden Sie eine Notendatei hoch, bevor Sie die Stimme dem Projekt hinzufügen.";
+      open();
+      return false;
+    } else {
+      return true;
+    }
+  }
+};
 
 const createAndFetch = async () => {
+
   try {
     isLoading.value = true;
     const accessToken = await authenticate();
@@ -173,12 +421,11 @@ const createAndFetch = async () => {
     const productData = getProductData(); // Ensure getProductData is defined
     await createProduct(accessToken, productData);
     console.log("Product created. Fetching product...");
-    const product = await fetchProduct(productData.productNumber); // Ensure fetchProduct is defined
+    const response = await fetchProduct(productData.productNumber); // Ensure fetchProduct is defined
+    fetchedProduct.value = response.elements[0];
+   
     console.log("Product Fetched. Adding Product to Cart...");
-    products.value.push({
-      product: product.elements[0],
-      quantity: quantitiy.value
-    });
+    addToCartProxy();
     isLoading.value = false;
     reset(true); // Ensure reset is defined
   } catch (error) {
@@ -189,6 +436,11 @@ const createAndFetch = async () => {
       console.error("An unknown error occurred in createAndFetch process.");
     }
   }
+};
+const { addToCart, quantity } = useAddToCart(fetchedProduct);
+
+const addToCartProxy = async () => {
+  await addToCart();
 };
 const getDesc = () => {
   let desc = `<span>Projekt Name: ${productName.value}</span><br/>` +
@@ -370,7 +622,6 @@ const calculatePrice = () => {
     }
     singlePrice.value = handlingPrice.value + (pagePrice.value * pagesToUse) + bindingTypePrice.value + totalVoicePrice.value + envelopedPrice.value;
   }
-  debugger;
 };
 
 const calculateDiscount = () => {
@@ -564,6 +815,7 @@ export default {
 </script>
     
 <template>
+  <LayoutBreadcrumbs />
   <div>
     <!--Sektion mit 3 Karten und Bider-->
     <section class="pt-5">
