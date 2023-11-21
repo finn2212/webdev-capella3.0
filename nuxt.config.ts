@@ -2,11 +2,7 @@
 export default defineNuxtConfig({
   runtimeConfig: {
     shopware: {
-      /**
-       * SSR Shopware Endpoint
-       * More here: https://frontends.shopware.com/getting-started/templates/custom-vue-project.html#shopware-endpoint-on-the-ssr-mode
-       */
-      shopwareEndpoint: "",
+      shopwareEndpoint: "https://s23511.creoline.cloud/webdev-staging"
     },
     public: {
       shopware: {
