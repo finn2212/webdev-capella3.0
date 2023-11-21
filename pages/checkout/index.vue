@@ -120,6 +120,7 @@ const state = reactive({
   salutationId: "",
   firstName: "",
   lastName: "",
+  acceptedDataProtection: true,
   email: "",
   password: "",
   guest: false,

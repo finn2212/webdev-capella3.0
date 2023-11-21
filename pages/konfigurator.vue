@@ -21,11 +21,7 @@ interface PdfData {
   // Include other properties as needed, such as URL or size
 }
 
-
-
 // const route = useRoute();
-
-
 // Primitive values using ref
 const price = ref(0);
 const priceString = ref('0');
@@ -413,28 +409,29 @@ const validate = () => {
 };
 
 const createAndFetch = async () => {
-
   try {
     isLoading.value = true;
     const accessToken = await authenticate();
     console.log("Prechecks done. Creating product...");
-    const productData = getProductData(); // Ensure getProductData is defined
+    const productData = getProductData();
+
     await createProduct(accessToken, productData);
     console.log("Product created. Fetching product...");
-    const response = await fetchProduct(productData.productNumber); // Ensure fetchProduct is defined
+    const response = await fetchProduct(productData.productNumber);
     fetchedProduct.value = response.elements[0];
-   
     console.log("Product Fetched. Adding Product to Cart...");
-    addToCartProxy();
-    isLoading.value = false;
-    reset(true); // Ensure reset is defined
+    await addToCartProxy();
+    //pushSuccess("Product successfully added to cart."); // Assuming pushSuccess is defined
   } catch (error) {
-    isLoading.value = false;
     if (error instanceof Error) {
       console.error("createAndFetch process error:", error.message);
+      //pushError("Error adding product to cart."); // Error feedback
     } else {
       console.error("An unknown error occurred in createAndFetch process.");
     }
+  } finally {
+    isLoading.value = false;
+    reset(true);
   }
 };
 const { addToCart, quantity } = useAddToCart(fetchedProduct);
