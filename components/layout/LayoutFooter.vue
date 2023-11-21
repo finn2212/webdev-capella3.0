@@ -17,71 +17,144 @@ const gridColumns = computed<number>(() =>
 
 <template>
   <footer class="px-4 sm:px-6 mt-2 lg:mt-8">
-    <menu class="border-t-2 border-gray-100 flex justify-center">
-      <div
-        class="py-10 w-full max-w-screen-xl"
-        :class="`grid grid-cols-2 md:grid-cols-${gridColumns}`"
-      >
-        <div class="hidden md:block">
-          <NuxtLink :to="formatLink(`/`)">
-            <span class="sr-only">Shopware</span>
-            <img
-              class="h-15 w-auto sm:h-15"
-              src="/logo.svg"
-              alt="logo of the shop"
-            />
-          </NuxtLink>
-        </div>
-        <div
-          v-for="navigationElement in navigationElements"
-          :key="navigationElement.id"
-        >
-          <h3 class="mb-5">
-            {{ getTranslatedProperty(navigationElement, "name") }}
-          </h3>
-          <template v-if="navigationElement.childCount > 0">
-            <ul class="list-none p-0 mb-5">
-              <li
-                v-for="navigationChild in navigationElement.children"
-                :key="navigationChild.id"
-                class="pb-3 md:pb-1"
-              >
-                <NuxtLink
-                  :target="
-                    navigationChild.externalLink || navigationChild.linkNewTab
-                      ? '_blank'
-                      : ''
-                  "
-                  :to="formatLink(getCategoryRoute(navigationChild))"
-                  class="text-base font-normal text-gray-500 hover:text-gray-900"
-                >
-                  {{ getTranslatedProperty(navigationChild, "name") }}
+    <div class="grey" style="margin-top: 100px;">
+      <div class="container justify-content-center">
+        <div class="row pt-4">
+          <div class="col-12 col-md-4">
+            <img src="@/assets/svg/phone_forwarded.svg" style="margin-right: 10px;" alt="Avatar">
+            <h5 class="thick pt-4">
+              Service-Hotline
+            </h5>
+            <p>
+              Unterstützung und Beratung unter:
+              <br>
+            <h5 class="inline">
+              08294 / 8601888
+            </h5>
+            <br>
+
+            Mo-Fr, 10:00 - 14:00 Uhr
+
+            <br>
+            Oder über unser Kontaktformular.
+            </p>
+          </div>
+          <div class="col-12 col-md-4">
+            <img src="@/assets/svg/local_police.svg" style="margin-right: 10px;" alt="Avatar">
+            <h5 class="pt-4 thick">
+              Rechtliches
+            </h5>
+            <div class="row justify-content-start">
+              <div class="col align-self-start">
+                <NuxtLink class="a" to="/contact">
+
+                  Impressum
+
                 </NuxtLink>
-              </li>
-            </ul>
-          </template>
+              </div>
+            </div>
+            <div class="row justify-content-start">
+              <div class="col align-self-start">
+                <NuxtLink class="a" to="/agb">
+
+                  AGB
+
+                </NuxtLink>
+              </div>
+            </div>
+            <div class="row justify-content-start">
+              <div class="col align-self-start">
+                <NuxtLink class="a" to="/shipping">
+
+                  Zahlung & Versand
+
+                </NuxtLink>
+              </div>
+            </div>
+            <div class="row justify-content-start">
+              <div class="col-12 col-md-4 align-self-start">
+                <NuxtLink class="a" to="/datenschutz">
+
+                  Datenschutz
+
+                </NuxtLink>
+              </div>
+            </div>
+            <div class="row justify-content-start">
+              <div class="col-12 col-md-4 align-self-start">
+                <NuxtLink class="a" to="/wiederrufsrecht">
+
+                  Widerrufserklärung
+
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <img src="@/assets/svg/award_star.svg" style="margin-right: 10px;" alt="Avatar">
+            <h5 class="pt-4">
+              Sicher einkaufen
+            </h5>
+            <p>
+              Bei capellaprint kaufen Sie sicher ein. Dies wird ermöglicht durch SSL-Verschlüsselung, bei der eine
+              sichere Verbindung zwischen unserem Server und Ihrem Browser aufgebaut wird.
+            </p>
+            <p class="thick">
+              Sicheres Einkaufen nach DSGVO Standards
+            </p>
+          </div>
         </div>
-        <div class="hidden md:block">
-          <ul class="list-none">
-            <li class="pb-1">
-              <a
-                href="mailto:info@shopware.com"
-                class="text-base font-medium text-gray-500 hover:text-gray-900"
-                >info@shopware.com</a
-              >
-            </li>
-            <li class="pb-1">
-              <a
-                href="tel:0080074676260"
-                class="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                Worldwide: 00 800 746 7626 0
-              </a>
-            </li>
-          </ul>
-          <LanguageSwitcher />
+        <div class="row pt-4">
+          <div class="col-12 col-md-4">
+            <div class="col">
+              <img src="@/assets/svg/local_shipping1.svg" style="margin-right: 10px;" alt="Avatar">
+              <h5 class="pt-2">
+                Versandarten
+              </h5>
+              <div class="row">
+                <div class="col-auto" style="padding: 0px !important">
+                  <img src="@/assets/svg/rhweb-dhl 1.svg" alt="Avatar">
+                </div>
+                <div class="col-auto" style="padding: 0px !important">
+                  <img src="@/assets/svg/rhweb-post-germany 1.svg" alt="Avatar">
+                </div>
+                <div class="col-auto" style="padding: 0px !important">
+                  <img src="@/assets/svg/rhweb-gogreen 1.svg" alt="Avatar">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="col">
+              <img src="@/assets/svg/credit_score.svg" style="margin-right: 10px;" alt="Avatar">
+              <h5 class="pt-2">
+                Zahlungsarten
+              </h5>
+              <div class="row">
+                <div class="col-auto" v-for="paymentMethod in paymentMethods"
+                  style="padding: 0px !important; margin-right: 10px;">
+                  <img :src="paymentMethod.media.url" alt="Avatar" style="height: 45px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="col">
+              <h5 class="mt-4 pt-4">Wir sind Mitglied im:</h5>
+              <img src="@/assets/svg/bvdm_logo_transparent 1.svg" style="margin-top: 10px;" alt="Avatar">
+
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 100px; padding-bottom: 40px; text-align: center;">
+          <div class="col">
+            * Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten, wenn nicht anders angegeben.
+            © 2023 AURIOPRINT – Alle Rechte vorbehalten.
+          </div>
         </div>
       </div>
-    </menu>
+    </div>
   </footer>
 </template>
