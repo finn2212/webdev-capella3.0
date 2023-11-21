@@ -21,37 +21,37 @@ export default defineNuxtConfig({
       isr: 60 * 60 * 24,
     },
     "/checkout": {
-      ssr: false,
+      ssr: true,
       headers: {
         "Cache-Control": "no-cache, no-store, must-revalidate",
       },
     },
     "/checkout/**": {
-      ssr: false,
+      ssr: true,
     },
     "/login": {
       ssr: false,
     },
     "/register": {
-      ssr: false,
+      ssr: true,
     },
     "/reset-password": {
-      ssr: false,
+      ssr: true,
     },
     "/wishlist": {
-      ssr: false,
+      ssr: true,
     },
     "/account": {
-      ssr: false,
+      ssr: true,
     },
     "/account/**": {
-      ssr: false,
+      ssr: true,
     },
     "/search": {
-      ssr: false,
+      ssr: true,
     },
     "/search/**": {
-      ssr: false,
+      ssr: true,
     },
     "/**": {
       isr: 60 * 60 * 24,
