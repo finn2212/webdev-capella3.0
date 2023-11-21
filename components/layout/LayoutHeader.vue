@@ -67,23 +67,9 @@ const sidebarController = useModal();
         <LayoutTopNavigation />
         <div class="flex flex-1"></div>
 
-        <div class="hidden md:flex md:min-w-1/4">
-          <LayoutStoreSearch />
-        </div>
 
         <div class="flex items-center justify-end">
           <AccountMenu />
-          <div class="flex ml-4 flow-root lg:ml-6">
-            <NuxtLink class="group -m-2 p-2 flex items-center relative text-center" aria-label="wishlist"
-              data-testid="wishlist-button" :to="formatLink(`/wishlist`)">
-              <div
-                class="w-7 h-7 i-carbon-favorite text-gray-600 hover:text-brand-primary hover:animate-count-infinite hover:animate-heart-beat" />
-              <span v-if="wishlistCount > 0"
-                class="text-3 font-sm text-white absolute bg-red-600 rounded-full min-w-5 min-h-5 top-0 right-0 leading-5">
-                {{ wishlistCount }}
-              </span>
-            </NuxtLink>
-          </div>
           <!-- Cart -->
           <div class="flex ml-4 flow-root lg:ml-6">
             <button class="group bg-transparent -m-2 p-2 flex items-center relative" aria-label="Mini cart"

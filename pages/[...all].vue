@@ -74,7 +74,7 @@ function render() {
             Ihre Partituren, perfekt gedruckt
           </h2>
           <p class="p-grid">
-          <p class="thick" style="margin:0px">
+          <p class="thick" style="margin:0p">
             Jetzt neu:
           </p>
           Mit Ihrer capella-Software sind Sie es gewohnt, Partituren in bester Notensatzmanier erstellen zu können; mit
