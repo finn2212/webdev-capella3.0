@@ -114,13 +114,13 @@ const gridColumns = computed<number>(() =>
               </h5>
               <div class="row">
                 <div class="col-auto" style="padding: 0px !important">
-                  <img src="@/assets/svg/rhweb-dhl 1.svg" alt="Avatar">
+                  <!-- <img src="@/assets/svg/rhweb-dhl 1.svg" alt="Avatar"> -->
                 </div>
                 <div class="col-auto" style="padding: 0px !important">
-                  <img src="@/assets/svg/rhweb-post-germany 1.svg" alt="Avatar">
+                  <!-- <img src="@/assets/svg/rhweb-post-germany 1.svg" alt="Avatar"> -->
                 </div>
                 <div class="col-auto" style="padding: 0px !important">
-                  <img src="@/assets/svg/rhweb-gogreen 1.svg" alt="Avatar">
+                  <!-- <img src="@/assets/svg/rhweb-gogreen 1.svg" alt="Avatar"> -->
                 </div>
               </div>
             </div>
