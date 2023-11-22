@@ -4,7 +4,7 @@ const { isLoggedIn, logout, user } = useUser();
 const loginModalController = useModal();
 const localePath = useLocalePath();
 const { formatLink } = useInternationalization(localePath);
-const isAccountMenuOpen = ref(false);
+const isAccountMenuOpen = ref(true);
 
 async function invokeLogout() {
   await logout();

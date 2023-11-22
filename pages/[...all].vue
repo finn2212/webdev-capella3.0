@@ -12,6 +12,28 @@ import {
   useNavigationSearch,
 } from "@shopware-pwa/composables-next";
 import { type SeoUrl } from "@shopware-pwa/types";
+import { ref } from 'vue'
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/24/solid";
+import {
+  Bars3Icon,
+  ChartPieIcon,
+  CursorArrowRaysIcon,
+  FingerPrintIcon,
+  SquaresPlusIcon,
+  XMarkIcon,
+} from '@heroicons/vue/24/solid';
+
+import { ChevronDownIcon, PhoneIcon, PlayCircleIcon, RectangleGroupIcon } from '@heroicons/vue/24/solid'
+const people = [
+  { name: 'Wade Cooper' },
+  { name: 'Arlene Mccoy' },
+  { name: 'Devon Webb' },
+  { name: 'Tom Cook' },
+  { name: 'Tanya Fox' },
+  { name: 'Hellen Schmidt' }
+]
+
+const selectedPerson = ref(people[0])
 const { clearBreadcrumbs } = useBreadcrumbs();
 
 const NOT_FOUND_COMPONENT = "errors/RoutingNotFound";
@@ -63,6 +85,7 @@ function render() {
 
 <template>
   <section>
+
     <LayoutBreadcrumbs />
     <div class="container justify-content-center">
       <div class="row">

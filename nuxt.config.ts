@@ -17,37 +17,27 @@ export default defineNuxtConfig({
       isr: 60 * 60 * 24,
     },
     "/checkout": {
-      ssr: true,
       headers: {
         "Cache-Control": "no-cache, no-store, must-revalidate",
       },
     },
     "/checkout/**": {
-      ssr: true,
     },
     "/login": {
-      ssr: false,
     },
     "/register": {
-      ssr: true,
     },
     "/reset-password": {
-      ssr: true,
     },
     "/wishlist": {
-      ssr: true,
     },
     "/account": {
-      ssr: true,
     },
     "/account/**": {
-      ssr: true,
     },
     "/search": {
-      ssr: true,
     },
     "/search/**": {
-      ssr: true,
     },
     "/**": {
       isr: 60 * 60 * 24,
@@ -62,12 +52,13 @@ export default defineNuxtConfig({
     strict: true,
   },
   modules: [
+    "nuxt-headlessui",
     "@vueuse/nuxt",
     "@unocss/nuxt",
     "@shopware-pwa/nuxt3-module",
     "@shopware-pwa/cms-base",
     "@nuxt/devtools",
-    "@nuxtjs/i18n",
+    "@nuxtjs/i18n"
   ],
   // components: true,
   components: {
@@ -92,6 +83,9 @@ export default defineNuxtConfig({
     "@unocss/reset/tailwind-compat.css",
     'bootstrap/dist/css/bootstrap.min.css' // needed to reset styles see https://unocss.dev/guide/style-reset (@unocss/reset)
   ],
+  headlessui: {
+    prefix: ''
+  }, 
   router: {
     options: {
       linkExactActiveClass: "text-brand-primary",
