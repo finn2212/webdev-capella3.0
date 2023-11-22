@@ -73,13 +73,16 @@ function render() {
           <h2 class="heading-grid">
             Ihre Partituren, perfekt gedruckt
           </h2>
-          <p class="p-grid">
           <p class="thick" style="margin:0p">
             Jetzt neu:
           </p>
-          Mit Ihrer capella-Software sind Sie es gewohnt, Partituren in bester Notensatzmanier erstellen zu können; mit
-          capellaprint lassen Sie diese künftig auch in Musikverlagsqualität drucken.
+          <p class="p-grid">
+
+            Mit Ihrer capella-Software sind Sie es gewohnt, Partituren in bester Notensatzmanier erstellen zu können;
+            mit
+            capellaprint lassen Sie diese künftig auch in Musikverlagsqualität drucken.
           </p>
+
           <div class="row align-items-end">
             <div class="col">
               <NuxtLink class="a" to="/konfigurator">

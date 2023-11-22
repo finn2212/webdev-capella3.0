@@ -63,11 +63,6 @@ const sidebarController = useModal();
             <LayoutSideMenu />
           </div>
         </div>
-
-        <LayoutTopNavigation />
-        <div class="flex flex-1"></div>
-
-
         <div class="flex items-center justify-end">
           <AccountMenu />
           <!-- Cart -->
