@@ -9,10 +9,10 @@ import { getPrefix } from "./i18n/src/helpers/prefix";
 useBreadcrumbs();
 
 useHead({
-  title: "Shopware Demo store",
-  meta: [{ name: "description", content: "Shopware Demo store" }],
+  title: "capellaprint - günstig Musiknoten drucken lassen",
+  meta: [{ name: "capellaprint", content: "günstig Musiknoten drucken lassen" }],
   htmlAttrs: {
-    lang: "en",
+    lang: "de",
   },
 });
 
