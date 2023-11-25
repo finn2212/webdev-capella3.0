@@ -62,7 +62,7 @@ export default defineNuxtConfig({
     "@shopware-pwa/cms-base",
     "@nuxt/devtools",
     "@nuxtjs/i18n",
-    '@nuxtjs/tailwindcss'
+    "@nuxtjs/tailwindcss"
   ],
 
   // components: true,
@@ -89,9 +89,8 @@ export default defineNuxtConfig({
   },
 
   css: [
-    '~/assets/css/tailwind.css',
-    '~/assets/css/styles.css',
-    // 'bootstrap/dist/css/bootstrap.min.css' // needed to reset styles see https://unocss.dev/guide/style-reset (@unocss/reset)
+    //"@unocss/reset/tailwind-compat.css",
+    'bootstrap/dist/css/bootstrap.min.css' // needed to reset styles see https://unocss.dev/guide/style-reset (@unocss/reset)
   ],
 
   postcss: {
@@ -139,12 +138,6 @@ export default defineNuxtConfig({
     ],
     experimental: {
       jsTsFormatResource: true,
-    },
-  },
-
-  devtools: {
-    timeline: {
-      enabled: true,
     },
   },
 });

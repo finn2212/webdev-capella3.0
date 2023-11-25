@@ -156,4 +156,95 @@ onMounted(() => {
 .grey {
   background: #F5F5F5;
 }
+
+.uploadBtn {
+  background-color: #F5F5F5 !important;
+  color:#000000;
+  border-style: solid !important;
+  border-width: 1px !important;
+  border-color: black !important;
+}
+
+.selectBtn {
+  background-color: #F5F5F5 !important;
+  border-radius: 7px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.red {
+  background: #D95A4E;
+}
+
+.bred {
+  background-color: #D5E7F2 !important;
+}
+
+.accordion-item {
+  color: var(--bs-accordion-color);
+  background-color: #D5E7F2 !important;
+  border: 0 !important;
+}
+
+.noborder {
+  border: 0px
+}
+
+.small {
+
+  font-size: 13px;
+}
+
+.accordion-body {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.top {
+  margin-top: 140px !important;
+}
+
+@media only screen and (max-width: 1024px) {
+  .top {
+    margin-top: 40px !important;
+  }
+}
+.red-font{
+  color: red
+}
+
+.btnMenu {
+  border: 0px;
+  background-color: transparent;
+}
+
+.h1,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Noto Sans', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.h2 {
+  font-size: 30px !important;
+  font-family: 'Noto Sans', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.thick {
+  font-weight: 700;
+  color: #000000;
+}
+
+.p-5 {
+  padding: 35px !important;
+}
 </style>
