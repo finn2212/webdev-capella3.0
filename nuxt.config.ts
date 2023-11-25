@@ -80,9 +80,15 @@ export default defineNuxtConfig({
     // for presets, theme config, ... look at the uno.config.ts file
   },
   css: [
-    "@unocss/reset/tailwind-compat.css",
+    '~/assets/css/tailwind.css',
     'bootstrap/dist/css/bootstrap.min.css' // needed to reset styles see https://unocss.dev/guide/style-reset (@unocss/reset)
   ],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   headlessui: {
     prefix: ''
   }, 
