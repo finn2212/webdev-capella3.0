@@ -81,6 +81,7 @@ export default defineNuxtConfig({
   },
   css: [
     '~/assets/css/tailwind.css',
+    '~/assets/css/styles.css',
     'bootstrap/dist/css/bootstrap.min.css' // needed to reset styles see https://unocss.dev/guide/style-reset (@unocss/reset)
   ],
   postcss: {
