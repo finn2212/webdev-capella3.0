@@ -355,10 +355,6 @@ select {
 .red-font{
   color: red
 }
-
-.hidden{
-  display: none;
-}
 .btnMenu {
   border: 0px;
   background-color: transparent;
