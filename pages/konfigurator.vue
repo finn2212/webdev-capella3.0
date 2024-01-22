@@ -818,7 +818,7 @@ export default {
 </script>
     
 <template>
-  <LayoutBreadcrumbs />
+ 
   <div>
     <!--Sektion mit 3 Karten und Bider-->
     <section class="pt-5">

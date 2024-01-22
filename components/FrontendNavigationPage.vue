@@ -22,7 +22,7 @@ const { data: categoryResponse } = await useAsyncData(
       },
     });
     return category;
-  },
+  }
 );
 
 const breadcrumbs = getCategoryBreadcrumbs(categoryResponse.value, {
@@ -35,6 +35,5 @@ useCmsHead(category, { mainShopTitle: "Shopware Frontends Demo Store" });
 </script>
 
 <template>
-  <LayoutBreadcrumbs />
   <CmsPage v-if="category?.cmsPage" :content="category.cmsPage" />
 </template>

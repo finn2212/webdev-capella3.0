@@ -133,10 +133,10 @@ const gridColumns = computed<number>(() =>
                 Zahlungsarten
               </h5>
               <div class="row">
-                <div class="col-auto" v-for="paymentMethod in paymentMethods"
+                <!-- <div class="col-auto" v-for="paymentMethod in paymentMethods"
                   style="padding: 0px !important; margin-right: 10px;">
                   <img :src="paymentMethod.media.url" alt="Avatar" style="height: 45px;">
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

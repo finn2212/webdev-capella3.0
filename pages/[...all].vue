@@ -82,14 +82,64 @@ function render() {
   return h("div", {}, "Loading...");
 }
 </script>
-
 <template>
+  <div class="carousel w-full">
+    <div id="slide1" class="carousel-item relative w-full">
+      <img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" class="w-full" />
+      <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <a href="#slide4" class="btn btn-circle">❮</a>
+        <a href="#slide2" class="btn btn-circle">❯</a>
+      </div>
+    </div>
+    <div id="slide2" class="carousel-item relative w-full">
+      <img src="https://daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.jpg" class="w-full" />
+      <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <a href="#slide1" class="btn btn-circle">❮</a>
+        <a href="#slide3" class="btn btn-circle">❯</a>
+      </div>
+    </div>
+    <div id="slide3" class="carousel-item relative w-full">
+      <img src="https://daisyui.com/images/stock/photo-1414694762283-acccc27bca85.jpg" class="w-full" />
+      <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <a href="#slide2" class="btn btn-circle">❮</a>
+        <a href="#slide4" class="btn btn-circle">❯</a>
+      </div>
+    </div>
+    <div id="slide4" class="carousel-item relative w-full">
+      <img src="https://daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg" class="w-full" />
+      <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <a href="#slide3" class="btn btn-circle">❮</a>
+        <a href="#slide1" class="btn btn-circle">❯</a>
+      </div>
+    </div>
+  </div>
+  <div class="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
+    <div class="carousel-item">
+      <img src="https://daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" class="rounded-box" />
+    </div>
+    <div class="carousel-item">
+      <img src="https://daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.jpg" class="rounded-box" />
+    </div>
+    <div class="carousel-item">
+      <img src="https://daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.jpg" class="rounded-box" />
+    </div>
+    <div class="carousel-item">
+      <img src="https://daisyui.com/images/stock/photo-1494253109108-2e30c049369b.jpg" class="rounded-box" />
+    </div>
+    <div class="carousel-item">
+      <img src="https://daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.jpg" class="rounded-box" />
+    </div>
+    <div class="carousel-item">
+      <img src="https://daisyui.com/images/stock/photo-1559181567-c3190ca9959b.jpg" class="rounded-box" />
+    </div>
+    <div class="carousel-item">
+      <img src="https://daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" class="rounded-box" />
+    </div>
+  </div>
   <section>
-
-    <LayoutBreadcrumbs />
     <div class="container justify-content-center">
       <div class="row">
-        <div class="col-12 col-xl-8 p-0 customBorder">
+        <div class="lg:w-8/12 p-0 customBorder">
           <img src="@/assets/images/pic1.png" alt="Avatar" class="img">
         </div>
         <div class="col green p-5 customBorder">
@@ -120,6 +170,7 @@ function render() {
       </div>
     </div>
   </section>
+
   <!--Sektion mit 3 Karten und Bider-->
   <section class="pt-5">
     <div class="container justify-content-center">
@@ -413,74 +464,55 @@ function render() {
 
             <img src="@/assets/svg/contact_support.svg" alt="Avatar" class="mt-4">
             <div class="accordion  accordion-flush" id="accordionFlushExample">
-              <div class="accordion-item mt-3">
-                <h2 class="accordion-header thick">
-                  <button @click="open(1)" id="flush-collapseOneBtn" class="accordion-button bred collapsed" type="button"
-                    style="padding-bottom: 0px;">
-                    <p class="thick"> Gehe ich ein Abonnement ein?</p>
-
-                  </button>
-                </h2>
-                <div id="flush-collapseOne" class="accordion-collapse open" data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    <p class="small">
-                      Nein, capellaprint ist nicht mit einem Abonnement verbunden. Für den
+              <div class="join join-vertical w-full">
+                <div class="collapse show collapse-arrow join-item border border-base-300">
+                  <input type="radio" name="my-accordion-4" />
+                  <div class="collapse-title text-xl font-medium">
+                    Gehe ich ein Abonnement ein?
+                  </div>
+                  <div class="collapse-content">
+                    <p> Nein, capellaprint ist nicht mit einem Abonnement verbunden. Für den
                       Bestellprozess können Sie auf Wunsch zwar ein kostenfreies Kundenkonto erstellen, dies
                       verpflichtet
-                      Sie aber zu nichts und ist jederzeit wieder deaktivierbar.
-                    </p>
+                      Sie aber zu nichts und ist jederzeit wieder deaktivierbar.</p>
                   </div>
                 </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header thick">
-                  <button @click="open(3)" class="accordion-button bred collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                    <p class="thick"> Werden meine Druckdaten kontrolliert? </p>
-                  </button>
-                </h2>
-                <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    <p class="small">
-                      Ja. Jede hochgeladene PDF-Datei wird von unseren Systemen standardisiert kontrolliert und ggf.
+                <div class="collapse show collapse-arrow join-item border border-base-300">
+                  <input type="radio" name="my-accordion-4" />
+                  <div class="collapse-title text-xl font-medium">
+                    Werden meine Druckdaten kontrolliert?
+                  </div>
+                  <div class="collapse-content">
+                    <p> Ja. Jede hochgeladene PDF-Datei wird von unseren Systemen standardisiert kontrolliert und ggf.
                       gleich korrigiert, um ein professionelles Druckbild zu gewährleisten. Sollten Datenfehler ein
                       manuelles Eingreifen notwendig machen, wird sich ein Mitarbeiter vor Ausführung der Produktion mit
-                      Ihnen per E-Mail in Verbindung setzen. Bitte beachten Sie unbedingt unsere Druckdatenvorgaben!
+                      Ihnen per E-Mail in Verbindung setzen. Bitte beachten Sie unbedingt unsere Druckdatenvorgaben!</p>
+                  </div>
+                </div>
+                <div class="collapse show collapse-arrow join-item border border-base-300">
+                  <input type="radio" name="my-accordion-4" />
+                  <div class="collapse-title text-xl font-medium">
+                    Wie erfolgt die Bestellung, was kostet es?
+                  </div>
+                  <div class="collapse-content">
+                    <p>
+                      Transparenz für unsere Kunden ist unser Leitmotiv. capellaprint garantiert
+                      Ihnen dauerhaft niedrige Preise ohne versteckte Zusatzkosten. Die Nutzung unseres Druckportals ist
+                      selbstverständlich kostenfrei.</p>
+                    <br>
+                    <p>
+                      Sie bezahlen, wie im normalen Online-Shopping auch, bei der Bestellung Ihrer Notenausgaben. Hierfür
+                      haben Sie die Wahl zwischen den sicheren Zahlungsarten PayPal, Klarna Rechnung und Kreditkarte.
                     </p>
                   </div>
                 </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header thick">
-                  <button @click="open(4)" class="accordion-button bred collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseTwo">
-                    <p class="thick"> Wie erfolgt die Bestellung, was kostet es? </p>
-                  </button>
-                </h2>
-                <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                  <p class="small">
-                    Transparenz für unsere Kunden ist unser Leitmotiv. capellaprint garantiert
-                    Ihnen dauerhaft niedrige Preise ohne versteckte Zusatzkosten. Die Nutzung unseres Druckportals ist
-                    selbstverständlich kostenfrei.</p>
-                  <br>
-                  <p class="small">
-                    Sie bezahlen, wie im normalen Online-Shopping auch, bei der Bestellung Ihrer Notenausgaben. Hierfür
-                    haben Sie die Wahl zwischen den sicheren Zahlungsarten PayPal, Klarna Rechnung und Kreditkarte.
-                  </p>
-                  <div class="accordion-body">
+                <div class="collapse show collapse-arrow join-item border border-base-300">
+                  <input type="radio" name="my-accordion-4" />
+                  <div class="collapse-title text-xl font-medium">
+                    Kann ich gedruckte Noten zurückgeben?
                   </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header thick">
-                  <button @click="open(5)" class="accordion-button bred collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseFiv" aria-expanded="false" aria-controls="flush-collapseTwo">
-                    <p class="thick"> Kann ich gedruckte Noten zurückgeben? </p>
-                  </button>
-                </h2>
-                <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    <p class="small">
+                  <div class="collapse-content">
+                    <p>
                       Ihre Partituren werden nach Ihren Vorgaben individuell für Sie gefertigt. Ein Rückgaberecht ist
                       deshalb leider nicht möglich. Sollten wir trotz korrekter Druckdaten von Ihnen fehlerhaft drucken,
                       liefern wir selbstverständlich kostenfrei Ersatz.
