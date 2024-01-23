@@ -27,15 +27,10 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
   <div class="container top">
     <!--Sektion Heading-->
     <section>
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row">
           <div class="col" style="max-height: 350px">
-            <img
-              src="@/assets/images/spiralheader.png"
-              alt="Avatar"
-              class="img"
-              style="height: 100%"
-            />
+            <img src="@/assets/images/spiralheader.png" alt="Avatar" class="img" style="height: 100%" />
           </div>
         </div>
         <!--  <div class="row">
@@ -64,7 +59,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </section>
     <!--Sektion Heading-->
     <section>
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row pt-4">
           <div class="col-12 col-xl-4 customBorder blockStart">
             <h2>Notenbuch mit Spiralbindung günstig drucken lassen</h2>
@@ -97,24 +92,14 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                   sondern und vor allem auch durch leises Umblättern und dadurch
                   bessere Nutzbarkeit im Konzert auszeichnet.
                 </p>
-                <a
-                  href=" https://firebasestorage.googleapis.com/v0/b/pocselfpublish.appspot.com/o/uploads%2FDruckdaten_Print_data_2023.pdf?alt=media&token=e8196ae8-3679-4f5a-9445-48d46724fc65"
-                  target="_blank"
-                >
-                  <button
-                    type="button"
-                    class="btn btn-dark p-2"
-                    style="width: 100%"
-                  >
-                    <img
-                      src="@/assets/svg/download.svg"
-                      alt="Avatar"
-                      style="
+                <a href=" https://firebasestorage.googleapis.com/v0/b/pocselfpublish.appspot.com/o/uploads%2FDruckdaten_Print_data_2023.pdf?alt=media&token=e8196ae8-3679-4f5a-9445-48d46724fc65"
+                  target="_blank">
+                  <button type="button" class="btn btn-dark p-2" style="width: 100%">
+                    <img src="@/assets/svg/download.svg" alt="Avatar" style="
                         height: 19px;
                         margin-right: 10px;
                         padding-left: 5px;
-                      "
-                    />
+                      " />
                     <p class="inline mt-2">Maßvorgaben (PDF)</p>
                   </button>
                 </a>
@@ -122,11 +107,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
               <div class="col">
                 <div class="row mt-4">
                   <div class="col-1">
-                    <img
-                      src="@/assets/svg/heart_plus.svg"
-                      class="mr-2"
-                      alt="Avatar"
-                    />
+                    <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
                   </div>
                   <div class="col">
                     <p class="card-text">
@@ -136,11 +117,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                   </div>
                   <div class="w-100 pt-3"></div>
                   <div class="col-1">
-                    <img
-                      src="@/assets/svg/heart_plus.svg"
-                      class="mr-2"
-                      alt="Avatar"
-                    />
+                    <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
                   </div>
                   <div class="col">
                     <p class="card-text">
@@ -150,11 +127,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                   </div>
                   <div class="w-100 pt-3"></div>
                   <div class="col-1">
-                    <img
-                      src="@/assets/svg/heart_plus.svg"
-                      class="mr-2"
-                      alt="Avatar"
-                    />
+                    <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
                   </div>
                   <div class="col">
                     <p class="card-text">
@@ -163,11 +136,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                   </div>
                   <div class="w-100 pt-3"></div>
                   <div class="col-1">
-                    <img
-                      src="@/assets/svg/heart_plus.svg"
-                      class="mr-2"
-                      alt="Avatar"
-                    />
+                    <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
                   </div>
                   <div class="col">
                     <p class="card-text">
@@ -176,11 +145,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                   </div>
                   <div class="w-100 pt-3"></div>
                   <div class="col-1">
-                    <img
-                      src="@/assets/svg/heart_plus.svg"
-                      class="mr-2"
-                      alt="Avatar"
-                    />
+                    <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
                   </div>
                   <div class="col">
                     <p class="thick" style="display: inline">
@@ -190,11 +155,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                   </div>
                   <div class="w-100 pt-3"></div>
                   <div class="col-1">
-                    <img
-                      src="@/assets/svg/heart_plus.svg"
-                      class="mr-2"
-                      alt="Avatar"
-                    />
+                    <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
                   </div>
                   <div class="col">
                     <p class="card-text">3–6 Werktage Produktionszeit</p>
@@ -208,7 +169,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </section>
     <!--TSektion Schrift mit 2 Karten-->
     <section>
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row pt-4">
           <div class="col-12 col-lg-4 customBorder blockStart">
             <div class="row align-items-start">
@@ -229,36 +190,22 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                     <h3>Zu den Notenheften mit Klammerheftung</h3>
                   </div>
                   <div class="col mb-2 align-self-end">
-                    <img
-                      src="@/assets/svg/arrow_circle_right.svg"
-                      alt="Avatar"
-                    />
+                    <img src="@/assets/svg/arrow_circle_right.svg" alt="Avatar" />
                   </div>
                 </NuxtLink>
               </div>
             </div>
           </div>
-          <div
-            class="col-12 col-lg-4 customBorder blue"
-            id="boxHeight"
-            style="padding-left: 0px !important; padding-right: 0px !important"
-          >
+          <div class="col-12 col-lg-4 customBorder blue" id="boxHeight"
+            style="padding-left: 0px !important; padding-right: 0px !important">
             <div class="row">
-              <img
-                class="card-img-top"
-                src="@/assets/images/pic7.png"
-                alt="Card image cap"
-              />
+              <img class="card-img-top" src="@/assets/images/pic7.png" alt="Card image cap" />
             </div>
             <div class="row p-4">
               <h2>Notenbuch DIN A4 Spiralbindung hoch</h2>
               <div class="row mt-2">
                 <div class="col-1">
-                  <img
-                    src="@/assets/svg/heart_plus.svg"
-                    class="mr-2"
-                    alt="Avatar"
-                  />
+                  <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
                 </div>
                 <div class="col">
                   <p class="">
@@ -268,11 +215,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
               </div>
               <div class="row mt-2">
                 <div class="col-1">
-                  <img
-                    src="@/assets/svg/heart_plus.svg"
-                    class="mr-2"
-                    alt="Avatar"
-                  />
+                  <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
                 </div>
                 <div class="col">
                   <p class="">
@@ -282,11 +225,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
               </div>
               <div class="row mt-2">
                 <div class="col-1">
-                  <img
-                    src="@/assets/svg/heart_plus.svg"
-                    class="mr-2"
-                    alt="Avatar"
-                  />
+                  <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
                 </div>
                 <div class="col">
                   <p class="">
@@ -299,37 +238,22 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                 <div class="col-8 mt-1">
                   <NuxtLink class="a" to="/productCustomizer">
                     <button type="button" class="btn btn-dark mt-3">
-                      <img
-                        src="@/assets/svg/plus.svg"
-                        alt="Avatar"
-                        class="plusBtn"
-                      />Jetzt drucken
+                      <img src="@/assets/svg/plus.svg" alt="Avatar" class="plusBtn" />Jetzt drucken
                     </button>
                   </NuxtLink>
                 </div>
               </div>
             </div>
           </div>
-          <div
-            class="col-12 col-lg-4 customBorder blue"
-            style="padding-left: 0px !important; padding-right: 0px"
-          >
+          <div class="col-12 col-lg-4 customBorder blue" style="padding-left: 0px !important; padding-right: 0px">
             <div class="row">
-              <img
-                class="card-img-top"
-                src="@/assets/images/pic8.png"
-                alt="Card image cap"
-              />
+              <img class="card-img-top" src="@/assets/images/pic8.png" alt="Card image cap" />
             </div>
             <div class="row p-4">
               <h2>Notenbuch DIN A4 Spiralbindung quer</h2>
               <div class="row mt-5">
                 <div class="col-1">
-                  <img
-                    src="@/assets/svg/heart_plus.svg"
-                    class="mr-2"
-                    alt="Avatar"
-                  />
+                  <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
                 </div>
                 <div class="col">
                   <p class="">Perfekt für Orgelnoten geeignet</p>
@@ -337,11 +261,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
               </div>
               <div class="row mt-2">
                 <div class="col-1">
-                  <img
-                    src="@/assets/svg/heart_plus.svg"
-                    class="mr-2"
-                    alt="Avatar"
-                  />
+                  <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
                 </div>
                 <div class="col">
                   <p class="">
@@ -352,11 +272,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
               </div>
               <div class="row mt-2">
                 <div class="col-1">
-                  <img
-                    src="@/assets/svg/heart_plus.svg"
-                    class="mr-2"
-                    alt="Avatar"
-                  />
+                  <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
                 </div>
                 <div class="col">
                   <p class="">
@@ -368,11 +284,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                 <div class="col-8">
                   <NuxtLink class="a" to="/productCustomizer">
                     <button type="button" class="btn btn-dark">
-                      <img
-                        src="@/assets/svg/plus.svg"
-                        alt="Avatar"
-                        class="plusBtn"
-                      />Jetzt drucken
+                      <img src="@/assets/svg/plus.svg" alt="Avatar" class="plusBtn" />Jetzt drucken
                     </button>
                   </NuxtLink>
                 </div>
@@ -384,7 +296,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </section>
     <!--Sektion mit 3 Karten und Bider-->
     <section class="pt-5">
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row">
           <div class="col customBorder blockStartMarign">
             <div class="row pb-3">
@@ -402,33 +314,21 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             <h2 class="heading-grid">Notenbuch »Peters« Spiralbindung hoch</h2>
             <div class="row mt-4">
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Format 19 x 27 cm hoch</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Das bekannte Format der Klavierauszüge der EDITION PETERS</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>2–400 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
@@ -437,11 +337,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                 <div class="col-8 mt-3">
                   <NuxtLink class="a" to="/productCustomizer">
                     <button type="button" class="btn btn-dark mt-3">
-                      <img
-                        src="@/assets/svg/plus.svg"
-                        alt="Avatar"
-                        class="plusBtn"
-                      />Jetzt drucken
+                      <img src="@/assets/svg/plus.svg" alt="Avatar" class="plusBtn" />Jetzt drucken
                     </button>
                   </NuxtLink>
                 </div>
@@ -452,33 +348,21 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             <h2 class="heading-grid">Notenbuch »Concert« Spiralbindung hoch</h2>
             <div class="row mt-4">
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p class="">Format 22,8 x 30,5 cm hoch</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p class="">Bekannt von EDITION PETERS, SCHOTT Music u.v.a.</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p class="">
@@ -488,16 +372,8 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
               <div class="row">
                 <div class="col-8">
                   <NuxtLink class="a" to="/productCustomizer">
-                    <button
-                      type="button"
-                      class="btn btn-dark"
-                      style="margin-top: 30px !important"
-                    >
-                      <img
-                        src="@/assets/svg/plus.svg"
-                        alt="Avatar"
-                        class="plusBtn"
-                      />Jetzt drucken
+                    <button type="button" class="btn btn-dark" style="margin-top: 30px !important">
+                      <img src="@/assets/svg/plus.svg" alt="Avatar" class="plusBtn" />Jetzt drucken
                     </button>
                   </NuxtLink>
                 </div>
@@ -509,39 +385,27 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </section>
     <!--Sektion mit 3 Karten und Bider-->
     <section class="pt-5">
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row">
           <div class="col customBorder pl-5 p-4 yellow">
             <h2 class="heading-grid">Notenbuch DIN B4 Spiralbindung hoch</h2>
             <div class="row mt-4">
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Format 25 x 35,3 cm hoch</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Hervorragend für Dirigierpartituren geeignet</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>2–400 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
@@ -550,11 +414,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                 <div class="col-8 mt-2">
                   <NuxtLink class="a" to="/productCustomizer">
                     <button type="button" class="btn btn-dark mt-3">
-                      <img
-                        src="@/assets/svg/plus.svg"
-                        alt="Avatar"
-                        class="plusBtn"
-                      />Jetzt drucken
+                      <img src="@/assets/svg/plus.svg" alt="Avatar" class="plusBtn" />Jetzt drucken
                     </button>
                   </NuxtLink>
                 </div>
@@ -565,33 +425,21 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             <h2 class="heading-grid">Notenbuch DIN A3 Spiralbindung hoch</h2>
             <div class="row mt-4">
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Format 29,7 x 42 cm hoch</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Für große Partituren und Stimmen</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>2–400 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
@@ -600,11 +448,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                 <div class="col-8 mt-4">
                   <NuxtLink class="a" to="/productCustomizer">
                     <button type="button" class="btn btn-dark mt-3">
-                      <img
-                        src="@/assets/svg/plus.svg"
-                        alt="Avatar"
-                        class="plusBtn"
-                      />Jetzt drucken
+                      <img src="@/assets/svg/plus.svg" alt="Avatar" class="plusBtn" />Jetzt drucken
                     </button>
                   </NuxtLink>
                 </div>
@@ -617,33 +461,21 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             </h2>
             <div class="row mt-4">
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Format 31,5 x 46 cm hoch</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Der Gigant für die großen Werke!</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>2–400 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
@@ -652,11 +484,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                 <div class="col-8 mt-4">
                   <NuxtLink class="a" to="/productCustomizer">
                     <button type="button" class="btn btn-dark mt-3">
-                      <img
-                        src="@/assets/svg/plus.svg"
-                        alt="Avatar"
-                        class="plusBtn"
-                      />Jetzt drucken
+                      <img src="@/assets/svg/plus.svg" alt="Avatar" class="plusBtn" />Jetzt drucken
                     </button>
                   </NuxtLink>
                 </div>
@@ -668,7 +496,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </section>
     <!--Sektion mit 3 Karten und Bider-->
     <section class="pt-5">
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row">
           <div class="col customBorder blockStartMarign">
             <div class="row pb-3">
@@ -686,33 +514,21 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             <h2 class="heading-grid">Notenbuch »Peters« Spiralbindung quer</h2>
             <div class="row mt-4">
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Format 27 x 19 cm quer</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Das bekannte Format der Klavierauszüge der EDITION PETERS</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>2–400 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
@@ -721,11 +537,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                 <div class="col-8 mt-3">
                   <NuxtLink class="a" to="/productCustomizer">
                     <button type="button" class="btn btn-dark mt-3">
-                      <img
-                        src="@/assets/svg/plus.svg"
-                        alt="Avatar"
-                        class="plusBtn"
-                      />Jetzt drucken
+                      <img src="@/assets/svg/plus.svg" alt="Avatar" class="plusBtn" />Jetzt drucken
                     </button>
                   </NuxtLink>
                 </div>
@@ -736,33 +548,21 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             <h2 class="heading-grid">Notenbuch »Concert« Spiralbindung quer</h2>
             <div class="row mt-4">
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p class="">Format 30,5 x 22,8 cm quer</p>
               </div>
               <div class="w-100 pt-3"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p class="">Bekannt von EDITION PETERS, SCHOTT Music u.v.a.</p>
               </div>
               <div class="w-100 pt-3"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p class="">
@@ -773,11 +573,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                 <div class="col-8">
                   <NuxtLink class="a" to="/productCustomizer">
                     <button type="button" class="btn btn-dark mt-3">
-                      <img
-                        src="@/assets/svg/plus.svg"
-                        alt="Avatar"
-                        class="plusBtn"
-                      />Jetzt drucken
+                      <img src="@/assets/svg/plus.svg" alt="Avatar" class="plusBtn" />Jetzt drucken
                     </button>
                   </NuxtLink>
                 </div>
@@ -789,39 +585,27 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </section>
     <!--Sektion mit 3 Karten und Bider-->
     <section class="pt-5">
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row">
           <div class="col customBorder pl-5 p-4 yellow">
             <h2 class="heading-grid">Notenbuch DIN B4 Spiralbindung quer</h2>
             <div class="row mt-4">
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Format 35,3 x 25 cm quer</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Hervorragend für Dirigierpartituren geeignet</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>2–400 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
@@ -829,11 +613,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
               <div class="row">
                 <div class="col-8 mt-2">
                   <button type="button" class="btn btn-dark mt-4">
-                    <img
-                      src="@/assets/svg/plus.svg"
-                      alt="Avatar"
-                      class="plusBtn"
-                    />Jetzt drucken
+                    <img src="@/assets/svg/plus.svg" alt="Avatar" class="plusBtn" />Jetzt drucken
                   </button>
                 </div>
               </div>
@@ -843,33 +623,21 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             <h2 class="heading-grid">Notenbuch DIN A3 Spiralbindung quer</h2>
             <div class="row mt-4">
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Format 42 x 29,7 cm quer</p>
               </div>
               <div class="w-100 pt-3"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Für große Partituren und Stimmen</p>
               </div>
               <div class="w-100 pt-3"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>2–400 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
@@ -877,11 +645,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
               <div class="row">
                 <div class="col-8 mt-4">
                   <button type="button" class="btn btn-dark mt-3">
-                    <img
-                      src="@/assets/svg/plus.svg"
-                      alt="Avatar"
-                      class="plusBtn"
-                    />Jetzt drucken
+                    <img src="@/assets/svg/plus.svg" alt="Avatar" class="plusBtn" />Jetzt drucken
                   </button>
                 </div>
               </div>
@@ -893,33 +657,21 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             </h2>
             <div class="row mt-4">
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Format 46 x 31,5 cm quer</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>Der Gigant für die großen Werke!</p>
               </div>
               <div class="w-100 pt-2"></div>
               <div class="col-1">
-                <img
-                  src="@/assets/svg/heart_plus.svg"
-                  class="mr-2"
-                  alt="Avatar"
-                />
+                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar" />
               </div>
               <div class="col">
                 <p>2–400 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
@@ -927,11 +679,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
               <div class="row">
                 <div class="col-8 mt-2">
                   <button type="button" class="btn btn-dark mt-5">
-                    <img
-                      src="@/assets/svg/plus.svg"
-                      alt="Avatar"
-                      class="plusBtn"
-                    />Jetzt drucken
+                    <img src="@/assets/svg/plus.svg" alt="Avatar" class="plusBtn" />Jetzt drucken
                   </button>
                 </div>
               </div>

@@ -14,21 +14,20 @@ const gridColumns = computed<number>(() =>
     : 2,
 );
 </script>
-
 <template>
-  <footer class="px-4 sm:px-6 mt-2 lg:mt-8">
-    <div class="grey" style="margin-top: 100px;">
-      <div class="container justify-content-center">
-        <div class="row pt-4">
-          <div class="col-12 col-md-4">
-            <img src="@/assets/svg/phone_forwarded.svg" style="margin-right: 10px;" alt="Avatar">
-            <h5 class="thick pt-4">
+  <footer>
+    <div class="grey pt-5 pb-5 mt-3">
+      <div class="max-w-screen-xl mx-auto">
+        <section class="flex flex-col md:flex-row">
+          <div class="p-3 grey md:w-3/9 w-full">
+            <img src="@/assets/svg/phone_forwarded.svg">
+            <h5>
               Service-Hotline
             </h5>
             <p>
               Unterstützung und Beratung unter:
               <br>
-            <h5 class="inline">
+            <h5>
               08294 / 8601888
             </h5>
             <br>
@@ -39,60 +38,53 @@ const gridColumns = computed<number>(() =>
             Oder über unser Kontaktformular.
             </p>
           </div>
-          <div class="col-12 col-md-4">
-            <img src="@/assets/svg/local_police.svg" style="margin-right: 10px;" alt="Avatar">
-            <h5 class="pt-4 thick">
+          <div>
+
+
+          </div>
+          <div class="p-3 grey md:w-3/9 w-full">
+            <img src="@/assets/svg/local_police.svg">
+            <h5>
               Rechtliches
             </h5>
-            <div class="row justify-content-start">
-              <div class="col align-self-start">
+            <div>
+              <div>
                 <NuxtLink class="a" to="/contact">
-
                   Impressum
-
                 </NuxtLink>
               </div>
             </div>
-            <div class="row justify-content-start">
-              <div class="col align-self-start">
+            <div>
+              <div>
                 <NuxtLink class="a" to="/agb">
-
                   AGB
-
                 </NuxtLink>
               </div>
             </div>
-            <div class="row justify-content-start">
-              <div class="col align-self-start">
+            <div>
+              <div>
                 <NuxtLink class="a" to="/shipping">
-
                   Zahlung & Versand
-
                 </NuxtLink>
               </div>
             </div>
-            <div class="row justify-content-start">
-              <div class="col-12 col-md-4 align-self-start">
+            <div>
+              <div>
                 <NuxtLink class="a" to="/datenschutz">
-
                   Datenschutz
-
                 </NuxtLink>
               </div>
             </div>
-            <div class="row justify-content-start">
-              <div class="col-12 col-md-4 align-self-start">
+            <div>
+              <div>
                 <NuxtLink class="a" to="/wiederrufsrecht">
-
                   Widerrufserklärung
-
                 </NuxtLink>
               </div>
             </div>
           </div>
-
-          <div class="col-12 col-md-4">
-            <img src="@/assets/svg/award_star.svg" style="margin-right: 10px;" alt="Avatar">
+          <div class="p-3 grey md:w-3/9 w-full">
+            <img src="@/assets/svg/award_star.svg">
             <h5 class="pt-4">
               Sicher einkaufen
             </h5>
@@ -104,55 +96,10 @@ const gridColumns = computed<number>(() =>
               Sicheres Einkaufen nach DSGVO Standards
             </p>
           </div>
-        </div>
-        <div class="row pt-4">
-          <div class="col-12 col-md-4">
-            <div class="col">
-              <img src="@/assets/svg/local_shipping1.svg" style="margin-right: 10px;" alt="Avatar">
-              <h5 class="pt-2">
-                Versandarten
-              </h5>
-              <div class="row">
-                <div class="col-auto" style="padding: 0px !important">
-                  <!-- <img src="@/assets/svg/rhweb-dhl 1.svg" alt="Avatar"> -->
-                </div>
-                <div class="col-auto" style="padding: 0px !important">
-                  <!-- <img src="@/assets/svg/rhweb-post-germany 1.svg" alt="Avatar"> -->
-                </div>
-                <div class="col-auto" style="padding: 0px !important">
-                  <!-- <img src="@/assets/svg/rhweb-gogreen 1.svg" alt="Avatar"> -->
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-4">
-            <div class="col">
-              <img src="@/assets/svg/credit_score.svg" style="margin-right: 10px;" alt="Avatar">
-              <h5 class="pt-2">
-                Zahlungsarten
-              </h5>
-              <div class="row">
-                <!-- <div class="col-auto" v-for="paymentMethod in paymentMethods"
-                  style="padding: 0px !important; margin-right: 10px;">
-                  <img :src="paymentMethod.media.url" alt="Avatar" style="height: 45px;">
-                </div> -->
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-4">
-            <div class="col">
-              <h5 class="mt-4 pt-4">Wir sind Mitglied im:</h5>
-              <!-- <img src="@/assets/svg/bvdm_logo_transparent 1.svg" style="margin-top: 10px;" alt="Avatar"> -->
-
-            </div>
-          </div>
-        </div>
-        <div class="row" style="margin-top: 100px; padding-bottom: 40px; text-align: center;">
-          <div class="col">
-            * Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten, wenn nicht anders angegeben.
-            © 2023 AURIOPRINT – Alle Rechte vorbehalten.
-          </div>
+        </section>
+        <div class="mt-25">
+          * Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten, wenn nicht anders angegeben.
+          © 2023 AURIOPRINT – Alle Rechte vorbehalten.
         </div>
       </div>
     </div>

@@ -9,17 +9,17 @@ const sidebarController = useModal();
 
 <template>
   <header class="relative bg-white" aria-label="top-navigation">
-    <div class="mx-auto px-4 sm:px-6">
+    <div class="mx-auto px-4 sm:px-6 max-w-screen-xl mx-auto">
       <div class="flex items-center border-b-2 border-gray-100 py-6 space-x-4">
         <div class="flex justify-start items-center min-w-10 lg:min-w-12">
           <div class="order-2 lg:order-1 ml-4 lg:ml-0">
-            <div class="row mt-2 mb-3">
+            <div class="flex mt-2 mb-3">
               <div class="col-1 col-xl-2">
-               
-                  <NuxtLink class="a" to="/">
-                    <img src="@/assets/svg/capella_AURIOPRINT.svg" alt="Avatar" style="width: 75%;">
-                  </NuxtLink>
-   
+
+                <NuxtLink class="a" to="/">
+                  <img src="@/assets/svg/capella_AURIOPRINT.svg" alt="Avatar" style="width: 75%;">
+                </NuxtLink>
+
               </div>
               <div class="col-auto mt-3">
                 <button type="button" id="menuBtn1" class="btnMenu p-0" @click="setActive(1)">
@@ -57,7 +57,7 @@ const sidebarController = useModal();
                 </button>
               </div>
             </div>
-        
+
           </div>
           <div class="order-1 lg:order-2 flex justify-start items-center">
             <LayoutSideMenu />

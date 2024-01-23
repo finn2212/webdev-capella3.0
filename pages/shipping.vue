@@ -23,10 +23,10 @@ const { locale } = useI18n();
 const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 </script>
 <template>
-  <div class="container justify-content-center top">
+  <div class="container justify-center top">
     <!--Sektion mit 3 Karten und Bider-->
     <section>
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row pt-4">
           <div class="col-12 col-lg-4 customBorder">
             <h2 class="mt-5">Informationen zum Versand</h2>
@@ -35,18 +35,10 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             </p>
             <div class="row">
               <div class="col-5">
-                <img
-                  src="@/assets/images/post.svg"
-                  style="width: 100%"
-                  alt="Avatar"
-                />
+                <img src="@/assets/images/post.svg" style="width: 100%" alt="Avatar" />
               </div>
               <div class="col-5">
-                <img
-                  src="@/assets/images/dhl.svg"
-                  style="width: 100%"
-                  alt="Avatar"
-                />
+                <img src="@/assets/images/dhl.svg" style="width: 100%" alt="Avatar" />
               </div>
             </div>
           </div>
@@ -69,11 +61,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             </div>
             <div class="row pt-5">
               <div class="col-1">
-                <img
-                  src="@/assets/svg/captive_portal.svg"
-                  alt="Avatar"
-                  class=""
-                />
+                <img src="@/assets/svg/captive_portal.svg" alt="Avatar" class="" />
               </div>
               <div class="col">
                 <h2>Internationaler Versand</h2>

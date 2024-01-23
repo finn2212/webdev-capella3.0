@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: "PageResolver",
+    name: "PageResolver",
 };
 </script>
 
@@ -8,8 +8,8 @@ export default {
 import { type Ref, resolveComponent } from "vue";
 import { pascalCase } from "scule";
 import {
-  useNavigationContext,
-  useNavigationSearch,
+    useNavigationContext,
+    useNavigationSearch,
 } from "@shopware-pwa/composables-next";
 import { type SeoUrl } from "@shopware-pwa/types";
 import { ref } from "vue";
@@ -23,11 +23,11 @@ const { locale } = useI18n();
 const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 </script>
 <template>
-    <div class="container justify-content-center top">
+    <div class="container justify-center top">
         <!--Sektion mit 3 Karten und Bider-->
         <!--Sektion mit 3 Karten und Bider-->
         <section>
-            <div class="container justify-content-center">
+            <div class="container justify-center">
                 <div class="row">
                     <div class="col customBorder blockStartMarign ">
                         <div class="row pb-3">
@@ -96,7 +96,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
         </section>
 
         <section>
-            <div class="container justify-content-center">
+            <div class="container justify-center">
                 <div class="row pt-4">
                     <div class="col-12 col-lg-4 pink customBorder p-4">
                         <div class="col-1">
@@ -171,7 +171,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             </div>
         </section>
         <section>
-            <div class="container justify-content-center">
+            <div class="container justify-center">
                 <div class="row" style="margin-top: 100px;">
                     <div class="col-4">
                         <h2>Impressum</h2>
@@ -205,62 +205,62 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 </template>
 <style>
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 @media only screen and (min-width: 1024px) {
-  .imgcard {
-    width: 100%;
-  }
+    .imgcard {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
-  .imgcard {
-    float: left;
-    margin-right: 25px;
-    max-height: 300px;
-  }
+    .imgcard {
+        float: left;
+        margin-right: 25px;
+        max-height: 300px;
+    }
 }
 
 .p-5 {
-  padding: 35px !important;
+    padding: 35px !important;
 }
 
 .btn-primary {
-  border-color: black;
+    border-color: black;
 }
 
 .card-img-top {
-  border-radius: 0px;
+    border-radius: 0px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .card-img-top {
-    margin-top: 0%;
-    height: 300px;
-    object-fit: cover;
-  }
+    .card-img-top {
+        margin-top: 0%;
+        height: 300px;
+        object-fit: cover;
+    }
 }
 
 .card {
-  margin: 0px;
-  border-radius: 0px;
-  padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    padding: 0px;
 }
 
 .imgsmall {
-  text-align: left;
-  width: 100%;
+    text-align: left;
+    width: 100%;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 @media only screen and (max-width: 1024px) {
-  .btn {
-    margin-top: 0%;
-  }
+    .btn {
+        margin-top: 0%;
+    }
 }
 </style>
 

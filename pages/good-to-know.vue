@@ -27,7 +27,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
   <div class="container top">
     <!--Sektion mit 3 Karten und Bider-->
     <section>
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row">
           <div class="col-12 col-xl-8 p-0 customBorder">
             <img src="@/assets/images/pic11.png" alt="Avatar" class="img" />
@@ -52,20 +52,11 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
               werden!
             </p>
             <div class="row align-items-end">
-              <a
-                href=" https://firebasestorage.googleapis.com/v0/b/pocselfpublish.appspot.com/o/uploads%2FDruckdaten_Print_data_2023.pdf?alt=media&token=e8196ae8-3679-4f5a-9445-48d46724fc65"
-                target="_blank"
-              >
-                <button
-                  type="button"
-                  class="btn btn-dark p-2"
-                  style="width: 100%"
-                >
-                  <img
-                    src="@/assets/svg/download.svg"
-                    alt="Avatar"
-                    style="height: 19px; margin-right: 10px; padding-left: 5px"
-                  />
+              <a href=" https://firebasestorage.googleapis.com/v0/b/pocselfpublish.appspot.com/o/uploads%2FDruckdaten_Print_data_2023.pdf?alt=media&token=e8196ae8-3679-4f5a-9445-48d46724fc65"
+                target="_blank">
+                <button type="button" class="btn btn-dark p-2" style="width: 100%">
+                  <img src="@/assets/svg/download.svg" alt="Avatar"
+                    style="height: 19px; margin-right: 10px; padding-left: 5px" />
                   <p class="inline mt-2">Maßvorgaben (PDF)</p>
                 </button>
               </a>
@@ -76,14 +67,10 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </section>
     <!--Sektion mit Karten und Text unten-->
     <section>
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row mt-5">
           <div class="col-12 col-md-6 p-4 grey customBorder">
-            <img
-              src="@/assets/svg/history_edu.svg"
-              style="margin-bottom: 25px"
-              alt="Avatar"
-            />
+            <img src="@/assets/svg/history_edu.svg" style="margin-bottom: 25px" alt="Avatar" />
             <h2>Unser</h2>
             <h2>Notenpapier</h2>
 
@@ -131,14 +118,10 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </section>
     <!--Sektion mit Karten und Text unten-->
     <section>
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row mt-5">
           <div class="col-12 col-md-6 p-4 darkblue customBorder">
-            <img
-              src="@/assets/svg/print.svg"
-              style="margin-bottom: 25px"
-              alt="Avatar"
-            />
+            <img src="@/assets/svg/print.svg" style="margin-bottom: 25px" alt="Avatar" />
             <h2>Unser</h2>
             <h2>Druckverfahren</h2>
 
@@ -176,14 +159,10 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </section>
     <!--Sektion mit Karten und Text unten-->
     <section>
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row mt-5">
           <div class="col-12 col-md-6 p-4 yellow customBorder">
-            <img
-              src="@/assets/svg/iron.svg"
-              style="margin-bottom: 25px"
-              alt="Avatar"
-            />
+            <img src="@/assets/svg/iron.svg" style="margin-bottom: 25px" alt="Avatar" />
             <h2>Das</h2>
             <h2>i-Tüpfelchen</h2>
 
@@ -219,14 +198,10 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </section>
     <!--Sektion mit Karten und Text unten-->
     <section>
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row mt-5">
           <div class="col-12 col-md-6 p-4 pink customBorder">
-            <img
-              src="@/assets/svg/content_cut.svg"
-              style="margin-bottom: 25px"
-              alt="Avatar"
-            />
+            <img src="@/assets/svg/content_cut.svg" style="margin-bottom: 25px" alt="Avatar" />
             <h2>Maßarbeit für Stimmen</h2>
             <div class="row" style="padding-top: 100px">
               <h2>3–5 mm</h2>
@@ -263,14 +238,10 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </section>
     <!--Sektion mit Karten und Text unten-->
     <section>
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row mt-5">
           <div class="col-12 col-md-6 p-4 green customBorder">
-            <img
-              src="@/assets/svg/surgical.svg"
-              style="margin-bottom: 25px"
-              alt="Avatar"
-            />
+            <img src="@/assets/svg/surgical.svg" style="margin-bottom: 25px" alt="Avatar" />
 
             <h2>
               Sitzt, passt, <br />

@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: "PageResolver",
+    name: "PageResolver",
 };
 </script>
 
@@ -8,8 +8,8 @@ export default {
 import { type Ref, resolveComponent } from "vue";
 import { pascalCase } from "scule";
 import {
-  useNavigationContext,
-  useNavigationSearch,
+    useNavigationContext,
+    useNavigationSearch,
 } from "@shopware-pwa/composables-next";
 import { type SeoUrl } from "@shopware-pwa/types";
 import { ref } from "vue";
@@ -28,7 +28,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
         <!--Sektion Heading-->
         <section>
-            <div class="container justify-content-center">
+            <div class="container justify-center">
                 <div class="row">
                     <div class="col" style="max-height: 350px;">
                         <img src="@/assets/images/Booklet_machine.png" alt="Avatar" class="img" style="height: 100%;">
@@ -41,7 +41,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
         <!--Sektion Heading-->
 
         <section>
-            <div class="container justify-content-center">
+            <div class="container justify-center">
                 <div class="row pt-4">
                     <div class="col-12 col-xl-4 customBorder blockStart">
                         <h2>
@@ -151,7 +151,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
         <!--TSektion Schrift mit 2 Karten-->
         <section>
-            <div class="container justify-content-center">
+            <div class="container justify-center">
                 <div class="row pt-4">
 
                     <div class="col-12 col-lg-4  customBorder blockStart">
@@ -278,7 +278,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
         <!--Sektion mit 3 Karten und Bider-->
         <section class="pt-5">
-            <div class="container justify-content-center">
+            <div class="container justify-center">
                 <div class="row">
                     <div class="col-12 col-lg  p-4" style="padding: 0px !important; margin-right:30px ">
                         <div class="row pb-3">
