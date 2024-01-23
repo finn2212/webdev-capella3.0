@@ -15,26 +15,25 @@ const { data: productResponse } = await useAsyncData(
       withCmsAssociations: true,
     });
     return productResponse;
-  },
+  }
 );
 
 const breadcrumbs = getCategoryBreadcrumbs(
   productResponse.value?.product.seoCategory,
   {
     startIndex: 2,
-  },
+  }
 );
 useBreadcrumbs(breadcrumbs);
 
 const { product } = useProduct(
   productResponse.value?.product,
-  productResponse.value?.configurator,
+  productResponse.value?.configurator
 );
 
 useCmsHead(product, { mainShopTitle: "Shopware Frontends Demo Store" });
 </script>
 <template>
-  <LayoutBreadcrumbs />
   <div class="container mx-auto bg-white flex flex-col">
     <template v-if="!product?.cmsPage">
       <ProductStatic :product="product" />

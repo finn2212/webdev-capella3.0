@@ -2,8 +2,8 @@
 // import VHeader from '@/components/layout/VHeader.vue';
 //import VForm from '~/components/layout/VFORM.vue';
 // import VPrices from '~/components/layout/VPrices.vue';
-import VAbout from '~/components/layout/VAbout.vue';
-import VSideBar from '~/components/layout/VSideBar.vue';
+import VAbout from "~/components/layout/VAbout.vue";
+import VSideBar from "~/components/layout/VSideBar.vue";
 
 useBreadcrumbs([
   {
@@ -20,8 +20,6 @@ export default {
 </script>
 
 <template>
-  <LayoutBreadcrumbs />
   <!-- <VSideBar /> -->
   <VAbout />
-
 </template>

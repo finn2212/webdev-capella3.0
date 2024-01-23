@@ -15,7 +15,7 @@ const { data: landingResponse } = await useAsyncData(
       withCmsAssociations: true,
     });
     return landingPage;
-  },
+  }
 );
 
 if (typeof landingResponse?.value !== null) {
@@ -25,6 +25,5 @@ if (typeof landingResponse?.value !== null) {
 </script>
 
 <template>
-  <LayoutBreadcrumbs />
   <CmsPage v-if="landingResponse?.cmsPage" :content="landingResponse.cmsPage" />
 </template>

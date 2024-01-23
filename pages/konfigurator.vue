@@ -818,11 +818,10 @@ export default {
 </script>
     
 <template>
-  <LayoutBreadcrumbs />
   <div>
     <!--Sektion mit 3 Karten und Bider-->
     <section class="pt-5">
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row">
           <div class="col-12 col-lg-4 customBorder p-4 blue">
             <img src="@/assets/svg/verified.svg" class="mr-2" alt="Avatar">
@@ -877,7 +876,7 @@ export default {
     </section>
     <!--Prouct Cusomizer Sections-->
     <section class="pt-5">
-      <div class="container justify-content-center">
+      <div class="container justify-center">
 
         <div class="row">
           <h1 class="">
@@ -1466,7 +1465,7 @@ export default {
     </section>
     <!--Sektion mit 3 Karten und Bider-->
     <section class="pt-5">
-      <div class="container justify-content-center">
+      <div class="container justify-center">
         <div class="row">
           <div class="col customBorder  pl-5  p-4 red">
             <div class="row">

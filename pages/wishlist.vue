@@ -37,7 +37,7 @@ const loadProductsByItemIds = async (itemIds: string[]): Promise<void> => {
       {
         ids: itemIds || items.value,
       },
-      apiInstance,
+      apiInstance
     );
 
     if (result) {
@@ -46,7 +46,7 @@ const loadProductsByItemIds = async (itemIds: string[]): Promise<void> => {
   } catch (error) {
     console.error(
       "[wishlist][loadProductsByItemIds]",
-      (error as ClientApiError).messages,
+      (error as ClientApiError).messages
     );
   }
 
@@ -66,12 +66,11 @@ watch(
   },
   {
     immediate: true,
-  },
+  }
 );
 </script>
 
 <template>
-  <LayoutBreadcrumbs />
   <div class="wishlist-page" data-testid="wishlist-wrapper">
     <div
       class="max-w-2xl mx-auto py-4 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8"
