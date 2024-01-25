@@ -19,6 +19,7 @@ const route = useRoute();
 const { locale } = useI18n();
 const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
+
 const { data: seoResult } = await useAsyncData(
   "cmsResponse" + routePath,
   async () => {
@@ -57,13 +58,16 @@ function render() {
   <!-- Your content here -->
 <template>
   <div class="max-w-screen-xl mx-auto">
+    <div>
+
+    </div>
     <section>
       <div class="flex flex-col md:flex-row">
         <div class="md:w-6/9 w-full border-12 border-white">
           <!-- Replace with your image -->
           <img src="@/assets/images/pic1.png" alt="Avatar" class="w-full h-full object-cover">
         </div>
-        <div class="md:w-3/9 w-full green p-5 border-12 border-white">
+        <div class="flex flex-col md:w-3/9 w-full green p-5 border-12 border-white">
           <h2>
             Ihre Partituren, perfekt gedruckt
           </h2>
@@ -76,7 +80,7 @@ function render() {
               mit capellaprint lassen Sie diese künftig auch in Musikverlagsqualität drucken.
             </p>
           </div>
-          <div class="mt-4 max-w-40">
+          <div class="mt-auto max-w-40">
             <NuxtLink to="/your-target-path"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
@@ -88,16 +92,16 @@ function render() {
     </section>
 
     <section class="flex flex-col md:flex-row">
-      <div class="p-5 grey md:w-3/9 w-full border-12 border-white">
-        <img src="@/assets/svg/function.svg" alt="Avatar">
+      <div class="flex flex-col p-5 grey md:w-3/9 w-full border-12 border-white">
+        <img src="@/assets/svg/function.svg" class="max-w-12" alt="Avatar">
         <h2>
           Schritt 1:
           Notenprojekt kalkulieren.
         </h2>
-        <p>
+        <p class="mb-5">
           Es ist ganz einfach: Mit unserem Konfigurator stellen Sie sich die perfekte Notenausgabe zusammen.
         </p>
-        <div class="mt-4 max-w-40">
+        <div class="mt-auto mt-5 max-w-40">
           <NuxtLink to="/your-target-path"
             class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
             <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
@@ -337,9 +341,9 @@ function render() {
       </div>
     </section>
     <section class="flex flex-col md:flex-row">
-      <div class="blue md:w-3/9 w-full border-12 border-white">
-        <img src="@/assets/images/pic4.png" alt="Card image cap">
-        <div class="p-5">
+      <div class="blue md:w-3/9 w-full border-12 border-white flex flex-col">
+        <img src="@/assets/images/pic6.png">
+        <div class="flex flex-col flex-grow p-5"> <!-- Make this a flex container and let it grow -->
           <h2>Notenheft DIN A4
             Klammerheftung</h2>
           <!-- Image and Text 1 -->
@@ -359,7 +363,7 @@ function render() {
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
             <p> Rechteckiger Heftrücken für ein hochprofessionelles Aussehen</p>
           </div>
-          <div class="mt-4 max-w-40">
+          <div class="mt-auto max-w-40">
             <NuxtLink to="/your-target-path"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
@@ -368,9 +372,9 @@ function render() {
           </div>
         </div>
       </div>
-      <div class="blue md:w-3/9 w-full border-12 border-white">
-        <img src="@/assets/images/pic5.png">
-        <div class="p-5">
+      <div class="pink md:w-3/9 w-full border-12 border-white flex flex-col">
+        <img src="@/assets/images/pic6.png">
+        <div class="flex flex-col flex-grow p-5"> <!-- Make this a flex container and let it grow -->
           <h2>Stimmenheft DIN A4 Klammerheftung ohne Umschlag</h2>
           <!-- Image and Text 1 -->
           <div class="flex items-center mt-4">
@@ -385,13 +389,13 @@ function render() {
           </div>
 
           <!-- Image and Text 3 -->
-          <div class="flex items-center mt-4">
+          <div class="flex items-center mt-4 mb-5">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
             <p>Hergestellt nach den strengen Regularien der Deutschen Orchestervereinigung e.V.</p>
           </div>
 
           <!-- Button -->
-          <div class="mt-4 max-w-40">
+          <div class="mt-auto max-w-40">
             <NuxtLink to="/your-target-path"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
@@ -400,11 +404,10 @@ function render() {
           </div>
         </div>
       </div>
-      <div class="pink md:w-3/9 w-full border-12 border-white">
+      <div class="pink md:w-3/9 w-full border-12 border-white flex flex-col">
         <img src="@/assets/images/pic6.png">
-        <div class="p-5">
-          <h2>Notenbuch DIN A4
-            Spiralbindung hoch</h2>
+        <div class="flex flex-col flex-grow p-5"> <!-- Make this a flex container and let it grow -->
+          <h2>Notenbuch DIN A4 Spiralbindung hoch</h2>
           <!-- Image and Text 1 -->
           <div class="flex items-center mt-4">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
@@ -422,10 +425,10 @@ function render() {
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
             <p>Hergestellt nach den strengen Regularien der Deutschen Orchestervereinigung e.V.</p>
           </div>
-          <div class="mt-4 max-w-40">
+          <div class="mt-auto max-w-40"> <!-- This will now be pushed to the bottom -->
             <NuxtLink to="/your-target-path"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
-              <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
+              <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" />
               {{ $t("startNow") }}
             </NuxtLink>
           </div>

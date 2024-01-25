@@ -9,70 +9,48 @@ const sidebarController = useModal();
 
 <template>
   <header class="relative bg-white" aria-label="top-navigation">
-    <div class="mx-auto px-4 sm:px-6 max-w-screen-xl mx-auto">
-      <div class="flex items-center border-b-2 border-gray-100 py-6 space-x-4">
-        <div class="flex justify-start items-center min-w-10 lg:min-w-12">
-          <div class="order-2 lg:order-1 ml-4 lg:ml-0">
-            <div class="flex mt-2 mb-3">
-              <div class="col-1 col-xl-2">
+    <div class="mx-auto px-4 sm:px-6 max-w-screen-xl">
+      <div class="flex items-center justify-between border-b-2 border-gray-100 py-6">
+        <div class="order-1 lg:order-2 flex justify-start items-center">
+          <LayoutSideMenu />
+        </div>
+        <!-- Left side of the header: logo and menu -->
+        <div class="flex items-center">
+          <!-- Logo -->
+          <NuxtLink to="/">
+            <img src="@/assets/svg/capella_AURIOPRINT.svg" alt="Avatar" class="w-3/4 lg:w-auto">
+          </NuxtLink>
 
-                <NuxtLink class="a" to="/">
-                  <img src="@/assets/svg/capella_AURIOPRINT.svg" alt="Avatar" style="width: 75%;">
-                </NuxtLink>
-
-              </div>
-              <div class="col-auto mt-3">
-                <button type="button" id="menuBtn1" class="btnMenu p-0" @click="setActive(1)">
-                  <NuxtLink class="a" to="/konfigurator">
-                    Notenheft konfigurieren
-                  </NuxtLink>
-                </button>
-              </div>
-              <div class="col-auto mt-3">
-                <button type="button" id="menuBtn2" class="btnMenu p-0" @click="setActive(2)">
-                  <NuxtLink class="a" to="/klammerheftung">
-                    Noten mit Klammerheftung
-                  </NuxtLink>
-                </button>
-              </div>
-              <div class="col-auto mt-3 me-1">
-                <button type="button" id="menuBtn3" class="btnMenu p-0" @click="setActive(3)">
-                  <NuxtLink class="a" to="/spiralbindung">
-                    Noten mit Spiralbindung
-                  </NuxtLink>
-                </button>
-              </div>
-              <div class="col-auto mt-3">
-                <button type="button" id="menuBtn4" class="btnMenu p-0" @click="setActive(4)">
-                  <NuxtLink class="a" to="/good-to-know">
-                    Wissenswertes
-                  </NuxtLink>
-                </button>
-              </div>
-              <div class="col-auto mt-3">
-                <button type="button" id="menuBtn5" class="btnMenu p-0" @click="setActive(5)">
-                  <NuxtLink class="a" to="/contact">
-                    Kontakt
-                  </NuxtLink>
-                </button>
-              </div>
-            </div>
-
-          </div>
-          <div class="order-1 lg:order-2 flex justify-start items-center">
-            <LayoutSideMenu />
+          <!-- Menu Items -->
+          <div class="hidden lg:flex space-x-4 ml-10">
+            <NuxtLink to="/konfigurator" class="text-gray-600 hover:text-brand-primary">
+              Notenheft konfigurieren
+            </NuxtLink>
+            <NuxtLink to="/klammerheftung" class="text-gray-600 hover:text-brand-primary">
+              Noten mit Klammerheftung
+            </NuxtLink>
+            <NuxtLink to="/spiralbindung" class="text-gray-600 hover:text-brand-primary">
+              Noten mit Spiralbindung
+            </NuxtLink>
+            <NuxtLink to="/good-to-know" class="text-gray-600 hover:text-brand-primary">
+              Wissenswertes
+            </NuxtLink>
+            <NuxtLink to="/contact" class="text-gray-600 hover:text-brand-primary">
+              Kontakt
+            </NuxtLink>
           </div>
         </div>
-        <div class="flex items-center justify-end">
+
+        <!-- Right side of the header: account and cart -->
+        <div class="flex justify-end items-center space-x-4 ml-auto mr-5">
           <AccountMenu />
           <!-- Cart -->
-          <div class="flex ml-4 flow-root lg:ml-6">
+          <div class="flow-root justify-self-end">
             <button class="group bg-transparent -m-2 p-2 flex items-center relative" aria-label="Mini cart"
-              data-testid="cart-button" @click="sidebarController.open">
-              <!-- Heroicon name: outline/shopping-bag -->
-              <div class="w-7 h-7 i-carbon-shopping-bag text-gray-600 hover:text-brand-primary" />
+              @click="sidebarController.open">
+              <div class="w-7 h-7 i-carbon-shopping-bag text-gray-600 hover:text-brand-primary"></div>
               <span v-if="count > 0"
-                class="text-3 font-sm text-white absolute bg-blue-600 rounded-full min-w-5 min-h-5 top-0 right-0 leading-5">
+                class="text-sm text-white absolute bg-blue-600 rounded-full min-w-5 min-h-5 top-0 right-0 leading-5">
                 {{ count || "" }}
               </span>
               <span class="sr-only">{{ $t("cart.itemsInCart") }}, {{ $t("cart.viewCart") }}</span>
