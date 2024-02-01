@@ -1,14 +1,21 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router';
 const { count } = useCart();
 const { count: wishlistCount } = useWishlist();
 const localePath = useLocalePath();
 const { formatLink } = useInternationalization(localePath);
 
 const sidebarController = useModal();
+const activeRoute = ref('');
+
+const route = useRoute();
+watch(route, (newRoute) => {
+  activeRoute.value = newRoute.path;
+});
 </script>
 
 <template>
-  <header class="relative bg-white" aria-label="top-navigation">
+  <header class="relative bg-white sticky top-0 z-50" aria-label="top-navigation">
     <div class="mx-auto px-4 sm:px-6 max-w-screen-xl">
       <div class="flex items-center justify-between border-b-2 border-gray-100 py-6">
         <div class="order-1 lg:order-2 flex justify-start items-center">
@@ -23,19 +30,29 @@ const sidebarController = useModal();
 
           <!-- Menu Items -->
           <div class="hidden lg:flex space-x-4 ml-10">
-            <NuxtLink to="/konfigurator" class="text-gray-600 hover:text-brand-primary">
+            <NuxtLink
+              :class="{ 'text-brand-primary': activeRoute === '/konfigurator', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/konfigurator' }"
+              to="/konfigurator">
               Notenheft konfigurieren
             </NuxtLink>
-            <NuxtLink to="/klammerheftung" class="text-gray-600 hover:text-brand-primary">
+            <NuxtLink
+              :class="{ 'text-brand-primary': activeRoute === '/klammerheftung', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/klammerheftung' }"
+              to="/klammerheftung">
               Noten mit Klammerheftung
             </NuxtLink>
-            <NuxtLink to="/spiralbindung" class="text-gray-600 hover:text-brand-primary">
+            <NuxtLink
+              :class="{ 'text-brand-primary': activeRoute === '/spiralbindung', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/spiralbindung' }"
+              to="/spiralbindung">
               Noten mit Spiralbindung
             </NuxtLink>
-            <NuxtLink to="/good-to-know" class="text-gray-600 hover:text-brand-primary">
+            <NuxtLink
+              :class="{ 'text-brand-primary': activeRoute === '/good-to-know', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/good-to-know' }"
+              to="/good-to-know">
               Wissenswertes
             </NuxtLink>
-            <NuxtLink to="/contact" class="text-gray-600 hover:text-brand-primary">
+            <NuxtLink
+              :class="{ 'text-brand-primary': activeRoute === '/contact', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/contact' }"
+              to="/contact">
               Kontakt
             </NuxtLink>
           </div>

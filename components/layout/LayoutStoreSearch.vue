@@ -74,7 +74,7 @@ watch(enter, (value) => {
 </script>
 
 <template>
-  <div
+  <!-- <div
     ref="searchContainer"
     class="relative group p-3 pr-0 rounded-lg transition duration-300 hover:shadow-md inline-block w-full"
     :class="[active ? 'shadow-lg' : 'shadow']"
@@ -137,5 +137,5 @@ watch(enter, (value) => {
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>

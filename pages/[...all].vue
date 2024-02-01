@@ -58,9 +58,6 @@ function render() {
   <!-- Your content here -->
 <template>
   <div class="max-w-screen-xl mx-auto">
-    <div>
-
-    </div>
     <section>
       <div class="flex flex-col md:flex-row">
         <div class="md:w-6/9 w-full border-12 border-white">
@@ -71,7 +68,7 @@ function render() {
           <h2>
             Ihre Partituren, perfekt gedruckt
           </h2>
-          <div class="w-full max-w-64">
+          <div class="w-full max-w-64 mb-5">
             <p>
               Jetzt neu:
             </p>
@@ -359,10 +356,12 @@ function render() {
           </div>
 
           <!-- Image and Text 3 -->
-          <div class="flex items-center mt-4">
+          <div class="flex items-center mt-4 mb-5">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
             <p> Rechteckiger Heftrücken für ein hochprofessionelles Aussehen</p>
           </div>
+
+          <!-- Button -->
           <div class="mt-auto max-w-40">
             <NuxtLink to="/your-target-path"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
@@ -421,10 +420,12 @@ function render() {
           </div>
 
           <!-- Image and Text 3 -->
-          <div class="flex items-center mt-4">
+          <div class="flex items-center mt-4 mb-5">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
             <p>Hergestellt nach den strengen Regularien der Deutschen Orchestervereinigung e.V.</p>
           </div>
+
+          <!-- Button -->
           <div class="mt-auto max-w-40"> <!-- This will now be pushed to the bottom -->
             <NuxtLink to="/your-target-path"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
