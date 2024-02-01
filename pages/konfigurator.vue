@@ -352,7 +352,6 @@ const authenticate = async () => {
       console.error("An unknown error occurred.");
       // Handle the case where the error is not an Error instance
     }
-    th error;
   }
 };
 
@@ -374,7 +373,6 @@ const createProduct = async (accessToken: string, productData: any) => {
       // Handle non-Error instances
       console.error("An unknown error occurred during product creation.");
     }
-    th error;
   }
 };
 const preCheck = () => {
@@ -536,7 +534,6 @@ const fetchProduct = async (productNumber: string) => {
     } else {
       console.error("An unknown error occurred during product fetching.");
     }
-    th error;
   }
 };
 
