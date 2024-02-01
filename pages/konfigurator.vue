@@ -352,7 +352,7 @@ const authenticate = async () => {
       console.error("An unknown error occurred.");
       // Handle the case where the error is not an Error instance
     }
-    throw error;
+    th error;
   }
 };
 
@@ -374,7 +374,7 @@ const createProduct = async (accessToken: string, productData: any) => {
       // Handle non-Error instances
       console.error("An unknown error occurred during product creation.");
     }
-    throw error;
+    th error;
   }
 };
 const preCheck = () => {
@@ -536,7 +536,7 @@ const fetchProduct = async (productNumber: string) => {
     } else {
       console.error("An unknown error occurred during product fetching.");
     }
-    throw error;
+    th error;
   }
 };
 
@@ -818,87 +818,107 @@ export default {
 </script>
     
 <template>
-  <div>
-    <!--Sektion mit 3 Karten und Bider-->
-    <section class="pt-5">
-      <div class="container justify-center">
-        <div class="row">
-          <div class="col-12 col-lg-4 customBorder p-4 blue">
-            <img src="@/assets/svg/verified.svg" class="mr-2" alt="Avatar">
-            <h2 class="heading-grid mt-3">
-              Ihre Vorteile bei capellaprint
-            </h2>
-            <div class="row mt-4">
-              <div class="col-1">
-                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar">
-              </div>
-              <div class="col">
-                <p> Erstklassiger Notendruck
-                </p>
-              </div>
-              <div class="w-100 pt-2"></div>
-              <div class="col-1">
-                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar">
-              </div>
-              <div class="col">
-                <p>
-                  Musikalientypische Papierformate
-                </p>
-              </div>
-              <div class="w-100 pt-2"></div>
-              <div class="col-1">
-                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar">
-              </div>
-              <div class="col">
-                <p>
-                  Prestissimo versandfertig
-                </p>
-              </div>
-              <div class="w-100 pt-2"></div>
-              <div class="col-1">
-                <img src="@/assets/svg/heart_plus.svg" class="mr-2" alt="Avatar">
-              </div>
-              <div class="col">
-                <p>
-                  Kauf auf Rechnung möglich
-                </p>
-              </div>
-            </div>
+  <div class="max-w-screen-xl mx-auto">
+    <section class="flex flex-col md:flex-">
+      <div class="blue md:w-3/9 w-full border-12 border-white flex flex-col">
+        <div class="flex flex-col flex-g p-5">
+          <img src="@/assets/svg/verified.svg" alt="Avatar" class="max-w-11">
+          <!-- Make this a flex container and let it g -->
+          <h2 class="mt-3">Ihre Vorteile bei capellaprint</h2>
+          <!-- Image and Text 1 -->
+          <div class="flex items-center mt-4">
+            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
+            <p>Erstklassiger Notendruck</p>
           </div>
-          <div class="col-12 col-lg-4 customBorder p-0">
-            <img class="card-img-top img" src="@/assets/images/pic9.png" alt="Card image cap">
+
+          <!-- Image and Text 2 -->
+          <div class="flex items-center mt-4">
+            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
+            <p>Musikalientypische Papierformate</p>
           </div>
-          <div class="col-12 col-lg-4 customBorder p-0">
-            <img class="card-img-top img" src="@/assets/images/pic10.png" alt="Card image cap">
+
+          <!-- Image and Text 3 -->
+          <div class="flex items-center mt-4">
+            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
+            <p>Prestissimo versandfertig</p>
+          </div>
+
+          <!-- Image and Text 4 -->
+          <div class="flex items-center mt-4 mb-5">
+            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
+            <p>Kauf auf Rechnung möglich</p>
           </div>
         </div>
       </div>
+      <div class="md:w-3/9 w-full border-12 border-white flex flex-col">
+        <img class="card-img-top img" src="@/assets/images/pic9.png" alt="Card image cap">
+      </div>
+      <div class="darkblue md:w-3/9 w-full border-12 border-white flex flex-col">
+        <img class="card-img-top img" src="@/assets/images/pic10.png" alt="Card image cap">
+      </div>
     </section>
+    <section class="flex flex-col md:flex-">
+      <div class="grey md:w-6/9 w-full border-12 border-white flex flex-col">
+        <div class="flex flex-col flex-g p-5">
+          <img src="@/assets/svg/verified.svg" alt="Avatar" class="max-w-11">
+          <!-- Make this a flex container and let it g -->
+          <h2 class="mt-3">Ihre Vorteile bei capellaprint</h2>
+          <!-- Image and Text 1 -->
+          <div class="flex items-center mt-4">
+            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
+            <p>Erstklassiger Notendruck</p>
+          </div>
+
+          <!-- Image and Text 2 -->
+          <div class="flex items-center mt-4">
+            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
+            <p>Musikalientypische Papierformate</p>
+          </div>
+
+          <!-- Image and Text 3 -->
+          <div class="flex items-center mt-4">
+            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
+            <p>Prestissimo versandfertig</p>
+          </div>
+
+          <!-- Image and Text 4 -->
+          <div class="flex items-center mt-4 mb-5">
+            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
+            <p>Kauf auf Rechnung möglich</p>
+          </div>
+        </div>
+      </div>
+      <div class="green md:w-3/9 w-full border-12 border-white flex flex-col">
+
+      </div>
+    </section>
+  </div>
+  <div>
     <!--Prouct Cusomizer Sections-->
     <section class="pt-5">
       <div class="container justify-center">
 
-        <div class="row">
+        <div class="">
           <h1 class="">
             Konfigurieren Sie Ihr Notenheft
           </h1>
-          <div class="col-12 col-lg-8 customBorder  pl-5  p-4 grey">
-            <div class="row">
-              <div class="col-12 col-md-7">
-                <h2 class="blockStartMarign">
+          <div class="      ">
+            <div class="">
+              <div class=" ">
+                <h2 class="">
                   1. Projekttitel*
                 </h2>
                 <p>Bitte vergeben Sie hier einen eindeutigen Projekttitel.</p>
               </div>
               <div class="col">
-                <input placeholder="Projekttitel eingeben ..." class="grey p-3"
+                <input placeholder="Projekttitel eingeben ..." class=" p-3"
                   style="border-width: 1px;  width: 300px; border-radius:5px; border-style: solid; border-color: black; margin-top: 20px;"
                   type="string" v-model="productName">
               </div>
             </div>
             <div v-if="projectType != 3" class="w-100 pt-5"></div>
-            <div class="row">
-              <div class="col-12 col-md-7">
+            <div class="">
+              <div class=" ">
                 <h2>2. Art des Projekts*</h2>
                 <p>Zu Beginn ist es notwendig, zu wissen, um welche Art von Notenprojekt es sich handelt.
                 </p>
@@ -912,7 +932,7 @@ export default {
                 </ul>
               </div>
               <div class="col pt-5">
-                <div class="row mt-3">
+                <div class=" mt-3">
                   <div class="col-8">
                     <p>Notenheft ohne
                       Instrumentalstimmen</p>
@@ -921,7 +941,7 @@ export default {
                     <input type="radio" id="one" value="1" v-model="projectType" />
                   </div>
                 </div>
-                <div class="row">
+                <div class="">
                   <div class="col-8">
 
                     <p>Notenheft mit
@@ -931,7 +951,7 @@ export default {
                     <input type="radio" id="two" value="2" v-model="projectType" />
                   </div>
                 </div>
-                <div class="row">
+                <div class="">
                   <div class="col-8">
                     <p>Stimmensatz / Chorsatz</p>
                   </div>
@@ -941,7 +961,7 @@ export default {
                 </div>
               </div>
               <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class="col-12 col-md-7">
+              <div v-if="projectType != 3" class=" ">
                 <h2>3. Papierformat*</h2>
                 <p>Bitte wählen Sie das Format aus, das die Noten haben.
                   Sie können zwischen gebräuchlichen musikalientypischen Papierformaten wählen.
@@ -955,7 +975,7 @@ export default {
                 <li> »Chorsatz Chorheft Cäcilia«, DIN A4</li>
               </div>
               <div v-if="projectType != 3" class="col pt-4">
-                <div class="row mt-3">
+                <div class=" mt-3">
                   <div class="col-8">
                     <p>DIN A4 (21 x 29,7 cm)</p>
                   </div>
@@ -963,7 +983,7 @@ export default {
                     <input type="radio" id="one" value="1" v-model="paperFormat" />
                   </div>
                 </div>
-                <div class="row">
+                <div class="">
                   <div class="col-8">
                     <p>Klavierauszug (19 x 27 cm)</p>
                   </div>
@@ -971,7 +991,7 @@ export default {
                     <input type="radio" id="one" value="2" v-model="paperFormat" />
                   </div>
                 </div>
-                <div class="row">
+                <div class="">
                   <div class="col-8">
                     <p>Concert (22,8 x 30,5 cm)</p>
                   </div>
@@ -979,7 +999,7 @@ export default {
                     <input type="radio" id="two" value="3" v-model="paperFormat" />
                   </div>
                 </div>
-                <div class="row">
+                <div class="">
                   <div class="col-8">
                     <p>DIN B4 (25 x 35,3 cm)</p>
                   </div>
@@ -987,7 +1007,7 @@ export default {
                     <input type="radio" id="two" value="4" v-model="paperFormat" />
                   </div>
                 </div>
-                <div class="row">
+                <div class="">
                   <div class="col-8">
                     <p>DIN A3 (29,7 x 42 cm)</p>
                   </div>
@@ -995,7 +1015,7 @@ export default {
                     <input type="radio" id="one" value="5" v-model="paperFormat" />
                   </div>
                 </div>
-                <div class="row">
+                <div class="">
                   <div class="col-8">
                     <p>Dirigent (31,5 x 46 cm)</p>
                   </div>
@@ -1005,7 +1025,7 @@ export default {
                 </div>
               </div>
               <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class="col-12 col-md-7">
+              <div v-if="projectType != 3" class=" ">
                 <h2>4. Ausrichtung*</h2>
                 <p>Bitte geben Sie nun an, ob die Noten im Hoch– oder im Querformat angelegt sind.
                 </p>
@@ -1015,7 +1035,7 @@ export default {
                 </p>
               </div>
               <div v-if="projectType != 3" class="col pt-5">
-                <div class="row mt-3">
+                <div class=" mt-3">
                   <div class="col-8">
                     <p>Notenheft Hochformat</p>
                   </div>
@@ -1023,7 +1043,7 @@ export default {
                     <input type="radio" id="one" value="true" v-model="format" />
                   </div>
                 </div>
-                <div class="row">
+                <div class="">
                   <div class="col-8">
                     <p>Notenheft Querformat</p>
                   </div>
@@ -1033,7 +1053,7 @@ export default {
                 </div>
               </div>
               <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class="col-12 col-md-7">
+              <div v-if="projectType != 3" class=" ">
                 <h2>5. Farbigkeit Inhalt*</h2>
                 <p>Ihre Noten können im Innenteil entweder schwarzweiß oder farbig gedruckt werden.
                 </p>
@@ -1043,7 +1063,7 @@ export default {
                 </p>
               </div>
               <div v-if="projectType != 3" class="col pt-5">
-                <div class="row mt-3">
+                <div class=" mt-3">
                   <div class="col-8">
                     <p>Inhalt schwarzweiß</p>
                   </div>
@@ -1051,7 +1071,7 @@ export default {
                     <input type="radio" id="one" value="false" v-model="color" />
                   </div>
                 </div>
-                <div class="row">
+                <div class="">
                   <div class="col-8">
                     <p>Inhalt farbig</p>
                   </div>
@@ -1061,7 +1081,7 @@ export default {
                 </div>
               </div>
               <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class="col-12 col-md-7">
+              <div v-if="projectType != 3" class=" ">
                 <h2>6. Seitenanzahl*</h2>
                 <p>Bitte geben Sie die Gesamtseitenanzahl Ihrer Datei an. Aus produktionstechnischen Gründen
                   muss diese immer durch 4 teilbar sein.
@@ -1083,7 +1103,7 @@ export default {
                 </select>
               </div>
               <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class="col-12 col-md-7">
+              <div v-if="projectType != 3" class=" ">
                 <h2>7. Bindung*</h2>
                 <p>
                   Bitte beachten Sie, dass bei den Formaten DIN B4, DIN A3 und Dirigent sowie bei allen
@@ -1091,7 +1111,7 @@ export default {
                 </p>
               </div>
               <div class="col pt-5">
-                <div class="row mt-3">
+                <div class=" mt-3">
                   <div class="col-8">
                     <p v-if="bindingType == 'true'">Bindung: Klammerheftung</p>
                     <p v-if="bindingType == 'false'">Bindung: Spiralbindung</p>
@@ -1099,7 +1119,7 @@ export default {
                 </div>
               </div>
               <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class="col-12 col-md-7">
+              <div v-if="projectType != 3" class=" ">
                 <h2>8. Umschlag</h2>
                 <p>Unser hochweißer Umschlagkarton mit 260g/m&#178; gibt Farben brillant wieder und besitzt
                   ein
@@ -1107,7 +1127,7 @@ export default {
                   hervorragend bedrucken und bricht auch bei starker Beanspruchung nicht auf.</p>
               </div>
               <div v-if="projectType != 3" class="col pt-5">
-                <div class="row mt-3">
+                <div class=" mt-3">
                   <div class="col-8">
                     <p>Mit Umschlag:</p>
                   </div>
@@ -1115,7 +1135,7 @@ export default {
                     <input type="radio" id="one" value="true" v-model="enveloped" />
                   </div>
                 </div>
-                <div class="row">
+                <div class="">
                   <div class="col-8">
 
                     <p>Ohne Umschlag:</p>
@@ -1126,7 +1146,7 @@ export default {
                 </div>
               </div>
               <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class="col-12 col-md-7">
+              <div v-if="projectType != 3" class=" ">
                 <h2>9. Notenupload*</h2>
                 <p>Hier laden Sie nun die Druckdaten als PDF auf unseren Server – ganz bequem und einfach.
                   Ihre Daten werden verschlüsselt übertragen.
@@ -1134,12 +1154,12 @@ export default {
                   passen sollte.</p>
               </div>
               <div v-if="projectType != 3" class="col mt-4">
-                <div class="row">
+                <div class="">
                   <div class="col-auto">
                     <p>Noten-PDF /Inhalt:*</p>
                   </div>
                   <div class="col">
-                    <div v-if="pdfData1 == null" class="row">
+                    <div v-if="pdfData1 == null" class="">
                       <div>
                         <button class="btn btn uploadBtn" style="color: black !important;" @click="click1"> <img
                             src="@/assets/svg/plusBlack.svg" alt="Avatar" style=" margin-right: 5px;">Datei
@@ -1148,7 +1168,7 @@ export default {
                           accept="application/pdf">
                       </div>
                     </div>
-                    <div v-if="pdfData1 != null && isUpload1 == false" class="row">
+                    <div v-if="pdfData1 != null && isUpload1 == false" class="">
                       <div class="col-auto">
                         {{ pdfData1.name }}
                       </div>
@@ -1159,7 +1179,7 @@ export default {
                         </button>
                       </div>
                     </div>
-                    <div v-if="isUpload1 == true" class="row mt-3">
+                    <div v-if="isUpload1 == true" class=" mt-3">
                       <div class="progress">
                         <div class="progress-bar progress-bar-striped" role="progressbar"
                           :style="{ width: uploadValue + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
@@ -1168,12 +1188,12 @@ export default {
                     </div>
                   </div>
                 </div>
-                <div class="row mt-5">
+                <div class=" mt-5">
                   <div class="col-auto">
                     <p>ggf. <br> Umschlagdatei:</p>
                   </div>
                   <div class="col">
-                    <div v-if="pdfData2 == null" class="row">
+                    <div v-if="pdfData2 == null" class="">
                       <div class="" v-if="pdfData2 == null">
                         <button class="btn btn uploadBtn ms-0 ms-xl-3" style="color: black !important;" @click="click2">
                           <img src="@/assets/svg/plusBlack.svg" alt="Avatar" style="margin-right: 5px;">Datei wählen
@@ -1182,7 +1202,7 @@ export default {
                           accept="application/pdf">
                       </div>
                     </div>
-                    <div v-if="pdfData2 != null && isUpload2 == false" class="row">
+                    <div v-if="pdfData2 != null && isUpload2 == false" class="">
                       <div class="col-8">
                         {{ pdfData2.name }}
                       </div>
@@ -1193,7 +1213,7 @@ export default {
                         </button>
                       </div>
                     </div>
-                    <div v-if="isUpload2 == true" class="row mt-3">
+                    <div v-if="isUpload2 == true" class=" mt-3">
                       <div class="progress">
                         <div class="progress-bar progress-bar-striped" role="progressbar"
                           :style="{ width: uploadValue2 + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
@@ -1204,8 +1224,8 @@ export default {
                 </div>
               </div>
             </div>
-            <div class="row pt-5" v-if="projectType != 1">
-              <div class="col-12 col-md-7">
+            <div class=" pt-5" v-if="projectType != 1">
+              <div class=" ">
                 <h2 v-if="projectType == 2">10. Instrumentalstimmen*</h2>
                 <h2 v-if="projectType == 3">3. Instrumentalstimmen*</h2>
                 <p>Wenn Ihr Projekt Instrumentalstimmen enthält, können Sie diese hier konfigurieren.
@@ -1222,15 +1242,15 @@ export default {
                 </p>
               </div>
               <div class="w-100 pt-2"></div>
-              <div class="col-12 col-md-6">
-                <p class="blockStartMarign">
+              <div class=" col-md-6">
+                <p class="">
                 <p class="thick inline"> Stimme benennen </p>(bspw. »Violine 1«)
                 </p>
-                <input type="string" class="grey p-3" placeholder="Stimmenname eingeben ..." v-model="voiceName"
+                <input type="string" class=" p-3" placeholder="Stimmenname eingeben ..." v-model="voiceName"
                   style="    width: 250px;border-width: 1px; border-radius:5px; border-style: solid; border-color: black; margin-top: 20px;">
               </div>
               <div class="col">
-                <div class="row">
+                <div class="">
                   <div class="col">
                     <p>Seitenanzahl Inhalt:</p>
                     <p>Exemplare pro Set:</p>
@@ -1254,7 +1274,7 @@ export default {
                       </select>
                     </p>
                     <p>
-                    <div v-if="pdfData3 == null" class="row">
+                    <div v-if="pdfData3 == null" class="">
                       <div class="" v-if="pdfData3 == null">
                         <button class="btn btn uploadBtn" style="color: black !important" @click="voiceUpload"> <img
                             src="@/assets/svg/plusBlack.svg" alt="Avatar" style="margin-right: 5px;">Datei wählen
@@ -1263,7 +1283,7 @@ export default {
                           accept="application/pdf">
                       </div>
                     </div>
-                    <div v-if="pdfData3 != null && isUpload3 == false" class="row">
+                    <div v-if="pdfData3 != null && isUpload3 == false" class="">
                       <div class="col">
                         {{ pdfData3.name }}
                       </div>
@@ -1274,7 +1294,7 @@ export default {
                         </button>
                       </div>
                     </div>
-                    <div v-if="isUpload3 == true" class="row mt-3">
+                    <div v-if="isUpload3 == true" class=" mt-3">
                       <div class="progress">
                         <div class="progress-bar progress-bar-striped" role="progressbar"
                           :style="{ width: uploadValue3 + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
@@ -1302,7 +1322,7 @@ export default {
                 Sie die Stimme dem Projekt hinzufügen
               </p>
             </div>
-            <div class="row" v-if="projectType != 1">
+            <div class="" v-if="projectType != 1">
               <div class="col-md-12 pt-4 ">
                 <h3 class="ps-2">Hinzugefügte Stimmen:</h3>
                 <table class="table table-striped">
@@ -1334,15 +1354,15 @@ export default {
               </div>
             </div>
 
-            <div class="row pt-5">
-              <div class="col-12 col-md-7">
+            <div class=" pt-5">
+              <div class=" ">
                 <h2 v-if="projectType == 1">10. In den Warenkorb*</h2>
                 <h2 v-if="projectType == 2">11. In den Warenkorb*</h2>
                 <h2 v-if="projectType == 3">4. In den Warenkorb*</h2>
                 <p>Bitte legen Sie das Projekt nun in den Warenkorb. Sie können danach noch weitere Projekte
                   anlegen und gemeinsam in einer Lieferung versandkostenoptimiert bestellen.</p>
               </div>
-              <div class="col-12 col-md">
+              <div class=" col-md">
                 <button v-if="!isLoading" @click="preCheck" type="button" class="btn btn-dark mt-5">
                   <img src="@/assets/svg/plus.svg" alt="Avatar" style="margin-right: 10px;">Jetzt
                   in den Warenkorb legen
@@ -1362,24 +1382,24 @@ export default {
               </div>
             </div>
           </div>
-          <div class="col-12 col-lg-4 p-0 customBorder">
+          <div class=" col-lg-4 p-0 ">
             <div id="stickyBar" class="sticky-top" style="top: 120px">
-              <div class="p-4 green">
-                <div class="row">
+              <div class=" green">
+                <div class="">
                   <div class="col">
                     <p>Ihr Preis pro Exemplar:</p>
                     <h2>€ {{ priceString }}</h2>
                     <p style="font-size: x-small;">Preis inkl. 7% MwSt., ggf. zzgl. Versandkosten</p>
                   </div>
                 </div>
-                <div class="row">
+                <div class="">
                   <div class="col">
                     <p>Ihr Preis für die gewünschte Auflagenhöhe:</p>
                     <h2>€ {{ projectPriceString }}</h2>
                     <p style="font-size: x-small;">Preis inkl. 7% MwSt., ggf. zzgl. Versandkosten</p>
                   </div>
                 </div>
-                <div class="row">
+                <div class="">
                   <div class="col">
                     <p>Ihre Auflage:</p>
                     <div class="input-group plus-minus-input">
@@ -1403,7 +1423,7 @@ export default {
                     <p style="font-size: x-small;">zzgl. Postlaufzeit</p>
                   </div>
                 </div>
-                <div class="row">
+                <div class="">
                   <div class="col align-self-center">
                     <button v-if="!isLoading" @click="preCheck" type="button" class="btn btn-dark mt-3">
                       <img src="@/assets/svg/plus.svg" alt="Avatar" style="margin-right: 10px;">Jetzt
@@ -1423,7 +1443,7 @@ export default {
                     </div>
                   </div>
                 </div>
-                <div class="row pt-4">
+                <div class=" pt-4">
                   <table class="table" style="font-size:small ; border-style: hidden !important;">
                     <thead>
                       <tr>
@@ -1435,10 +1455,10 @@ export default {
                     <tbody>
                       <tr style="cursor: pointer;" :id="'discountgroup' + discount.id"
                         v-for="(discount, index) in discounts" @click="setAmount(discount.amount)">
-                        <th v-if="discount.amount == 1" scope="row">1</th>
-                        <th v-if="discount.amount > 1 && discount.amount <= 200" scope="row">{{
+                        <th v-if="discount.amount == 1" scope="">1</th>
+                        <th v-if="discount.amount > 1 && discount.amount <= 200" scope="">{{
                           discount.amount }} – {{ discounts[index + 1].amount - 1 }}</th>
-                        <th v-if="discount.amount > 200" scope="row">Ab 250</th>
+                        <th v-if="discount.amount > 200" scope="">Ab 250</th>
                         <td>€ {{ (singlePrice * (1 - discount.discount)).toFixed(2) }}</td>
                         <td>{{ (discount.discount * 100).toFixed(0) }} %</td>
                       </tr>
@@ -1447,7 +1467,7 @@ export default {
                 </div>
                 <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
               </div>
-              <div class="p-4 pink" style="margin-top: 20px;">
+              <div class=" pink" style="margin-top: 20px;">
                 <h1>
                   Kostenfreier
                   Versand
@@ -1466,9 +1486,9 @@ export default {
     <!--Sektion mit 3 Karten und Bider-->
     <section class="pt-5">
       <div class="container justify-center">
-        <div class="row">
-          <div class="col customBorder  pl-5  p-4 red">
-            <div class="row">
+        <div class="">
+          <div class="col      red">
+            <div class="">
               <div class="col-2"> <img src="@/assets/svg/report.svg" class="mr-2" alt="Avatar"></div>
               <div class="col">
                 <h2>Maßvorgaben</h2>
@@ -1488,7 +1508,7 @@ export default {
               </button>
             </a>
           </div>
-          <div class="col customBorder  pl-5  p-4 yellow">
+          <div class="col      yellow">
             <img src="@/assets/svg/mark_email_read.svg" class="mr-2" alt="Avatar">
             <h2 style="margin-top: 60px;">
               Sie benötigen Hilfe?
