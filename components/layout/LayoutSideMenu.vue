@@ -45,9 +45,37 @@ const toggleCollapse = (navigationElement: Category) => {
         <div class="w-full px-4 pb-4">
           <!-- <LayoutStoreSearch @link-clicked="sideMenuController.close" /> -->
         </div>
-        <!-- <div class="overflow-y-auto">
+        <div class="overflow-y-auto">
           <ul class="flex flex-col items-start p-x-2 space-y-2">
-            <li v-for="navigationElement in navigationElements" :key="navigationElement.id"
+            <div class="flex h-full flex-col justify-start text-left space-y-4 ml-10 pt-5">
+              <!-- Navigation Links -->
+              <NuxtLink class="justify-start"
+                :class="{ 'text-brand-primary': activeRoute === '/konfigurator', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/konfigurator' }"
+                to="/konfigurator" @click="close">
+                Notenheft konfigurieren
+              </NuxtLink>
+              <NuxtLink
+                :class="{ 'text-brand-primary': activeRoute === '/klammerheftung', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/klammerheftung' }"
+                to="/klammerheftung" @click="close">
+                Noten mit Klammerheftung
+              </NuxtLink>
+              <NuxtLink
+                :class="{ 'text-brand-primary': activeRoute === '/spiralbindung', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/spiralbindung' }"
+                to="/spiralbindung" @click="close">
+                Noten mit Spiralbindung
+              </NuxtLink>
+              <NuxtLink
+                :class="{ 'text-brand-primary': activeRoute === '/good-to-know', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/good-to-know' }"
+                to="/good-to-know" @click="close">
+                Wissenswertes
+              </NuxtLink>
+              <NuxtLink
+                :class="{ 'text-brand-primary': activeRoute === '/contact', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/contact' }"
+                to="/contact" @click="close">
+                Kontakt
+              </NuxtLink>
+            </div>
+            <!-- <li v-for="navigationElement in navigationElements" :key="navigationElement.id"
               class="flex flex-col flex-1 w-full">
               <NuxtLink :to="formatLink(getCategoryRoute(navigationElement))"
                 class="flex items-center px-5 py-3 text-base font-normal text-gray-900 break-all hover:bg-gray-100"
@@ -87,9 +115,9 @@ const toggleCollapse = (navigationElement: Category) => {
                   </NuxtLink>
                 </li>
               </ul>
-            </li>
+            </li> -->
           </ul>
-        </div> -->
+        </div>
       </aside>
     </div>
   </LayoutSidebar>
