@@ -816,7 +816,7 @@ export default {
     
 <template>
   <div class="max-w-screen-xl mx-auto">
-    <section class="flex flex-col md:flex-">
+    <section class="flex  md:flex-">
       <div class="blue md:w-3/9 w-full border-12 border-white flex flex-col">
         <div class="flex flex-col flex-g p-5">
           <img src="@/assets/svg/verified.svg" alt="Avatar" class="max-w-11">
@@ -854,7 +854,7 @@ export default {
         <img class="card-img-top img" src="@/assets/images/pic10.png" alt="Card image cap">
       </div>
     </section>
-    <section class="flex flex-col md:flex-">
+    <section class="flex md:flex-">
       <div class="grey md:w-6/9 w-full border-12 border-white flex flex-col">
         <div class="flex flex-col flex-g p-5">
           <img src="@/assets/svg/verified.svg" alt="Avatar" class="max-w-11">
@@ -865,7 +865,6 @@ export default {
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
             <p>Erstklassiger Notendruck</p>
           </div>
-
           <!-- Image and Text 2 -->
           <div class="flex items-center mt-4">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
