@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
-
 const props = withDefaults(
   defineProps<{
     controller: ReturnType<typeof useModal>;
@@ -17,13 +14,6 @@ const { isOpen, close } = controller.value;
 
 const sidebarContentElement = ref();
 onClickOutside(sidebarContentElement, () => close());
-
-const activeRoute = ref('');
-const route = useRoute();
-watch(route, (newRoute) => {
-  activeRoute.value = newRoute.path;
-});
-
 </script>
 
 <template>
@@ -43,41 +33,12 @@ watch(route, (newRoute) => {
                 'left-0': side === 'left',
                 'right-0': side === 'right',
               }">
-              <div ref="sidebarContentElement" class="pointer-events-auto w-screen max-w-md">
+              <div ref="sidebarContentElement" class="pointer-events-auto w-screen max-w-md pt-5">
                 <div class="flex h-full flex-col bg-white shadow-xl">
                   <slot></slot>
-                  <div class="flex h-full flex-col justify-start text-left space-y-4 ml-10">
-                    <!-- Navigation Links -->
-                    <NuxtLink class="justify-start"
-                      :class="{ 'text-brand-primary': activeRoute === '/konfigurator', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/konfigurator' }"
-                      to="/konfigurator" @click="close">
-                      Notenheft konfigurieren
-                    </NuxtLink>
-                    <NuxtLink
-                      :class="{ 'text-brand-primary': activeRoute === '/klammerheftung', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/klammerheftung' }"
-                      to="/klammerheftung" @click="close">
-                      Noten mit Klammerheftung
-                    </NuxtLink>
-                    <NuxtLink
-                      :class="{ 'text-brand-primary': activeRoute === '/spiralbindung', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/spiralbindung' }"
-                      to="/spiralbindung" @click="close">
-                      Noten mit Spiralbindung
-                    </NuxtLink>
-                    <NuxtLink
-                      :class="{ 'text-brand-primary': activeRoute === '/good-to-know', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/good-to-know' }"
-                      to="/good-to-know" @click="close">
-                      Wissenswertes
-                    </NuxtLink>
-                    <NuxtLink
-                      :class="{ 'text-brand-primary': activeRoute === '/contact', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/contact' }"
-                      to="/contact" @click="close">
-                      Kontakt
-                    </NuxtLink>
-                  </div>
+
                 </div>
-
               </div>
-
             </div>
           </Transition>
         </div>
@@ -85,3 +46,4 @@ watch(route, (newRoute) => {
     </Transition>
   </Teleport>
 </template>
+
