@@ -24,17 +24,11 @@ const promoCode = ref("");
   <div>
     <div class="mb-4">
       <div class="flex gap-3">
-        <input
-          v-model="promoCode"
-          type="text"
-          name="promoCode"
-          :placeholder="$t('form.promoCodePlaceholder')"
-          class="border rounded-md py-2 px-4 border-solid border-1 border-cyan-600 w-full"
-        />
+        <input v-model="promoCode" type="text" name="promoCode" :placeholder="$t('form.promoCodePlaceholder')"
+          class="border rounded-md py-2 px-4 border-solid border-1 border-cyan-600 w-full" />
         <button
-          class="text-white bg-blue-500 hover:bg-blue-600 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md"
-          @click="addPromotionCodeHandler(promoCode)"
-        >
+          class="text-white bg-black hover:bg-blue-600 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-full"
+          @click="addPromotionCodeHandler(promoCode)">
           Add
         </button>
       </div>
@@ -42,17 +36,10 @@ const promoCode = ref("");
     <div v-if="showPromotionCodes">
       <div>{{ $t("checkout.promoCode.label") }}:</div>
       <ul role="list" class="text-sm pl-0">
-        <li
-          v-for="appliedPromotionCode in appliedPromotionCodes"
-          :key="appliedPromotionCode.id"
-          class="flex justify-between text-gray-600 border-b py-4"
-        >
+        <li v-for="appliedPromotionCode in appliedPromotionCodes" :key="appliedPromotionCode.id"
+          class="flex justify-between text-gray-600 border-b py-4">
           <span>{{ appliedPromotionCode.label }}</span>
-          <button
-            class="text-brand-dark"
-            type="button"
-            @click="removeItemHandler(appliedPromotionCode)"
-          >
+          <button class="text-brand-dark" type="button" @click="removeItemHandler(appliedPromotionCode)">
             {{ $t("checkout.promoCode.remove") }}
           </button>
         </li>
