@@ -78,7 +78,7 @@ function render() {
             </p>
           </div>
           <div class="mt-auto max-w-40">
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
               {{ $t("startNow") }}
@@ -99,7 +99,7 @@ function render() {
           Es ist ganz einfach: Mit unserem Konfigurator stellen Sie sich die perfekte Notenausgabe zusammen.
         </p>
         <div class="mt-auto mt-5 max-w-40">
-          <NuxtLink to="/your-target-path"
+          <NuxtLink to="/konfigurator"
             class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
             <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
             {{ $t("startNow") }}
@@ -363,7 +363,7 @@ function render() {
 
           <!-- Button -->
           <div class="mt-auto max-w-40">
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
               {{ $t("startNow") }}
@@ -395,7 +395,7 @@ function render() {
 
           <!-- Button -->
           <div class="mt-auto max-w-40">
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
               {{ $t("startNow") }}
@@ -427,7 +427,7 @@ function render() {
 
           <!-- Button -->
           <div class="mt-auto max-w-40"> <!-- This will now be pushed to the bottom -->
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" />
               {{ $t("startNow") }}
