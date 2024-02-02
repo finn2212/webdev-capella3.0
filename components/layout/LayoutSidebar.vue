@@ -33,7 +33,7 @@ onClickOutside(sidebarContentElement, () => close());
                 'left-0': side === 'left',
                 'right-0': side === 'right',
               }">
-              <div ref="sidebarContentElement" class="pointer-events-auto w-screen max-w-md pt-5">
+              <div ref="sidebarContentElement" class="pointer-events-auto w-screen max-w-md pt-20">
                 <div class="flex h-full flex-col bg-white shadow-xl">
                   <slot></slot>
 

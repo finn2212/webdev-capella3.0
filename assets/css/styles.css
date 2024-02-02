@@ -4,10 +4,3 @@ a {
 
 element.style {
 }
-
-ol, ul, dl {
-    list-style-type: none !important;
-    padding-left: 0 !important;
-    margin-top: 0;
-    margin-bottom: 1rem; 
-}

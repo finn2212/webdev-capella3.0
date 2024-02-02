@@ -3,6 +3,7 @@ import { ref, onBeforeMount } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
 import { Product } from "@shopware-pwa/types";
+import { reactive } from 'vue';
 
 interface ProductItem {
   product: any; // Replace 'any' with a more specific type if known
@@ -21,13 +22,24 @@ interface PdfData {
   // Include other properties as needed, such as URL or size
 }
 
+interface FileState {
+  [key: number]: { selected: boolean; name: string };
+}
+
 const { pushSuccess } = useNotifications();
 const { codeErrorsNotification } = useCartNotification();
 
 // const route = useRoute();
 // Primitive values using ref
 const price = ref(0);
+// Using Record<number, boolean> to address TypeScript indexing issue
+const files: FileState = reactive({
+  1: { selected: false, name: '' },
+  2: { selected: false, name: '' },
+});
 const priceString = ref('0');
+const shopwareAccessToken = "SWSCUHZMWNG2TTLINJFXMKG3TW"; // Make sure this is your actual JWT
+const apiUrl = "https://s23511.creoline.cloud/webdev-staging/store-api";
 const projectPriceString = ref('0');
 const productionTime = ref("1–3 Tage");
 const isOpen = ref(false);
@@ -40,7 +52,7 @@ const voiceQuantity = ref(1);
 const handlingPrice = ref(3.8);
 const singlePrice = ref(4.29);
 const pagePrice = ref(0.15);
-const quantitiy = ref(1);
+const productQuantity = ref(1);
 const handlingVoice = ref(1);
 const pdf1 = ref('');
 const pdf2 = ref('');
@@ -310,7 +322,6 @@ const discounts = reactive([
 onMounted(() => {
   calculatePrice(); // Make sure calculatePrice is defined appropriately
 });
-
 
 const swEnvironment = useRuntimeConfig(); // Nuxt 3 way to access runtime config
 if (typeof swEnvironment.public.shopware.shopwareEndpoint === 'string' && typeof swEnvironment.public.shopware.shopwareAccessToken === 'string') {
@@ -625,43 +636,43 @@ const calculatePrice = () => {
 };
 
 const calculateDiscount = () => {
-  if (quantitiy.value === 1) {
+  if (productQuantity.value === 1) {
     discount.value = 1;
     productionTime.value = "1–3 Tage";
     //setDiscountGroup(1);
-  } else if (quantitiy.value > 1 && quantitiy.value < 10) {
+  } else if (productQuantity.value > 1 && productQuantity.value < 10) {
     discount.value = 0.45;
     productionTime.value = "1–3 Tage";
     //setDiscountGroup(2);
-  } else if (quantitiy.value > 9 && quantitiy.value < 24) {
+  } else if (productQuantity.value > 9 && productQuantity.value < 24) {
     discount.value = 0.55;
     productionTime.value = "1–3 Tage";
     //setDiscountGroup(3);
-  } else if (quantitiy.value > 24 && quantitiy.value < 50) {
+  } else if (productQuantity.value > 24 && productQuantity.value < 50) {
     discount.value = 0.63;
     productionTime.value = "1–3 Tage";
     //setDiscountGroup(4);
-  } else if (quantitiy.value > 49 && quantitiy.value < 75) {
+  } else if (productQuantity.value > 49 && productQuantity.value < 75) {
     discount.value = 0.68;
     productionTime.value = "1–3 Tage";
     //setDiscountGroup(5);
-  } else if (quantitiy.value > 74 && quantitiy.value < 100) {
+  } else if (productQuantity.value > 74 && productQuantity.value < 100) {
     discount.value = 0.70;
     productionTime.value = "1–3 Tage";
     //setDiscountGroup(6);
-  } else if (quantitiy.value > 99 && quantitiy.value < 150) {
+  } else if (productQuantity.value > 99 && productQuantity.value < 150) {
     discount.value = 0.72;
     productionTime.value = "3–5 Tage";
     //setDiscountGroup(7);
-  } else if (quantitiy.value > 149 && quantitiy.value < 200) {
+  } else if (productQuantity.value > 149 && productQuantity.value < 200) {
     discount.value = 0.74;
     productionTime.value = "3–5 Tage";
     //setDiscountGroup(8);
-  } else if (quantitiy.value > 199 && quantitiy.value < 250) {
+  } else if (productQuantity.value > 199 && productQuantity.value < 250) {
     discount.value = 0.75;
     productionTime.value = "3–5 Tage";
     //setDiscountGroup(9);
-  } else if (quantitiy.value >= 250) {
+  } else if (productQuantity.value >= 250) {
     discount.value = 0.76;
     productionTime.value = "3–5 Tage";
     //setDiscountGroup(10);
@@ -722,16 +733,16 @@ const calculateWeight = () => {
 
 const calculateProjectPrice = () => {
   priceString.value = price.value.toFixed(2).replace(".", ",");
-  if (quantitiy.value === 0) {
+  if (productQuantity.value === 0) {
     projectPriceString.value = priceString.value;
   } else {
-    projectPriceString.value = (price.value * quantitiy.value).toFixed(2).replace(".", ",");
+    projectPriceString.value = (price.value * productQuantity.value).toFixed(2).replace(".", ",");
   }
 };
 
 const reset = (full: boolean) => {
   if (full) {
-    quantitiy.value = 1;
+    productQuantity.value = 1;
     projectType.value = 1;
     productName.value = "";
     pdf1.value = '';
@@ -751,6 +762,84 @@ const reset = (full: boolean) => {
   totalVoicePrice.value = 0;
 
   calculatePrice();
+};
+
+const handleFileSelection = (event: Event, fileIndex: number) => {
+  const input = event.target as HTMLInputElement;
+  if (input.files?.length) {
+    const file = input.files[0];
+    files[fileIndex] = { selected: true, name: file.name };
+  }
+};
+
+const uploadFile = (fileIndex: number) => {
+  console.log(`Uploading file ${files[fileIndex].name}...`);
+  handleFileUpload(files[fileIndex], fetchedProduct.value.productNumber)
+  // Implement your upload logic here
+  // Optionally reset the file selection state if needed
+  files[fileIndex] = { selected: false, name: '' };
+};
+
+const cancelSelection = (fileIndex: number) => {
+  // Reset the selected state and file name for the input
+  files[fileIndex] = { selected: false, name: '' };
+};
+// Function to create a media object
+async function createMediaObject() {
+  const response = await axios.post(`${apiUrl}/media`, {
+    headers: {
+      "Content-Type": 'application/json',
+      "sw-access-key": 'SWSCUHZMWDM2TTLINJFXMKG3TW'
+    },
+  });
+  return response.data.data.id; // Assuming the response includes the media ID
+}
+
+// Function to upload a file to the created media object
+async function uploadFileToMedia(mediaId: any, file: any) {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  await axios.post(`${apiUrl}/media/${mediaId}/upload`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      "sw-access-key": 'SWSCUHZMWDM2TTLINJFXMKG3TW'
+    },
+  });
+}
+
+// Function to associate the media with a product
+async function associateMediaWithProduct(productId: any, mediaId: any) {
+  await axios.patch(`${apiUrl}/product/${productId}`, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      "sw-access-key": 'SWSCUHZMWDM2TTLINJFXMKG3TW'
+    },
+  });
+}
+async function handleFileUpload(file: any, productId: any) {
+  try {
+    const mediaId = await createMediaObject();
+    await uploadFileToMedia(mediaId, file);
+    await associateMediaWithProduct(productId, mediaId);
+    console.log('File uploaded and associated with product successfully');
+  } catch (error) {
+    console.error('Error uploading file:', error);
+  }
+}
+
+// Define the count function to increment or decrement the quantity
+const count = (increase: boolean) => {
+  if (increase) {
+    if (productQuantity.value < 300) {
+      console.log(productQuantity.value) // Ensures productQuantity does not exceed max
+      productQuantity.value = productQuantity.value + 1;
+    }
+  } else {
+    if (productQuantity.value > 0) { // Ensures productQuantity does not go below min
+      productQuantity.value = productQuantity.value - 1;
+    }
+  }
 };
 
 // Watchers
@@ -783,9 +872,10 @@ watch(pagesQuantitiy, () => {
   calculatePrice();
 });
 
-watch(quantitiy, (newValue) => {
+watch(productQuantity, (newValue) => {
   if (newValue < 0) {
-    quantitiy.value = 0;
+    console.log(productQuantity.value)
+    productQuantity.value = 0;
   }
   calculatePrice();
 });
@@ -816,333 +906,566 @@ export default {
     
 <template>
   <div class="max-w-screen-xl mx-auto">
-    <section class="flex  md:flex-">
-      <div class="blue md:w-3/9 w-full border-12 border-white flex flex-col">
-        <div class="flex flex-col flex-g p-5">
-          <img src="@/assets/svg/verified.svg" alt="Avatar" class="max-w-11">
-          <!-- Make this a flex container and let it g -->
-          <h2 class="mt-3">Ihre Vorteile bei capellaprint</h2>
-          <!-- Image and Text 1 -->
-          <div class="flex items-center mt-4">
-            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p>Erstklassiger Notendruck</p>
-          </div>
+    <section>
+      <div class="flex flex-col md:flex-row">
+        <div class="blue md:w-3/9 w-full border-12 border-white flex flex-col">
+          <div class="flex flex-col flex-g p-5">
+            <img src="@/assets/svg/verified.svg" alt="Avatar" class="max-w-11">
+            <!-- Make this a flex container and let it g -->
+            <h2 class="mt-3">Ihre Vorteile bei capellaprint</h2>
+            <!-- Image and Text 1 -->
+            <div class="flex items-center mt-4">
+              <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
+              <p>Erstklassiger Notendruck</p>
+            </div>
 
-          <!-- Image and Text 2 -->
-          <div class="flex items-center mt-4">
-            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p>Musikalientypische Papierformate</p>
-          </div>
+            <!-- Image and Text 2 -->
+            <div class="flex items-center mt-4">
+              <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
+              <p>Musikalientypische Papierformate</p>
+            </div>
 
-          <!-- Image and Text 3 -->
-          <div class="flex items-center mt-4">
-            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p>Prestissimo versandfertig</p>
-          </div>
+            <!-- Image and Text 3 -->
+            <div class="flex items-center mt-4">
+              <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
+              <p>Prestissimo versandfertig</p>
+            </div>
 
-          <!-- Image and Text 4 -->
-          <div class="flex items-center mt-4 mb-5">
-            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p>Kauf auf Rechnung möglich</p>
+            <!-- Image and Text 4 -->
+            <div class="flex items-center mt-4 mb-5">
+              <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
+              <p>Kauf auf Rechnung möglich</p>
+            </div>
           </div>
         </div>
+        <div class="md:w-3/9 w-full border-12 border-white flex flex-col">
+          <img class="w-full max-full" src="@/assets/images/pic9.png" alt="Card image cap">
+        </div>
+        <div class="md:w-3/9 w-full border-12 border-white flex flex-col">
+          <img class="w-full max-full" src="@/assets/images/pic10.png" alt="Card image cap">
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="border-12 border-white">
+        <h1>
+          Konfigurieren Sie Ihr Notenheft
+        </h1>
+      </div>
+    </section>
+    <section>
+      <div class="flex flex-col md:flex-row">
+        <div class="grey md:w-6/9 w-full border-12 border-white flex flex-col p-4">
+          <div class="flex w-full pt-3">
+            <!-- Column 1 (3/5) -->
+            <div class="w-3/5 p-2">
+              <h2>
+                1. Projekttitel*
+              </h2>
+              <p>Bitte vergeben Sie hier einen eindeutigen Projekttitel.</p>
+            </div>
+            <!-- Column 2 (2/5) -->
+            <div class="w-2/5 p-2 mt-5">
+              <input placeholder="Projekttitel eingeben ..." class=" p-3" type="string" v-model="productName">
+            </div>
+          </div>
+          <div class="flex w-full pt-3">
+            <!-- Column 1 (3/5) -->
+            <div class="w-3/5 p-2">
+              <h2>2. Art des Projekts*</h2>
+              <p>Zu Beginn ist es notwendig, zu wissen, um welche Art von Notenprojekt es sich handelt.</p>
+              <p class="mt-3">Wählen Sie zwischen den gebräuchlichsten Formen:</p>
+              <ul class="list-disc list-outside pl-5 space-y-2">
+                <li class="text-gray-700">Partitur/Notenheft ohne separate Stimmauszüge / Instrumentalstimmen</li>
+                <li class="text-gray-700">Partitur mit separaten Stimmauszügen / Instrumentalstimmen</li>
+                <li class="text-gray-700">Stimmauszüge / Instrumentalstimmen ohne Partitur</li>
+              </ul>
+            </div>
+            <!-- Column 2 (2/5) -->
+            <div class="w-2/5 p-2 flex flex-col mt-8">
+              <!-- First row -->
+              <div class="flex"> <!-- Added margin-bottom for spacing between rows -->
+                <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">Notenheft ohne Instrumentalstimmen</p>
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option1" value="1" v-model="projectType" />
+                </div>
+              </div>
+              <!-- Second row, identical to the first row -->
+              <div class="flex mt-3">
+                <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">Notenheft mit
+                    Instrumentalstimmen</p> <!-- Adjust content as needed -->
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option2" value="2" v-model="projectType" />
+                </div>
+              </div>
+              <div class="flex mt-3">
+                <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">Stimmensatz / Chorsatz</p> <!-- Adjust content as needed -->
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option3" value="3" v-model="projectType" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex w-full pt-3">
+            <!-- Column 1 (3/5) -->
+            <div class="w-3/5 p-2">
+              <h2>3. Papierformat*</h2>
+              <p>Bitte wählen Sie das Format aus, das die Noten haben. Sie können zwischen gebräuchlichen
+                musikalientypischen Papierformaten wählen.</p>
+              <p class="mt-3">Bitte beachten Sie: Wenn Sie unterschiedliche Formate innerhalb eines Projekts haben (bspw.
+                Partitur in DIN A3 und Stimmen in DIN A4), legen Sie bitte für jedes Format ein neues Projekt an.</p>
+              <p class="mt-3">Beispiel:</p>
+              <ul class="list-disc list-outside pl-5 space-y-2">
+                <li class="text-gray-700">»Klavierauszug Chorheft Cäcilia«, Concertformat</li>
+                <li class="text-gray-700">»Chorsatz Chorheft Cäcilia«, DIN A4</li>
+              </ul>
+            </div>
+            <!-- Column 2 (2/5) -->
+            <div class="w-2/5 p-2 flex flex-col">
+              <!-- First row -->
+              <div class="flex pt-8"> <!-- Added margin-bottom for spacing between rows -->
+                <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">DIN A4 (21 x 29,7 cm)</p>
+                </div>
+                <div class="flex-1" style="flex-basis: 30%;">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option1" value="1" v-model="paperFormat" />
+                </div>
+              </div>
+              <!-- Second row, identical to the first row -->
+              <div class="flex mt-3">
+                <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">Klavierauszug (19 x 27 cm)</p> <!-- Adjust content as needed -->
+                </div>
+                <div class="flex-1" style="flex-basis: 30%">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option2" value="2" v-model="paperFormat" />
+                </div>
+              </div>
+              <div class="flex mt-3">
+                <div class="flex-1" style="flex-basis: 70% "> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">Concert (22,8 x 30,5 cm)</p> <!-- Adjust content as needed -->
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option3" value="3" v-model="paperFormat" />
+                </div>
+              </div>
+              <div class="flex mt-3">
+                <div class="flex-1" style="flex-basis: 70% "> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">DIN B4 (25 x 35,3 cm)</p> <!-- Adjust content as needed -->
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option4" value="4" v-model="paperFormat" />
+                </div>
+              </div>
+              <div class="flex mt-3">
+                <div class="flex-1" style="flex-basis: 70% "> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">DIN A3 (29,7 x 42 cm)</p> <!-- Adjust content as needed -->
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option5" value="5" v-model="paperFormat" />
+                </div>
+              </div>
+              <div class="flex mt-3">
+                <div class="flex-1" style="flex-basis: 70% "> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">Dirigent (31,5 x 46 cm)</p> <!-- Adjust content as needed -->
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option6" value="6" v-model="paperFormat" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex w-full pt-3">
+            <!-- Column 1 (3/5) -->
+            <div class="w-3/5 p-2">
+              <h2>4. Ausrichtung*</h2>
+              <p>Bitte geben Sie nun an, ob die Noten im Hoch– oder im Querformat angelegt sind.</p>
+              <p class="mt-3">Bitte beachten Sie, dass Sie innerhalb eines Projekts die Ausrichtungen nicht mischen
+                können.
+              </p>
+            </div>
+            <!-- Column 2 (2/5) -->
+            <div class="w-2/5 p-2 flex flex-col mt-8">
+              <!-- First row -->
+              <div class="flex "> <!-- Added margin-bottom for spacing between rows -->
+                <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">Notenheft Hochformat</p>
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option1" value="true" v-model="format" />
+                </div>
+              </div>
+              <!-- Second row, identical to the first row -->
+              <div class="flex mt-3">
+                <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">Notenheft Querformat</p> <!-- Adjust content as needed -->
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option2" value="false" v-model="format" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex w-full pt-3">
+            <!-- Column 1 (3/5) -->
+            <div class="w-3/5 p-2">
+              <h2>5. Farbigkeit Inhalt*</h2>
+              <p>Ihre Noten können im Innenteil entweder schwarzweiß oder farbig gedruckt werden.</p>
+              <p class="mt-3">Falls Ihr Notenprojekt einen Umschlag hat, wird dieser ohne Aufpreis farbig gedruckt.
+                Instrumentalstimmen werden generell schwarzweiß gedruckt.</p>
+            </div>
+            <!-- Column 2 (2/5) -->
+            <div class="w-2/5 p-2 flex flex-col mt-8">
+              <!-- Second row, identical to the first row -->
+              <div class="flex">
+                <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">Inhalt schwarzweiß</p> <!-- Adjust content as needed -->
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option1" value="true" v-model="color" />
+                </div>
+              </div>
+              <div class="flex mt-3">
+                <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">Inhalt farbig</p> <!-- Adjust content as needed -->
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option2" value="false" v-model="color" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex w-full pt-3">
+            <!-- Column 1 (3/5) -->
+            <div class="w-3/5 p-2">
+              <h2>6. Seitenanzahl*</h2>
+              <p>Bitte geben Sie die Gesamtseitenanzahl Ihrer Datei an. Aus produktionstechnischen Gründen muss diese
+                immer
+                durch 4 teilbar sein.</p>
+              <p class="mt-3">Sie können zwischen 4 und 400 Seiten Umfang wählen. Bitte beachten Sie, dass wir Ihr Heft in
+                den Formaten DIN A4, Klavierauszug und Concert bei weniger als 88 Seiten Inhalt standardmäßig
+                klammerheften.
+              </p>
+            </div>
+            <!-- Column 2 (2/5) -->
+            <div class="w-2/5 p-2 flex flex-col mt-8">
+              <!-- First row -->
+              <div class="flex"> <!-- Added margin-bottom for spacing between rows -->
+                <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">Seitenanzahl Inhalt:</p>
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <select id="mySelect" class="custom-select selectBtn" v-model="pagesQuantitiy">
+                    <option selected v-bind:value="4"> 4
+                    </option>
+                    <option v-for="item in pages" v-bind:value="item">{{ item }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <!-- Second row, identical to the first row -->
+            </div>
+          </div>
+          <div class="flex w-full pt-3">
+            <!-- Column 1 (3/5) -->
+            <div class="w-3/5 p-2">
+              <h2>7. Bindung*</h2>
+              <p>Bitte beachten Sie, dass bei den Formaten DIN B4, DIN A3 und Dirigent sowie bei allen Querformaten und
+                bei
+                mehr als 88 Seiten Inhalt nur Spiralbindung verfügbar ist.</p>
+              <p class="mt-3">Wählen Sie zwischen den gebräuchlichsten Formen:</p>
+            </div>
+            <!-- Column 2 (2/5) -->
+            <div class="w-2/5 p-2 flex flex-col mt-8">
+              <!-- First row -->
+              <div class="flex "> <!-- Added margin-bottom for spacing between rows -->
+                <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <div>
+                    <p v-if="bindingType == 'true'">Bindung: Klammerheftung</p>
+                    <p v-if="bindingType == 'false'">Bindung: Spiralbindung</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Second row, identical to the first row -->
+            </div>
+          </div>
+          <div class="flex w-full pt-3">
+            <!-- Column 1 (3/5) -->
+            <div class="w-3/5 p-2">
+              <h2>8. Umschlag</h2>
+              <p>Unser hochweißer Umschlagkarton mit 260g/m² gibt Farben brillant wieder und besitzt ein hervorragendes
+                Aufschlagverhalten. Die einseitig matte Oberfläche lässt sich hervorragend bedrucken und bricht auch bei
+                starker Beanspruchung nicht auf.</p>
+            </div>
+            <!-- Column 2 (2/5) -->
+            <div class="w-2/5 p-2 flex flex-col mt-8">
+              <!-- Second row, identical to the first row -->
+              <div class="flex">
+                <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">Mit Umschlag:</p> <!-- Adjust content as needed -->
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option1" value="true" v-model="enveloped" />
+                </div>
+              </div>
+              <div class="flex mt-3">
+                <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+                  <p class="font-bold">Ohne Umschlag:</p> <!-- Adjust content as needed -->
+                </div>
+                <div class="flex-1" style="flex-basis: 30% ">
+                  <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <input type="radio" id="option2" value="false" v-model="enveloped" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="projectType != 3" class="flex w-full mt-3">
+            <!-- Column 1 (3/5) -->
+            <div class="w-3/5 p-2">
+              <h2>
+                9. Notenupload*
+              </h2>
+              <p>Hier laden Sie nun die Druckdaten als PDF auf unseren Server – ganz bequem und einfach. Ihre Daten werden
+                verschlüsselt übertragen. Wir prüfen diese auf Druckbarkeit und melden uns ggf. per E-Mail, falls etwas
+                nicht passen sollte.</p>
+            </div>
+            <!-- Column 2 (2/5) -->
+            <div class="w-2/5 p-2 flex flex-col space-y-4 mt-5">
+              <div v-for="fileIndex in [1, 2]" :key="fileIndex" class="block">
+                <label v-if="!files[fileIndex].selected" class="block">
+                  <span class="sr-only">Upload File {{ fileIndex }}</span>
+                  <input type="file" @change="handleFileSelection($event, fileIndex)" class="block w-full text-sm text-gray-900
+                 file:mr-4 file:py-2 file:px-4
+                 file:rounded-full file:border-0
+                 file:text-sm file:font-semibold
+                 file:bg-black-50 file:text-black-700
+                 hover:file:bg-blue-100" />
+                </label>
+                <div v-else class="flex flex-col justify-between">
+                  <button @click="uploadFile(fileIndex)" class="btn bg-black text-white rounded-full">
+                    Upload: {{ files[fileIndex].name }}
+                  </button>
+                  <button @click="cancelSelection(fileIndex)"
+                    class="btn border border-black text-black grey rounded-full mt-3">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex w-full pt-3">
+            <!-- Column 1 (3/5) -->
+            <div class="w-3/5 p-2">
+              <h2>10. In den Warenkorb*</h2>
+              <p>Bitte legen Sie das Projekt nun in den Warenkorb. Sie können danach noch weitere Projekte anlegen und
+                gemeinsam in einer Lieferung versandkostenoptimiert bestellen.</p>
+            </div>
+            <!-- Column 2 (2/5) -->
+            <div class="w-2/5 p-2 flex flex-col mt-8">
+              <!-- Second row, identical to the first row -->
+              <button v-if="!isLoading" @click="preCheck" type="button" class="btn bg-black text-white rounded-full">
+                <img src="@/assets/svg/plus.svg" alt="Avatar" style="margin-right: 10px;">Jetzt
+                in den Warenkorb legen
+              </button>
+              <div v-else role="status">
+                <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                  viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                    fill="currentColor" />
+                  <path
+                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                    fill="currentFill" />
+                </svg>
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col md:w-3/9 sticky top-0 border-12 border-white">
+          <div class="green w-full p-5">
+            <div>
+              <div>
+                <p>Ihr Preis pro Exemplar:</p>
+                <h2 class="font-bold pt-3">€ {{ priceString }}</h2>
+                <p style="font-size: x-small;">Preis inkl. 7% MwSt., ggf. zzgl. Versandkosten</p>
+              </div>
+            </div>
+            <div>
+              <div class="pt-3">
+                <p>Ihr Preis für die gewünschte Auflagenhöhe:</p>
+                <h2 class="font-bold pt-3">€ {{ projectPriceString }}</h2>
+                <p style="font-size: x-small;">Preis inkl. 7% MwSt., ggf. zzgl. Versandkosten</p>
+              </div>
+            </div>
+            <div class="flex">
+              <div class="pt-3 w-1/2">
+                <p>Ihre Auflage:</p>
+                <div class="flex mt-3">
+
+                  <button @click="count(false)" type="button" class="mr-3">
+                    <img src="@/assets/svg/remove.svg" alt="Decrease quantity" class="h-4 w-4">
+                  </button>
+
+                  <input class="green text-center text-2xl" max="300" type="number" min="0" v-model="productQuantity">
+
+                  <button @click="count(true)" type="button" class="ml-3">
+                    <img src="@/assets/svg/add.svg" alt="Increase quantity" class="h-4 w-4">
+                  </button>
+
+                </div>
+              </div>
+              <div class="pt-3 w-1/2">
+                <p>Produktionsdauer:</p>
+                <h2 class="pt-3">{{ productionTime }} </h2>
+                <p style="font-size: x-small;">zzgl. Postlaufzeit</p>
+              </div>
+            </div>
+            <div>
+              <div>
+                <button v-if="!isLoading" @click="preCheck" type="button"
+                  class="btn bg-black text-white rounded-full mt-3">
+                  <img src="@/assets/svg/plus.svg" alt="Avatar" style="margin-right: 10px;">Jetzt
+                  in den Warenkorb legen
+                </button>
+                <div v-else role="status">
+                  <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                    viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                      fill="currentColor" />
+                    <path
+                      d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                      fill="currentFill" />
+                  </svg>
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+            <div class="pt-4">
+              <table class="table" style="font-size:small ; border-style: hidden !important;">
+                <thead>
+                  <tr>
+                    <th scope="col">Auflage</th>
+                    <th scope="col">Preis / Stck.</th>
+                    <th scope="col">Sie sparen:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="cursor: pointer;" :id="'discountgroup' + discount.id" v-for="(discount, index) in discounts"
+                    @click="setAmount(discount.amount)">
+                    <th v-if="discount.amount == 1" scope="">1</th>
+                    <th v-if="discount.amount > 1 && discount.amount <= 200" scope="">{{
+                      discount.amount }} – {{ discounts[index + 1].amount - 1 }}</th>
+                    <th v-if="discount.amount > 200" scope="">Ab 250</th>
+                    <td>€ {{ (singlePrice * (1 - discount.discount)).toFixed(2) }}</td>
+                    <td>{{ (discount.discount * 100).toFixed(0) }} %</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="pink w-full mt-12 p-5" style=" margin-top: 20px;">
+            <h1>
+              Kostenfreier
+              Versand
+            </h1>
+            <img src="@/assets/svg/local_shipping.svg" alt="Avatar" style=" margin-top: 150px; width: 10%; ">
+            <h1 class="mt-2">
+              Ab 50,- Euro
+              Einkaufswert
+            </h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="flex flex-col md:flex-row">
+      <div class="red md:w-3/9 w-full border-12 border-white flex flex-col">
+        <div class="flex flex-col flex-g p-5">
+          <div class="flex">
+            <img src="@/assets/svg/report.svg" class="max-w-10 mr-5" alt="Avatar">
+            <h2>Maßvorgaben
+            </h2>
+          </div>
+
+          <p class="mt-12">Um bestmögliche Qualität in der Druckproduktion zu gewährleisten, ist
+            es notwendig, dass die
+            Druckdaten korrekt angelegt sind.
+            Bitte laden Sie die Maßvorgaben herunter und legen Sie Ihre Druckdaten danach an.
+          </p>
+          <a href=" https://firebasestorage.googleapis.com/v0/b/pocselfpublish.appspot.com/o/uploads%2FDruckdaten_Print_data_2023.pdf?alt=media&token=e8196ae8-3679-4f5a-9445-48d46724fc65"
+            target="_blank">
+            <button type="button" class="btn bg-black text-white rounded-full mt-3" style="width: 100%;">
+              <img src="@/assets/svg/download.svg" alt="Avatar"
+                style="height: 19px; margin-right: 10px; padding-left: 5px;">
+              <p class="inline mt-2">Maßvorgaben (PDF)</p>
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="yellow md:w-3/9 w-full border-12 border-white flex flex-col p-5">
+        <img src="@/assets/svg/mark_email_read.svg" class="max-w-10" alt="Avatar">
+        <h2 style="margin-top: 60px;">
+          Sie benötigen Hilfe?
+          Schreiben Sie uns!
+        </h2>
+        <p> Kommen Sie nicht weiter? Gerne sind wir für Sie da. Bitte schreiben Sie uns eine E-Mail:
+        </p>
+        <h5 class="font-bold mt-3"> fragen@capellaprint.com
+        </h5>
+        <p> Wir melden uns baldmöglichst bei Ihnen zurück. Gemeinsam finden wir eine Lösung!</p>
       </div>
       <div class="md:w-3/9 w-full border-12 border-white flex flex-col">
-        <img class="card-img-top img" src="@/assets/images/pic9.png" alt="Card image cap">
-      </div>
-      <div class="darkblue md:w-3/9 w-full border-12 border-white flex flex-col">
-        <img class="card-img-top img" src="@/assets/images/pic10.png" alt="Card image cap">
-      </div>
-    </section>
-    <section class="flex md:flex-">
-      <div class="grey md:w-6/9 w-full border-12 border-white flex flex-col">
-        <div class="flex flex-col flex-g p-5">
-          <img src="@/assets/svg/verified.svg" alt="Avatar" class="max-w-11">
-          <!-- Make this a flex container and let it g -->
-          <h2 class="mt-3">Ihre Vorteile bei capellaprint</h2>
-          <!-- Image and Text 1 -->
-          <div class="flex items-center mt-4">
-            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p>Erstklassiger Notendruck</p>
-          </div>
-          <!-- Image and Text 2 -->
-          <div class="flex items-center mt-4">
-            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p>Musikalientypische Papierformate</p>
-          </div>
-
-          <!-- Image and Text 3 -->
-          <div class="flex items-center mt-4">
-            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p>Prestissimo versandfertig</p>
-          </div>
-
-          <!-- Image and Text 4 -->
-          <div class="flex items-center mt-4 mb-5">
-            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p>Kauf auf Rechnung möglich</p>
-          </div>
-        </div>
-      </div>
-      <div class="green md:w-3/9 w-full border-12 border-white flex flex-col">
 
       </div>
-    </section>
+    </div>
   </div>
   <div>
     <!--Prouct Cusomizer Sections-->
     <section class="pt-5">
       <div class="container justify-center">
 
-        <div class="">
-          <h1 class="">
-            Konfigurieren Sie Ihr Notenheft
-          </h1>
-          <div class="      ">
-            <div class="">
-              <div class=" ">
-                <h2 class="">
-                  1. Projekttitel*
-                </h2>
-                <p>Bitte vergeben Sie hier einen eindeutigen Projekttitel.</p>
+        <div>
+
+          <div>
+            <div>
+              <div>
+
               </div>
-              <div class="col">
-                <input placeholder="Projekttitel eingeben ..." class=" p-3"
-                  style="border-width: 1px;  width: 300px; border-radius:5px; border-style: solid; border-color: black; margin-top: 20px;"
-                  type="string" v-model="productName">
+              <div>
+
               </div>
             </div>
-            <div v-if="projectType != 3" class="w-100 pt-5"></div>
-            <div class="">
-              <div class=" ">
-                <h2>2. Art des Projekts*</h2>
-                <p>Zu Beginn ist es notwendig, zu wissen, um welche Art von Notenprojekt es sich handelt.
-                </p>
-                <p>
-                  Wählen Sie zwischen den gebräuchlichsten Formen: </p>
-                <ul>
-                  <li>Partitur/Notenheft ohne separate Stimmauszüge / Instrumentalstimmen</li>
-                  <li>Partitur mit separaten Stimmauszügen / Instrumentalstimmen</li>
-                  <li> Stimmauszüge / Instrumentalstimmen ohne Partitur"
-                  </li>
-                </ul>
-              </div>
-              <div class="col pt-5">
-                <div class=" mt-3">
-                  <div class="col-8">
-                    <p>Notenheft ohne
-                      Instrumentalstimmen</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="one" value="1" v-model="projectType" />
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col-8">
+            <div class="w-100 pt-5"></div>
+            <div>
+              <div>
 
-                    <p>Notenheft mit
-                      Instrumentalstimmen</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="two" value="2" v-model="projectType" />
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col-8">
-                    <p>Stimmensatz / Chorsatz</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="one" value="3" v-model="projectType" />
-                  </div>
-                </div>
               </div>
-              <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class=" ">
-                <h2>3. Papierformat*</h2>
-                <p>Bitte wählen Sie das Format aus, das die Noten haben.
-                  Sie können zwischen gebräuchlichen musikalientypischen Papierformaten wählen.
-                </p>
-                <p> Bitte beachten Sie: Wenn Sie unterschiedliche Formate innerhalb eines Projekts haben
-                  (bspw. Partitur in DIN A3 und Stimmen in DIN A4), legen Sie bitte für jedes Format ein
-                  neues Projekt an.
-                </p>
-                <p class="m-0">Beispiel:</p>
-                <li> »Klavierauszug Chorheft Cäcilia«, Concertformat</li>
-                <li> »Chorsatz Chorheft Cäcilia«, DIN A4</li>
-              </div>
-              <div v-if="projectType != 3" class="col pt-4">
-                <div class=" mt-3">
-                  <div class="col-8">
-                    <p>DIN A4 (21 x 29,7 cm)</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="one" value="1" v-model="paperFormat" />
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col-8">
-                    <p>Klavierauszug (19 x 27 cm)</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="one" value="2" v-model="paperFormat" />
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col-8">
-                    <p>Concert (22,8 x 30,5 cm)</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="two" value="3" v-model="paperFormat" />
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col-8">
-                    <p>DIN B4 (25 x 35,3 cm)</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="two" value="4" v-model="paperFormat" />
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col-8">
-                    <p>DIN A3 (29,7 x 42 cm)</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="one" value="5" v-model="paperFormat" />
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col-8">
-                    <p>Dirigent (31,5 x 46 cm)</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="two" value="6" v-model="paperFormat" />
-                  </div>
-                </div>
-              </div>
-              <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class=" ">
-                <h2>4. Ausrichtung*</h2>
-                <p>Bitte geben Sie nun an, ob die Noten im Hoch– oder im Querformat angelegt sind.
-                </p>
-                <p>
-                  Bitte beachten Sie, dass Sie innerhalb eines Projekts die Ausrichtungen nicht mischen
-                  können.
-                </p>
-              </div>
-              <div v-if="projectType != 3" class="col pt-5">
-                <div class=" mt-3">
-                  <div class="col-8">
-                    <p>Notenheft Hochformat</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="one" value="true" v-model="format" />
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col-8">
-                    <p>Notenheft Querformat</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="two" value="false" v-model="format" />
-                  </div>
-                </div>
-              </div>
-              <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class=" ">
-                <h2>5. Farbigkeit Inhalt*</h2>
-                <p>Ihre Noten können im Innenteil entweder schwarzweiß oder farbig gedruckt werden.
-                </p>
-                <p>
-                  Falls Ihr Notenprojekt einen Umschlag hat, wird dieser ohne Aufpreis farbig gedruckt.
-                  Instrumentalstimmen werden generell schwarzweiß gedruckt.
-                </p>
-              </div>
-              <div v-if="projectType != 3" class="col pt-5">
-                <div class=" mt-3">
-                  <div class="col-8">
-                    <p>Inhalt schwarzweiß</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="one" value="false" v-model="color" />
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col-8">
-                    <p>Inhalt farbig</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="two" value="true" v-model="color" />
-                  </div>
-                </div>
-              </div>
-              <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class=" ">
-                <h2>6. Seitenanzahl*</h2>
-                <p>Bitte geben Sie die Gesamtseitenanzahl Ihrer Datei an. Aus produktionstechnischen Gründen
-                  muss diese immer durch 4 teilbar sein.
-                </p>
-                <p>Sie können zwischen 4 und 400 Seiten Umfang wählen. Bitte beachten Sie, dass wir Ihr Heft
-                  in den Formaten DIN A4, Klavierauszug und Concert bei weniger als 88 Seiten Inhalt
-                  standardmäßig klammerheften.
-                </p>
-              </div>
-              <div v-if="projectType != 3" class="col-3 pt-5">
-                <p>Seitenanzahl Inhalt:</p>
-              </div>
-              <div v-if="projectType != 3" class="col pt-5">
-                <select id="mySelect" class="custom-select selectBtn" v-model="pagesQuantitiy">
-                  <option selected v-bind:value="4"> 4
-                  </option>
-                  <option v-for="item in pages" v-bind:value="item">{{ item }}
-                  </option>
-                </select>
-              </div>
-              <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class=" ">
-                <h2>7. Bindung*</h2>
-                <p>
-                  Bitte beachten Sie, dass bei den Formaten DIN B4, DIN A3 und Dirigent sowie bei allen
-                  Querformaten und bei mehr als 88 Seiten Inhalt nur Spiralbindung verfügbar ist.
-                </p>
-              </div>
-              <div class="col pt-5">
-                <div class=" mt-3">
-                  <div class="col-8">
-                    <p v-if="bindingType == 'true'">Bindung: Klammerheftung</p>
-                    <p v-if="bindingType == 'false'">Bindung: Spiralbindung</p>
-                  </div>
-                </div>
-              </div>
-              <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class=" ">
-                <h2>8. Umschlag</h2>
-                <p>Unser hochweißer Umschlagkarton mit 260g/m&#178; gibt Farben brillant wieder und besitzt
-                  ein
-                  hervorragendes Aufschlagverhalten. Die einseitig matte Oberfläche lässt sich
-                  hervorragend bedrucken und bricht auch bei starker Beanspruchung nicht auf.</p>
-              </div>
-              <div v-if="projectType != 3" class="col pt-5">
-                <div class=" mt-3">
-                  <div class="col-8">
-                    <p>Mit Umschlag:</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="one" value="true" v-model="enveloped" />
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col-8">
 
-                    <p>Ohne Umschlag:</p>
-                  </div>
-                  <div class="col-1">
-                    <input type="radio" id="two" value="false" v-model="enveloped" />
-                  </div>
-                </div>
-              </div>
+
               <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3" class=" ">
+              <div v-if="projectType != 3">
                 <h2>9. Notenupload*</h2>
                 <p>Hier laden Sie nun die Druckdaten als PDF auf unseren Server – ganz bequem und einfach.
                   Ihre Daten werden verschlüsselt übertragen.
@@ -1150,12 +1473,12 @@ export default {
                   passen sollte.</p>
               </div>
               <div v-if="projectType != 3" class="col mt-4">
-                <div class="">
+                <div>
                   <div class="col-auto">
                     <p>Noten-PDF /Inhalt:*</p>
                   </div>
-                  <div class="col">
-                    <div v-if="pdfData1 == null" class="">
+                  <div>
+                    <div v-if="pdfData1 == null">
                       <div>
                         <button class="btn btn uploadBtn" style="color: black !important;" @click="click1"> <img
                             src="@/assets/svg/plusBlack.svg" alt="Avatar" style=" margin-right: 5px;">Datei
@@ -1164,7 +1487,7 @@ export default {
                           accept="application/pdf">
                       </div>
                     </div>
-                    <div v-if="pdfData1 != null && isUpload1 == false" class="">
+                    <div v-if="pdfData1 != null && isUpload1 == false">
                       <div class="col-auto">
                         {{ pdfData1.name }}
                       </div>
@@ -1175,7 +1498,7 @@ export default {
                         </button>
                       </div>
                     </div>
-                    <div v-if="isUpload1 == true" class=" mt-3">
+                    <div v-if="isUpload1 == true">
                       <div class="progress">
                         <div class="progress-bar progress-bar-striped" role="progressbar"
                           :style="{ width: uploadValue + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
@@ -1188,9 +1511,9 @@ export default {
                   <div class="col-auto">
                     <p>ggf. <br> Umschlagdatei:</p>
                   </div>
-                  <div class="col">
-                    <div v-if="pdfData2 == null" class="">
-                      <div class="" v-if="pdfData2 == null">
+                  <div>
+                    <div v-if="pdfData2 == null">
+                      <div v-if="pdfData2 == null">
                         <button class="btn btn uploadBtn ms-0 ms-xl-3" style="color: black !important;" @click="click2">
                           <img src="@/assets/svg/plusBlack.svg" alt="Avatar" style="margin-right: 5px;">Datei wählen
                         </button>
@@ -1198,18 +1521,18 @@ export default {
                           accept="application/pdf">
                       </div>
                     </div>
-                    <div v-if="pdfData2 != null && isUpload2 == false" class="">
-                      <div class="col-8">
+                    <div v-if="pdfData2 != null && isUpload2 == false">
+                      <div>
                         {{ pdfData2.name }}
                       </div>
-                      <div class="col">
+                      <div>
                         <button class="btn btn uploadBtn" style="color: black !important;  margin-left:5px "
                           @click="deletePdf2">
                           <img src="@/assets/svg/plusBlack.svg" alt="Avatar" style="transform: rotate(45deg);">
                         </button>
                       </div>
                     </div>
-                    <div v-if="isUpload2 == true" class=" mt-3">
+                    <div v-if="isUpload2 == true">
                       <div class="progress">
                         <div class="progress-bar progress-bar-striped" role="progressbar"
                           :style="{ width: uploadValue2 + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
@@ -1221,7 +1544,7 @@ export default {
               </div>
             </div>
             <div class=" pt-5" v-if="projectType != 1">
-              <div class=" ">
+              <div>
                 <h2 v-if="projectType == 2">10. Instrumentalstimmen*</h2>
                 <h2 v-if="projectType == 3">3. Instrumentalstimmen*</h2>
                 <p>Wenn Ihr Projekt Instrumentalstimmen enthält, können Sie diese hier konfigurieren.
@@ -1239,20 +1562,20 @@ export default {
               </div>
               <div class="w-100 pt-2"></div>
               <div class=" col-md-6">
-                <p class="">
+                <p>
                 <p class="thick inline"> Stimme benennen </p>(bspw. »Violine 1«)
                 </p>
                 <input type="string" class=" p-3" placeholder="Stimmenname eingeben ..." v-model="voiceName"
                   style="    width: 250px;border-width: 1px; border-radius:5px; border-style: solid; border-color: black; margin-top: 20px;">
               </div>
-              <div class="col">
-                <div class="">
-                  <div class="col">
+              <div>
+                <div>
+                  <div>
                     <p>Seitenanzahl Inhalt:</p>
                     <p>Exemplare pro Set:</p>
                     <p class="pt-2">Noten-PDF / Inhalt:</p>
                   </div>
-                  <div class="col">
+                  <div>
                     <p>
                       <select id="mySelect" class="custom-select selectBtn" v-model="voicePages">
                         <option selected v-bind:value="4"> 4
@@ -1270,8 +1593,8 @@ export default {
                       </select>
                     </p>
                     <p>
-                    <div v-if="pdfData3 == null" class="">
-                      <div class="" v-if="pdfData3 == null">
+                    <div v-if="pdfData3 == null">
+                      <div v-if="pdfData3 == null">
                         <button class="btn btn uploadBtn" style="color: black !important" @click="voiceUpload"> <img
                             src="@/assets/svg/plusBlack.svg" alt="Avatar" style="margin-right: 5px;">Datei wählen
                         </button>
@@ -1279,18 +1602,18 @@ export default {
                           accept="application/pdf">
                       </div>
                     </div>
-                    <div v-if="pdfData3 != null && isUpload3 == false" class="">
-                      <div class="col">
+                    <div v-if="pdfData3 != null && isUpload3 == false">
+                      <div>
                         {{ pdfData3.name }}
                       </div>
-                      <div class="col">
+                      <div>
                         <button class="btn btn uploadBtn" style="color: black !important; margin-left:5px"
                           @click="deletePdf3">
                           <img src="@/assets/svg/plusBlack.svg" alt="Avatar" style="transform: rotate(45deg);">
                         </button>
                       </div>
                     </div>
-                    <div v-if="isUpload3 == true" class=" mt-3">
+                    <div v-if="isUpload3 == true">
                       <div class="progress">
                         <div class="progress-bar progress-bar-striped" role="progressbar"
                           :style="{ width: uploadValue3 + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
@@ -1318,7 +1641,7 @@ export default {
                 Sie die Stimme dem Projekt hinzufügen
               </p>
             </div>
-            <div class="" v-if="projectType != 1">
+            <div v-if="projectType != 1">
               <div class="col-md-12 pt-4 ">
                 <h3 class="ps-2">Hinzugefügte Stimmen:</h3>
                 <table class="table table-striped">
@@ -1350,177 +1673,25 @@ export default {
               </div>
             </div>
 
-            <div class=" pt-5">
-              <div class=" ">
-                <h2 v-if="projectType == 1">10. In den Warenkorb*</h2>
-                <h2 v-if="projectType == 2">11. In den Warenkorb*</h2>
-                <h2 v-if="projectType == 3">4. In den Warenkorb*</h2>
-                <p>Bitte legen Sie das Projekt nun in den Warenkorb. Sie können danach noch weitere Projekte
-                  anlegen und gemeinsam in einer Lieferung versandkostenoptimiert bestellen.</p>
-              </div>
-              <div class=" col-md">
-                <button v-if="!isLoading" @click="preCheck" type="button" class="btn btn-dark mt-5">
-                  <img src="@/assets/svg/plus.svg" alt="Avatar" style="margin-right: 10px;">Jetzt
-                  in den Warenkorb legen
-                </button>
-                <div v-else role="status">
-                  <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-                    viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                      fill="currentColor" />
-                    <path
-                      d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                      fill="currentFill" />
-                  </svg>
-                  <span class="sr-only">Loading...</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class=" col-lg-4 p-0 ">
-            <div id="stickyBar" class="sticky-top" style="top: 120px">
-              <div class=" green">
-                <div class="">
-                  <div class="col">
-                    <p>Ihr Preis pro Exemplar:</p>
-                    <h2>€ {{ priceString }}</h2>
-                    <p style="font-size: x-small;">Preis inkl. 7% MwSt., ggf. zzgl. Versandkosten</p>
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col">
-                    <p>Ihr Preis für die gewünschte Auflagenhöhe:</p>
-                    <h2>€ {{ projectPriceString }}</h2>
-                    <p style="font-size: x-small;">Preis inkl. 7% MwSt., ggf. zzgl. Versandkosten</p>
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col">
-                    <p>Ihre Auflage:</p>
-                    <div class="input-group plus-minus-input">
-                      <div class="input-group-button">
-                        <button @click="count(false)" type="button" class="button noborder green" data-field="quantity">
-                          <img src="@/assets/svg/remove.svg" alt="Avatar">
-                        </button>
-                      </div>
-                      <input class="input" max="300" type="number" min="0" v-model="quantitiy">
-                      <div class="input-group-button">
-                        <button @click="count(true)" type="button" class="button noborder green" data-quantity="plus"
-                          data-field="quantity">
-                          <img src="@/assets/svg/add.svg" alt="Avatar">
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <p>Produktionsdauer:</p>
-                    <h2>{{ productionTime }} </h2>
-                    <p style="font-size: x-small;">zzgl. Postlaufzeit</p>
-                  </div>
-                </div>
-                <div class="">
-                  <div class="col align-self-center">
-                    <button v-if="!isLoading" @click="preCheck" type="button" class="btn btn-dark mt-3">
-                      <img src="@/assets/svg/plus.svg" alt="Avatar" style="margin-right: 10px;">Jetzt
-                      in den Warenkorb legen
-                    </button>
-                    <div v-else role="status">
-                      <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-                        viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                          fill="currentColor" />
-                        <path
-                          d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                          fill="currentFill" />
-                      </svg>
-                      <span class="sr-only">Loading...</span>
-                    </div>
-                  </div>
-                </div>
-                <div class=" pt-4">
-                  <table class="table" style="font-size:small ; border-style: hidden !important;">
-                    <thead>
-                      <tr>
-                        <th scope="col">Auflage</th>
-                        <th scope="col">Preis / Stck.</th>
-                        <th scope="col">Sie sparen:</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr style="cursor: pointer;" :id="'discountgroup' + discount.id"
-                        v-for="(discount, index) in discounts" @click="setAmount(discount.amount)">
-                        <th v-if="discount.amount == 1" scope="">1</th>
-                        <th v-if="discount.amount > 1 && discount.amount <= 200" scope="">{{
-                          discount.amount }} – {{ discounts[index + 1].amount - 1 }}</th>
-                        <th v-if="discount.amount > 200" scope="">Ab 250</th>
-                        <td>€ {{ (singlePrice * (1 - discount.discount)).toFixed(2) }}</td>
-                        <td>{{ (discount.discount * 100).toFixed(0) }} %</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
-              </div>
-              <div class=" pink" style="margin-top: 20px;">
-                <h1>
-                  Kostenfreier
-                  Versand
-                </h1>
-                <img src="@/assets/svg/local_shipping.svg" alt="Avatar" style=" margin-top: 150px; width: 10%; ">
-                <h1 class="mt-2">
-                  Ab 50,- Euro
-                  Einkaufswert
-                </h1>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
     </section>
     <!--Sektion mit 3 Karten und Bider-->
-    <section class="pt-5">
-      <div class="container justify-center">
-        <div class="">
-          <div class="col      red">
-            <div class="">
-              <div class="col-2"> <img src="@/assets/svg/report.svg" class="mr-2" alt="Avatar"></div>
-              <div class="col">
-                <h2>Maßvorgaben</h2>
-              </div>
-            </div>
-            <p style="margin-top: 80px;">Um bestmögliche Qualität in der Druckproduktion zu gewährleisten, ist
-              es notwendig, dass die
-              Druckdaten korrekt angelegt sind.
-              Bitte laden Sie die Maßvorgaben herunter und legen Sie Ihre Druckdaten danach an.
-            </p>
-            <a href=" https://firebasestorage.googleapis.com/v0/b/pocselfpublish.appspot.com/o/uploads%2FDruckdaten_Print_data_2023.pdf?alt=media&token=e8196ae8-3679-4f5a-9445-48d46724fc65"
-              target="_blank">
-              <button type="button" class="btn btn-dark p-2" style="width: 100%;">
-                <img src="@/assets/svg/download.svg" alt="Avatar"
-                  style="height: 19px; margin-right: 10px; padding-left: 5px;">
-                <p class="inline mt-2">Maßvorgaben (PDF)</p>
-              </button>
-            </a>
-          </div>
-          <div class="col      yellow">
-            <img src="@/assets/svg/mark_email_read.svg" class="mr-2" alt="Avatar">
-            <h2 style="margin-top: 60px;">
-              Sie benötigen Hilfe?
-              Schreiben Sie uns!
-            </h2>
-            <p> Kommen Sie nicht weiter? Gerne sind wir für Sie da. Bitte schreiben Sie uns eine E-Mail:
-            </p>
-            <h5> fragen@capellaprint.com
-            </h5>
-            <p> Wir melden uns baldmöglichst bei Ihnen zurück. Gemeinsam finden wir eine Lösung!</p>
-          </div>
-          <div class="col-4">
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
+<style>
+/* For Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+</style>
     

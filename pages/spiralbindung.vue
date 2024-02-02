@@ -151,7 +151,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           <!-- Button -->
           <div class="mt-auto max-w-40">
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
               Jetzt
@@ -184,7 +184,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           <!-- Button -->
           <div class="mt-auto max-w-40"> <!-- This will now be pushed to the bottom -->
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" />
               Jetzt
@@ -227,7 +227,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           <!-- Button -->
           <div class="mt-auto max-w-40">
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
               Jetzt
@@ -259,7 +259,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           <!-- Button -->
           <div class="mt-auto max-w-40"> <!-- This will now be pushed to the bottom -->
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" />
               Jetzt
@@ -294,7 +294,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           <!-- Button -->
           <div class="mt-auto max-w-40"> <!-- This will now be pushed to the bottom -->
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" />
               Jetzt
@@ -326,7 +326,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           <!-- Button -->
           <div class="mt-auto max-w-40">
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
               Jetzt
@@ -358,7 +358,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           <!-- Button -->
           <div class="mt-auto max-w-40"> <!-- This will now be pushed to the bottom -->
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" />
               Jetzt
@@ -401,7 +401,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           <!-- Button -->
           <div class="mt-auto max-w-40">
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
               Jetzt
@@ -433,7 +433,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           <!-- Button -->
           <div class="mt-auto max-w-40"> <!-- This will now be pushed to the bottom -->
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" />
               Jetzt
@@ -467,7 +467,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           <!-- Button -->
           <div class="mt-auto max-w-40"> <!-- This will now be pushed to the bottom -->
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" />
               Jetzt
@@ -499,7 +499,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           <!-- Button -->
           <div class="mt-auto max-w-40">
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
               Jetzt
@@ -531,7 +531,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           <!-- Button -->
           <div class="mt-auto max-w-40"> <!-- This will now be pushed to the bottom -->
-            <NuxtLink to="/your-target-path"
+            <NuxtLink to="/konfigurator"
               class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
               <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" />
               Jetzt
