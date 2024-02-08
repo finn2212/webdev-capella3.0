@@ -64,7 +64,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             <a href="https://firebasestorage.googleapis.com/v0/b/pocselfpublish.appspot.com/o/uploads%2FDruckdaten_Print_data_2023.pdf?alt=media&token=e8196ae8-3679-4f5a-9445-48d46724fc65"
               target="_blank" class="mt-auto w-full">
               <button type="button"
-                class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-center w-full">
+                class="bg-black text-white border border-black rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-center w-full">
                 <img src="@/assets/svg/download.svg" alt="Download" style="height: 19px; margin-right: 10px;">
                 <p>Maßvorgaben (PDF)</p>
               </button>

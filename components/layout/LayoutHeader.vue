@@ -16,6 +16,7 @@ watch(route, (newRoute) => {
 
 <template>
   <header class="relative bg-white sticky top-0 z-50" aria-label="top-navigation">
+    <AnnouncementBar />
     <div class="mx-auto px-4 sm:px-6 max-w-screen-xl">
       <div class="flex items-center justify-between border-b-2 border-gray-100 py-6">
         <div class="order-1 lg:order-2 flex justify-start items-center">
