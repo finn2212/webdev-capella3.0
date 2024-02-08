@@ -21,7 +21,7 @@ const gridColumns = computed<number>(() =>
         <section class="flex flex-col md:flex-row">
           <div class="p-3 grey md:w-3/9 w-full">
             <img src="@/assets/svg/phone_forwarded.svg">
-            <h5>
+            <h5 class="mt-3">
               Service-Hotline
             </h5>
             <p>
@@ -44,7 +44,7 @@ const gridColumns = computed<number>(() =>
           </div>
           <div class="p-3 grey md:w-3/9 w-full">
             <img src="@/assets/svg/local_police.svg">
-            <h5>
+            <h5 class="mt-3">
               Rechtliches
             </h5>
             <div>
@@ -85,7 +85,7 @@ const gridColumns = computed<number>(() =>
           </div>
           <div class="p-3 grey md:w-3/9 w-full">
             <img src="@/assets/svg/award_star.svg">
-            <h5 class="pt-4">
+            <h5 class="mt-3">
               Sicher einkaufen
             </h5>
             <p>

@@ -222,7 +222,7 @@ const { locale } = useI18n();
 const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 </script>
 <template>
-  <div class="agb-container container top">
+  <div class="max-w-screen-xl mx-auto">
     <h1>Online-AGB www.capellaprint.com</h1>
     <p>Stand: 2. Mai 2023</p>
     <h3>Allgemeine Geschäftsbedingungen (AGB)</h3>
@@ -234,63 +234,4 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </section>
   </div>
 </template>
-<style>
-* {
-  box-sizing: border-box;
-}
-
-@media only screen and (min-width: 1024px) {
-  .imgcard {
-    width: 100%;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .imgcard {
-    float: left;
-    margin-right: 25px;
-    max-height: 300px;
-  }
-}
-
-.p-5 {
-  padding: 35px !important;
-}
-
-.btn-primary {
-  border-color: black;
-}
-
-.card-img-top {
-  border-radius: 0px;
-}
-
-@media only screen and (max-width: 1024px) {
-  .card-img-top {
-    margin-top: 0%;
-    height: 300px;
-    object-fit: cover;
-  }
-}
-
-.card {
-  margin: 0px;
-  border-radius: 0px;
-  padding: 0px;
-}
-
-.imgsmall {
-  text-align: left;
-  width: 100%;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-@media only screen and (max-width: 1024px) {
-  .btn {
-    margin-top: 0%;
-  }
-}
-</style>
+<style></style>

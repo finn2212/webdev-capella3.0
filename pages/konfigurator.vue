@@ -1345,7 +1345,7 @@ export default {
             <div>
               <div>
                 <button v-if="!isLoading" @click="preCheck" type="button"
-                  class="btn bg-black text-white rounded-full mt-3">
+                  class="btn bg-black text-white rounded-full mt-3 border border-black">
                   <img src="@/assets/svg/plus.svg" alt="Avatar" style="margin-right: 10px;">Jetzt
                   in den Warenkorb legen
                 </button>
@@ -1364,17 +1364,17 @@ export default {
               </div>
             </div>
             <div class="pt-4">
-              <table class="table" style="font-size:small ; border-style: hidden !important;">
+              <table class="table border-0" style="font-size:small ; border-style: hidden !important;">
                 <thead>
-                  <tr>
+                  <tr class="">
                     <th scope="col">Auflage</th>
                     <th scope="col">Preis / Stck.</th>
                     <th scope="col">Sie sparen:</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style="cursor: pointer;" :id="'discountgroup' + discount.id" v-for="(discount, index) in discounts"
-                    @click="setAmount(discount.amount)">
+                  <tr class="border-0" style="cursor: pointer;" :id="'discountgroup' + discount.id"
+                    v-for="(discount, index) in discounts" @click="setAmount(discount.amount)">
                     <th v-if="discount.amount == 1" scope="">1</th>
                     <th v-if="discount.amount > 1 && discount.amount <= 200" scope="">{{
                       discount.amount }} – {{ discounts[index + 1].amount - 1 }}</th>
@@ -1416,7 +1416,8 @@ export default {
           </p>
           <a href=" https://firebasestorage.googleapis.com/v0/b/pocselfpublish.appspot.com/o/uploads%2FDruckdaten_Print_data_2023.pdf?alt=media&token=e8196ae8-3679-4f5a-9445-48d46724fc65"
             target="_blank">
-            <button type="button" class="btn bg-black text-white rounded-full mt-3" style="width: 100%;">
+            <button type="button" class="btn border border-black bg-black text-white rounded-full mt-3"
+              style="width: 100%;">
               <img src="@/assets/svg/download.svg" alt="Avatar"
                 style="height: 19px; margin-right: 10px; padding-left: 5px;">
               <p class="inline mt-2">Maßvorgaben (PDF)</p>

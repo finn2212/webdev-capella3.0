@@ -87,11 +87,17 @@ function render() {
         </div>
       </div>
     </section>
-
+    <section>
+      <div class="border-12 border-white">
+        <h1>
+          So einfach geht’s
+        </h1>
+      </div>
+    </section>
     <section class="flex flex-col md:flex-row">
       <div class="flex flex-col p-5 grey md:w-3/9 w-full border-12 border-white">
         <img src="@/assets/svg/function.svg" class="max-w-12" alt="Avatar">
-        <h2>
+        <h2 class="mt-3">
           Schritt 1:
           Notenprojekt kalkulieren.
         </h2>
@@ -108,7 +114,7 @@ function render() {
       </div>
       <div class="p-5 grey md:w-3/9 w-full border-12 border-white">
         <img src="@/assets/svg/backup.svg" alt="Avatar">
-        <h2>
+        <h2 class="mt-3">
           Schritt 2:
           Laden Sie Ihre Noten-PDF hoch.
         </h2>
@@ -118,13 +124,20 @@ function render() {
       </div>
       <div class="p-5 grey md:w-3/9 w-full border-12 border-white">
         <img src="@/assets/svg/flight.svg" alt="Avatar">
-        <h2>
+        <h2 class="mt-3">
           Schritt 3:
           Bestellen – schon fertig!
         </h2>
         <p>
           Zuletzt bestellen Sie Ihre Noten ganz bequem online. Ein paar Tage später ist die Musikpost schon da!
         </p>
+      </div>
+    </section>
+    <section>
+      <div class="border-12 border-white">
+        <h1>
+          Was ist capellaprint?
+        </h1>
       </div>
     </section>
     <section class="flex flex-col xl:flex-row">
@@ -241,20 +254,24 @@ function render() {
       <!-- Left Column -->
       <div class="xl:w-6/9 w-full">
         <!-- Top Div with Text -->
-        <div class="border-12 border-white p-9 yellow">
-          <h3 class="font-bold">»capellaprint ist ein attraktiver Service und hervorragend
-            geeignet, um aus
-            Ihren Partituren das
-            Optimum herauszuholen.«</h3>
-          <div class="flex flex-col md:flex-row items-start mt-4">
-            <p class="font-bold mr-2">
-              Dr. Dominik Hörnel,
-            </p>
-            <p>
-              Vorstandsvorsitzender, capella-software AG
-            </p>
+        <div>
+          <h1 class="ml-3">
+            Konfigurieren Sie Ihr Notenheft
+          </h1>
+          <div class="border-12 border-white yellow p-5">
+            <h3 class="font-bold">»capellaprint ist ein attraktiver Service und hervorragend
+              geeignet, um aus
+              Ihren Partituren das
+              Optimum herauszuholen.«</h3>
+            <div class="flex flex-col md:flex-row items-start mt-4">
+              <p class="font-bold mr-2">
+                Dr. Dominik Hörnel,
+              </p>
+              <p>
+                Vorstandsvorsitzender, capella-software AG
+              </p>
+            </div>
           </div>
-
         </div>
 
         <!-- Bottom Div with Image -->
@@ -262,11 +279,13 @@ function render() {
           <img src="@/assets/images/pic3.png" alt="Bildbeschreibung" class="w-full h-full object-cover">
         </div>
       </div>
-
       <!-- Right Column -->
       <div class="xl:w-3/9 w-full flex flex-col justify-between border-12 border-white p-5 blue">
+        <h1 class="ml-3">
+          Konfigurieren Sie Ihr Notenheft
+        </h1>
         <div>
-          <div class="flex items-start mb-15">
+          <div class="flex items-start mb-15 ">
             <!-- Image on the Left -->
             <img src="@/assets/svg/verified.svg" alt="Avatar" class="mr-4">
 
