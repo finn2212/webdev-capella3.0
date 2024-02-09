@@ -12,6 +12,7 @@ export default defineNuxtConfig({
       }
     },
   },
+
   routeRules: {
     "/": {
       isr: 60 * 60 * 24,
@@ -43,6 +44,7 @@ export default defineNuxtConfig({
       isr: 60 * 60 * 24,
     },
   },
+
   /**
    * Commented because of the StackBlitz error
    * Issue: https://github.com/shopware/frontends/issues/88
@@ -51,6 +53,7 @@ export default defineNuxtConfig({
     // typeCheck: true,
     strict: true,
   },
+
   modules: [
     "nuxt-headlessui",
     "@vueuse/nuxt",
@@ -61,6 +64,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     '@nuxtjs/tailwindcss'
   ],
+
   // components: true,
   components: {
     dirs: [
@@ -71,37 +75,45 @@ export default defineNuxtConfig({
     ],
     global: true,
   },
+
   vueuse: {
     ssrHandlers: true,
   },
+
   nitro: {
     compressPublicAssets: true,
   },
+
   unocss: {
     // for presets, theme config, ... look at the uno.config.ts file
   },
+
   css: [
     '~/assets/css/tailwind.css',
     '~/assets/css/styles.css',
     // 'bootstrap/dist/css/bootstrap.min.css' // needed to reset styles see https://unocss.dev/guide/style-reset (@unocss/reset)
   ],
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+
   headlessui: {
     prefix: ''
-  }, 
+  },
+
   router: {
     options: {
       linkExactActiveClass: "text-brand-primary",
     },
   },
+
   i18n: {
     strategy: "prefix_except_default",
-    defaultLocale: "en-GB",
+    defaultLocale: "de-DE",
     detectBrowserLanguage: false,
     langDir: "./i18n/src/langs/",
     vueI18n: "./i18n/config",
@@ -127,6 +139,12 @@ export default defineNuxtConfig({
     ],
     experimental: {
       jsTsFormatResource: true,
+    },
+  },
+
+  devtools: {
+    timeline: {
+      enabled: true,
     },
   },
 });

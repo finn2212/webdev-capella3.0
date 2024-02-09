@@ -6,6 +6,7 @@ import {
 import { Category } from "@shopware-pwa/types";
 
 const { navigationElements } = useNavigation();
+const { apiInstance } = useShopwareContext();
 
 const sideMenuController = useSideMenuModal();
 const localePath = useLocalePath();

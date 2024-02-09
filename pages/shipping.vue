@@ -23,68 +23,85 @@ const { locale } = useI18n();
 const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 </script>
 <template>
-  <div class="container justify-center top">
-    <!--Sektion mit 3 Karten und Bider-->
+  <div class="max-w-screen-xl mx-auto">
     <section>
-      <div class="container justify-center">
-        <div class="row pt-4">
-          <div class="col-12 col-lg-4 customBorder">
-            <h2 class="mt-5">Informationen zum Versand</h2>
-            <p class="pt-5 mt-5">
+      <div class="flex flex-col md:flex-row">
+        <div class="sm:w-1/2 flex flex-col border-12 border-white">
+          <div>
+            <h2 class="mt-3">Informationen zum Versand</h2>
+            <p class="mt-3">
               Wir versenden weltweit ausschließlich mit Deutsche Post und DHL.
             </p>
-            <div class="row">
-              <div class="col-5">
-                <img src="@/assets/images/post.svg" style="width: 100%" alt="Avatar" />
+            <div class="flex mt-3">
+              <div>
+                <img src="@/assets/images/post.svg" alt="Avatar" class="mr-3" />
               </div>
-              <div class="col-5">
-                <img src="@/assets/images/dhl.svg" style="width: 100%" alt="Avatar" />
+              <div>
+                <img src="@/assets/images/dhl.svg" alt="Avatar" />
               </div>
             </div>
           </div>
-          <div class="col customBorder grey p-5">
-            <div class="row">
-              <div class="col-1">
-                <img src="@/assets/svg/forklift.svg" alt="Avatar" class="" />
-              </div>
-              <div class="col">
-                <h2>Standardversand Deutschland</h2>
-                <p style="font-size: 12px">inkl. deutscher Inseln</p>
-              </div>
-              <div class="col">
-                <p class="thick">Versand per DHL–Warenpost oder DHL Paket</p>
 
-                <p class="m-0">Warenwert bis 19,99 €: 4,99 €</p>
-                <p class="m-0">Warenwert bis 49,99 €: 6,99 €</p>
-                <p class="thick">Ab 50 € Warenwert kostenfrei</p>
-              </div>
+        </div>
+        <div class="flex flex-col xl:flex-row md:w-6/9 w-full grey p-5 border-12 border-white">
+          <div class="sm:w-1/2 w-full">
+            <div>
+              <img src="@/assets/svg/forklift.svg" alt="Avatar" />
             </div>
-            <div class="row pt-5">
-              <div class="col-1">
-                <img src="@/assets/svg/captive_portal.svg" alt="Avatar" class="" />
-              </div>
-              <div class="col">
-                <h2>Internationaler Versand</h2>
-              </div>
-              <div class="col">
-                <p>
-                  Als Verbraucher im Ausland zahlen Sie Versandkosten abhängig
-                  vom Auftragswert. Auch international versenden wir
-                  ausschließlich mit Deutscher Post und DHL.
-                </p>
-
-                <p class="thick m-0">Europa & Welt</p>
-                <p class="m-0">Warenwert bis 49,99 €: 14,99 €</p>
-                <p class="m-0">Warenwert bis 249,99 €: 33,99 €</p>
-                <p class="m-0">Warenwert bis 499,99 €: 49,99 €</p>
-                <p class="m-0">Warenwert ab 500 €: 69,99 €</p>
-
-                <p style="margin-top: 100px; font-size: 12px">
-                  Stand: 01.05.2023. Irrtümer und Preisänderungen vorbehalten.
-                  Preise ggf. zzgl. gesetzl. Mehrwertsteuer.
-                </p>
-              </div>
+            <div>
+              <h2>Standardversand Deutschland</h2>
+              <p>inkl. deutscher Inseln</p>
             </div>
+            <div>
+              <p>Versand per DHL–Warenpost oder DHL Paket</p>
+
+              <p>Warenwert bis 19,99 €: 4,99 €</p>
+              <p>Warenwert bis 49,99 €: 6,99 €</p>
+              <p>Ab 50 € Warenwert kostenfrei</p>
+            </div>
+          </div>
+          <div class="sm:w-1/2 flex flex-col">
+            <div>
+              <img src="@/assets/svg/captive_portal.svg" alt="Avatar" />
+            </div>
+            <div>
+              <h2>Internationaler Versand</h2>
+            </div>
+            <div>
+              <p>
+                Als Verbraucher im Ausland zahlen Sie Versandkosten abhängig
+                vom Auftragswert. Auch international versenden wir
+                ausschließlich mit Deutscher Post und DHL.
+              </p>
+
+              <p>Europa & Welt</p>
+              <p>Warenwert bis 49,99 €: 14,99 €</p>
+              <p>Warenwert bis 249,99 €: 33,99 €</p>
+              <p>Warenwert bis 499,99 €: 49,99 €</p>
+              <p>Warenwert ab 500 €: 69,99 €</p>
+
+              <p>
+                Stand: 01.05.2023. Irrtümer und Preisänderungen vorbehalten.
+                Preise ggf. zzgl. gesetzl. Mehrwertsteuer.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <section>
+
+  </section>
+  <div class="container justify-center top">
+    <!--Sektion mit 3 Karten und Bider-->
+    <section>
+      <div>
+        <div>
+
+          <div class="">
+
+
           </div>
         </div>
       </div>

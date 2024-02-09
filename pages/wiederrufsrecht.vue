@@ -77,12 +77,12 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 </script>
 <template>
   <div class="max-w-screen-xl mx-auto">
-    <h1>AURIOPRINT Widerrufsrecht</h1>
+    <h1 class="mt-3">AURIOPRINT Widerrufsrecht</h1>
     <p>Stand: 01.01.2023</p>
 
     <!-- AGB Sections -->
     <section v-for="section in wiederrufsrechtSections" :key="section.id" class="pt-5">
-      <h5>{{ section.title }}</h5>
+      <h5 class="mt-3">{{ section.title }}</h5>
       <div v-html="section.content"></div>
     </section>
   </div>
