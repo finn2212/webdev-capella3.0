@@ -2,6 +2,9 @@
 export default {
   name: "PageResolver",
 };
+
+
+
 </script>
 
 <script setup lang="ts">
@@ -16,6 +19,9 @@ import { type SeoUrl } from "@shopware-pwa/types";
 const NOT_FOUND_COMPONENT = "errors/RoutingNotFound";
 const { resolvePath } = useNavigationSearch();
 const route = useRoute();
+const slideIndex = ref(1);
+const firstSlideIndex = ref(1);
+
 const { locale } = useI18n();
 const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
@@ -39,6 +45,15 @@ const { data: seoResult } = await useAsyncData(
 const { routeName, foreignKey } = useNavigationContext(
   seoResult as Ref<SeoUrl>,
 );
+// Define a method to update the slideIndex
+const moveToSlide = (index: any) => {
+  slideIndex.value = index;
+};
+// Define a method to update the slideIndex
+const moveToSlide1 = (index: any) => {
+  firstSlideIndex.value = index;
+};
+
 
 function render() {
   const componentName = routeName.value;
@@ -133,8 +148,8 @@ function render() {
         </p>
       </div>
     </section>
-    <section>
-      <div class="border-12 border-white">
+    <section class="flex flex-col xl:flex-row">
+      <div class="border-12 border-white xl:w-6/9 w-full">
         <h1>
           Was ist capellaprint?
         </h1>
@@ -142,20 +157,56 @@ function render() {
     </section>
     <section class="flex flex-col xl:flex-row">
       <!-- Left Column -->
-      <div class="xl:w-6/9 w-full">
-        <!-- Top Div with Text -->
-        <div class="border-12 border-white p-9 yellow">
-          <h5>»Die Partituren sind übrigens sensationell in Haptik, <br> Aussehen und Nutzbarkeit.«</h5>
-          <p>
-            Alexander Mottok
-          </p>
-          – Chefdirigent, Deutsches Ärzteorchester
-
+      <div class="xl:w-6/9 w-full flex flex-col">
+        <div class="carousel w-full yellow p-5 border-12 border-white">
+          <!-- Slide 1 -->
+          <div id="slide1" class="carousel-item relative w-full flex flex-col" v-show="firstSlideIndex === 1">
+            <h3 class="font-bold">»Spitzenqualität zu hervorragenden Preisen. Wir drucken nur noch hier«</h3>
+            <div class="flex flex-col md:flex-row items-start mt-4">
+              <p class="font-bold mr-2">
+                Dr. Dominik Hörnel,
+              </p>
+              <p>
+                Vorstandsvorsitzender, capella-software AG
+              </p>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div id="slide2" class="carousel-item relative w-full flex flex-col" v-show="firstSlideIndex === 2">
+            <h3 class="font-bold">»Es macht mich stolz, mit unserer Musikaliendruckerei einen echten Mehrwert für alle
+              capella-Nutzer:innen bieten zu können.«</h3>
+            <div class="flex flex-col md:flex-row items-start mt-4">
+              <p class="font-bold mr-2">
+                Sebastian Gabriel,
+              </p>
+              <p>
+                Geschäftsführer AURIOPRINT
+              </p>
+            </div>
+          </div>
         </div>
 
         <!-- Bottom Div with Image -->
-        <div class="border-12 border-white">
-          <img src="@/assets/images/pic2.png" alt="Bildbeschreibung" class="w-full h-full object-cover">
+        <div class="border-12 border-white flex flex-grow ">
+          <div class="carousel w-full">
+            <!-- Slide 1 -->
+            <div id="slide1" class="carousel-item relative w-full" v-show="firstSlideIndex === 1">
+              <img src="@/assets/images/pic2.png" class="w-full h-auto min-h-full object-cover" alt="Bildbeschreibung">
+              <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                <button @click="moveToSlide1(2)" class="btn btn-circle">❮</button>
+                <button @click="moveToSlide1(2)" class="btn btn-circle">❯</button>
+              </div>
+            </div>
+            <!-- Slide 2 -->
+            <div id="slide2" class="carousel-item relative w-full" v-show="firstSlideIndex === 2">
+              <img src="@/assets/images/sebastianQuote.jpeg" class="w-full h-auto min-h-full object-cover"
+                alt="Bildbeschreibung">
+              <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                <button @click="moveToSlide1(1)" class="btn btn-circle">❮</button>
+                <button @click="moveToSlide1(1)" class="btn btn-circle">❯</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -252,108 +303,156 @@ function render() {
     </section>
     <section class="flex flex-col xl:flex-row">
       <!-- Left Column -->
-      <div class="xl:w-6/9 w-full">
+      <div class="xl:w-6/9 w-full flex flex-col">
         <!-- Top Div with Text -->
+
         <div>
           <h1 class="ml-3">
             Konfigurieren Sie Ihr Notenheft
           </h1>
+
           <div class="border-12 border-white yellow p-5">
-            <h3 class="font-bold">»capellaprint ist ein attraktiver Service und hervorragend
-              geeignet, um aus
-              Ihren Partituren das
-              Optimum herauszuholen.«</h3>
-            <div class="flex flex-col md:flex-row items-start mt-4">
-              <p class="font-bold mr-2">
-                Dr. Dominik Hörnel,
-              </p>
-              <p>
-                Vorstandsvorsitzender, capella-software AG
-              </p>
+            <div class="carousel w-full">
+              <!-- Slide 1 -->
+              <div id="slide1" class="carousel-item relative w-full flex flex-col" v-show="slideIndex === 1">
+                <h3 class="font-bold">»capellaprint ist ein attraktiver Service und hervorragend
+                  geeignet, um aus
+                  Ihren Partituren das
+                  Optimum herauszuholen.«</h3>
+                <div class="flex flex-col md:flex-row items-start mt-4">
+                  <p class="font-bold mr-2">
+                    Dr. Dominik Hörnel,
+                  </p>
+                  <p>
+                    Vorstandsvorsitzender, capella-software AG
+                  </p>
+                </div>
+              </div>
+              <!-- Slide 2 -->
+              <div id="slide2" class="carousel-item relative w-full flex flex-col" v-show="slideIndex === 2">
+                <h3 class="font-bold">»Es macht mich stolz, mit unserer Musikaliendruckerei einen echten Mehrwert für alle
+                  capella-Nutzer:innen bieten zu können.«</h3>
+                <div class="flex flex-col md:flex-row items-start mt-4">
+                  <p class="font-bold mr-2">
+                    Sebastian Gabriel,
+                  </p>
+                  <p>
+                    Geschäftsführer AURIOPRINT
+                  </p>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
 
         <!-- Bottom Div with Image -->
-        <div class="border-12 border-white">
-          <img src="@/assets/images/pic3.png" alt="Bildbeschreibung" class="w-full h-full object-cover">
+        <div class="border-12 border-white flex-grow flex">
+
+          <div class="carousel w-full">
+            <!-- Slide 1 -->
+            <div id="slide1" class="carousel-item relative w-full" v-show="slideIndex === 1">
+              <img src="@/assets/images/pic3.png" class="w-full h-auto min-h-full object-cover" alt="Bildbeschreibung">
+              <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                <button @click="moveToSlide(2)" class="btn btn-circle">❮</button>
+                <button @click="moveToSlide(2)" class="btn btn-circle">❯</button>
+              </div>
+            </div>
+            <!-- Slide 2 -->
+            <div id="slide2" class="carousel-item relative w-full" v-show="slideIndex === 2">
+              <img src="@/assets/images/sebastianQuote.jpeg" class="w-full h-auto min-h-full object-cover"
+                alt="Bildbeschreibung">
+              <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                <button @click="moveToSlide(1)" class="btn btn-circle">❮</button>
+                <button @click="moveToSlide(1)" class="btn btn-circle">❯</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Right Column -->
-      <div class="xl:w-3/9 w-full flex flex-col justify-between border-12 border-white p-5 blue">
-        <h1 class="ml-3">
-          Konfigurieren Sie Ihr Notenheft
-        </h1>
+      <div class="xl:w-3/9 w-full flex flex-col">
         <div>
-          <div class="flex items-start mb-15 ">
-            <!-- Image on the Left -->
-            <img src="@/assets/svg/verified.svg" alt="Avatar" class="mr-4">
-
-            <!-- Text Container on the Right -->
-            <div>
-              <h2>
-
-                Ihre Vorteile
-              </h2>
+          <h1 class="ml-3">
+            Unser Tipp
+          </h1>
+        </div>
+        <div class="flex-grow pb-auto flex flex-col border-12 border-white p-5 blue">
+          <div>
+            <div class="flex items-start mb-15 ">
+              <!-- Image on the Left -->
+              <img src="@/assets/svg/verified.svg" alt="Avatar" class="mr-4">
+              <!-- Text Container on the Right -->
+              <div>
+                <h2>
+                  Ihre Vorteile
+                </h2>
+              </div>
             </div>
-          </div>
-
-          <div class="collapse collapse-plus">
-            <input type="radio" name="my-accordion-3" />
-            <div class="collapse-title text-xl font-medium">
-              Gehe ich ein Abonnement ein?
+            <div class="collapse collapse-plus">
+              <input type="radio" name="my-accordion-3" />
+              <div class="collapse-title text-xl font-medium">
+                Gehe ich ein Abonnement ein?
+              </div>
+              <div class="collapse-content">
+                <p>Nein, capellaprint ist nicht mit einem Abonnement verbunden. Für den
+                  Bestellprozess können Sie auf Wunsch zwar ein kostenfreies Kundenkonto erstellen, dies
+                  verpflichtet
+                  Sie aber zu nichts und ist jederzeit wieder deaktivierbar.</p>
+              </div>
             </div>
-            <div class="collapse-content">
-              <p>Nein, capellaprint ist nicht mit einem Abonnement verbunden. Für den
-                Bestellprozess können Sie auf Wunsch zwar ein kostenfreies Kundenkonto erstellen, dies
-                verpflichtet
-                Sie aber zu nichts und ist jederzeit wieder deaktivierbar.</p>
+            <div class="collapse collapse-plus">
+              <input type="radio" name="my-accordion-3" />
+              <div class="collapse-title text-xl font-medium">
+                Werden meine Druckdaten kontrolliert?
+              </div>
+              <div class="collapse-content">
+                <p>Ja. Jede hochgeladene PDF-Datei wird von unseren Systemen standardisiert kontrolliert und ggf.
+                  gleich korrigiert, um ein professionelles Druckbild zu gewährleisten. Sollten Datenfehler ein
+                  manuelles Eingreifen notwendig machen, wird sich ein Mitarbeiter vor Ausführung der Produktion mit
+                  Ihnen per E-Mail in Verbindung setzen. Bitte beachten Sie unbedingt unsere Druckdatenvorgaben!</p>
+              </div>
             </div>
-          </div>
-          <div class="collapse collapse-plus">
-            <input type="radio" name="my-accordion-3" />
-            <div class="collapse-title text-xl font-medium">
-              Werden meine Druckdaten kontrolliert?
+            <div class="collapse collapse-plus">
+              <input type="radio" name="my-accordion-3" />
+              <div class="collapse-title text-xl font-medium">
+                Wie erfolgt die Bestellung, was kostet es?
+              </div>
+              <div class="collapse-content">
+                <p>
+                  Transparenz für unsere Kunden ist unser Leitmotiv. capellaprint garantiert
+                  Ihnen dauerhaft niedrige Preise ohne versteckte Zusatzkosten. Die Nutzung unseres Druckportals ist
+                  selbstverständlich kostenfrei.</p>
+                <br>
+                <p>
+                  Sie bezahlen, wie im normalen Online-Shopping auch, bei der Bestellung Ihrer Notenausgaben. Hierfür
+                  haben Sie die Wahl zwischen den sicheren Zahlungsarten PayPal, Klarna Rechnung und Kreditkarte.
+                </p>
+              </div>
             </div>
-            <div class="collapse-content">
-              <p>Ja. Jede hochgeladene PDF-Datei wird von unseren Systemen standardisiert kontrolliert und ggf.
-                gleich korrigiert, um ein professionelles Druckbild zu gewährleisten. Sollten Datenfehler ein
-                manuelles Eingreifen notwendig machen, wird sich ein Mitarbeiter vor Ausführung der Produktion mit
-                Ihnen per E-Mail in Verbindung setzen. Bitte beachten Sie unbedingt unsere Druckdatenvorgaben!</p>
-            </div>
-          </div>
-          <div class="collapse collapse-plus">
-            <input type="radio" name="my-accordion-3" />
-            <div class="collapse-title text-xl font-medium">
-              Wie erfolgt die Bestellung, was kostet es?
-            </div>
-            <div class="collapse-content">
-              <p>
-                Transparenz für unsere Kunden ist unser Leitmotiv. capellaprint garantiert
-                Ihnen dauerhaft niedrige Preise ohne versteckte Zusatzkosten. Die Nutzung unseres Druckportals ist
-                selbstverständlich kostenfrei.</p>
-              <br>
-              <p>
-                Sie bezahlen, wie im normalen Online-Shopping auch, bei der Bestellung Ihrer Notenausgaben. Hierfür
-                haben Sie die Wahl zwischen den sicheren Zahlungsarten PayPal, Klarna Rechnung und Kreditkarte.
-              </p>
-            </div>
-          </div>
-          <div class="collapse collapse-plus">
-            <input type="radio" name="my-accordion-3" />
-            <div class="collapse-title text-xl font-medium">
-              Kann ich gedruckte Noten zurückgeben?
-            </div>
-            <div class="collapse-content">
-              <p>
-                Ihre Partituren werden nach Ihren Vorgaben individuell für Sie gefertigt. Ein Rückgaberecht ist
-                deshalb leider nicht möglich. Sollten wir trotz korrekter Druckdaten von Ihnen fehlerhaft drucken,
-                liefern wir selbstverständlich kostenfrei Ersatz.
-              </p>
+            <div class="collapse collapse-plus">
+              <input type="radio" name="my-accordion-3" />
+              <div class="collapse-title text-xl font-medium">
+                Kann ich gedruckte Noten zurückgeben?
+              </div>
+              <div class="collapse-content">
+                <p>
+                  Ihre Partituren werden nach Ihren Vorgaben individuell für Sie gefertigt. Ein Rückgaberecht ist
+                  deshalb leider nicht möglich. Sollten wir trotz korrekter Druckdaten von Ihnen fehlerhaft drucken,
+                  liefern wir selbstverständlich kostenfrei Ersatz.
+                </p>
+              </div>
             </div>
           </div>
         </div>
         <!-- Add more <p> tags as needed -->
+      </div>
+    </section>
+    <section class="flex flex-col xl:flex-row">
+      <div class="border-12 border-white xl:w-6/9 w-full">
+        <h1>
+          Unsere Topseller
+        </h1>
       </div>
     </section>
     <section class="flex flex-col md:flex-row">

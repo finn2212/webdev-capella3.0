@@ -23,10 +23,10 @@ const { locale } = useI18n();
 const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 </script>
 <template>
-  <div class="agb-container container top">
-    <h1>Datenschutzerkl&auml;rung</h1>
+  <div class="max-w-screen-xl mx-auto">
+    <h1 class="mt-3">Datenschutzerkl&auml;rung</h1>
 
-    <h2>1) Einleitung und Kontaktdaten des Verantwortlichen</h2>
+    <h2 class="mt-3">1) Einleitung und Kontaktdaten des Verantwortlichen</h2>
 
     <p>
       <b>1.1</b>&nbsp;Wir freuen uns, dass Sie unsere Website besuchen und
@@ -47,7 +47,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       entscheidet.
     </p>
 
-    <h2>2) Datenerfassung beim Besuch unserer Website</h2>
+    <h2 class="mt-3">2) Datenerfassung beim Besuch unserer Website</h2>
 
     <p>
       <b>2.1</b>&nbsp;Bei der blo&szlig; informatorischen Nutzung unserer
@@ -89,7 +89,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       erkennen.
     </p>
 
-    <h2>3) Hosting &amp; Content-Delivery-Network</h2>
+    <h2 class="mt-3">3) Hosting &amp; Content-Delivery-Network</h2>
 
     <p>Creoline</p>
 
@@ -112,7 +112,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       unberechtigte Weitergabe an Dritte untersagt.
     </p>
 
-    <h2>4) Cookies</h2>
+    <h2 class="mt-3">4) Cookies</h2>
 
     <p>
       Um den Besuch unserer Website attraktiv zu gestalten und die Nutzung
@@ -149,7 +149,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       Funktionalit&auml;t unserer Website eingeschr&auml;nkt sein kann.
     </p>
 
-    <h2>5) Kontaktaufnahme</h2>
+    <h2 class="mt-3">5) Kontaktaufnahme</h2>
 
     <p>
       Im Rahmen der Kontaktaufnahme mit uns (z.B. per Kontaktformular oder
@@ -169,7 +169,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       gesetzlichen Aufbewahrungspflichten entgegenstehen.
     </p>
 
-    <h2>6) Datenverarbeitung bei Er&ouml;ffnung eines Kundenkontos</h2>
+    <h2 class="mt-3">6) Datenverarbeitung bei Er&ouml;ffnung eines Kundenkontos</h2>
 
     <p>
       Gem&auml;&szlig; Art. 6 Abs. 1 lit. b DSGVO werden personenbezogene Daten
@@ -189,7 +189,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       fortbesteht.
     </p>
 
-    <h2>7) Nutzung von Kundendaten zur Direktwerbung</h2>
+    <h2 class="mt-3">7) Nutzung von Kundendaten zur Direktwerbung</h2>
 
     <p><b>7.1</b>&nbsp;Anmeldung zu unserem E-Mail-Newsletter</p>
 
@@ -254,7 +254,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       unverz&uuml;glich eingestellt.
     </p>
 
-    <h2>8) Datenverarbeitung zur Bestellabwicklung</h2>
+    <h2 class="mt-3">8) Datenverarbeitung zur Bestellabwicklung</h2>
 
     <p>
       <b>8.1</b>&nbsp;Soweit f&uuml;r die Vertragsabwicklung zu Liefer- und
@@ -411,9 +411,8 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     <p>
       Weitere Hinweise zum Datenschutz bei Apple Pay finden Sie unter der
       nachstehenden Internetadresse:
-      <a href="https://support.apple.com/de-de/HT203027" target="_blank"
-        >https://support.apple.com<wbr />/de-de<wbr />/HT203027</a
-      ><br />
+      <a href="https://support.apple.com/de-de/HT203027"
+        target="_blank">https://support.apple.com<wbr />/de-de<wbr />/HT203027</a><br />
       - Klarna
     </p>
 
@@ -464,11 +463,8 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </p>
 
     <p>
-      <a
-        href="https://cdn.klarna.com/1.0/shared/content/legal/terms/0/de_de/credit_rating_agencies"
-        target="_blank"
-        >https://cdn.klarna.com<wbr />/1.0<wbr />/shared<wbr />/content<wbr />/legal<wbr />/terms<wbr />/0<wbr />/de_de<wbr />/credit_rating_agencies</a
-      >
+      <a href="https://cdn.klarna.com/1.0/shared/content/legal/terms/0/de_de/credit_rating_agencies"
+        target="_blank">https://cdn.klarna.com<wbr />/1.0<wbr />/shared<wbr />/content<wbr />/legal<wbr />/terms<wbr />/0<wbr />/de_de<wbr />/credit_rating_agencies</a>
     </p>
 
     <p>
@@ -581,7 +577,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       erforderlich ist.
     </p>
 
-    <h2>9) Webanalysedienste</h2>
+    <h2 class="mt-3">9) Webanalysedienste</h2>
 
     <p>Google Tag Manager</p>
 
@@ -629,7 +625,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       Datenschutzniveaus&nbsp;sicherstellt.
     </p>
 
-    <h2>10) Seitenfunktionalit&auml;ten</h2>
+    <h2 class="mt-3">10) Seitenfunktionalit&auml;ten</h2>
 
     <p><b>10.1</b>&nbsp;Google Web Fonts</p>
 
@@ -718,7 +714,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       Datenschutzniveaus&nbsp;sicherstellt.
     </p>
 
-    <h2>11) Tools und Sonstiges</h2>
+    <h2 class="mt-3">11) Tools und Sonstiges</h2>
 
     <p><b>11.1</b>&nbsp;- sevDesk</p>
 
@@ -795,7 +791,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       Benutzeroberfl&auml;che auf unserer Website.
     </p>
 
-    <h2>12) Rechte des Betroffenen</h2>
+    <h2 class="mt-3">12) Rechte des Betroffenen</h2>
 
     <p>
       <b>12.1</b>&nbsp;Das geltende Datenschutzrecht gew&auml;hrt Ihnen
@@ -858,7 +854,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       VERARBEITUNG DER BETROFFENEN DATEN ZU DIREKTWERBEZWECKEN.
     </p>
 
-    <h2>13) Dauer der Speicherung personenbezogener Daten</h2>
+    <h2 class="mt-3">13) Dauer der Speicherung personenbezogener Daten</h2>
 
     <p>
       Die Dauer der Speicherung von personenbezogenen Daten bemisst sich anhand
@@ -913,62 +909,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
   </div>
 </template>
 <style>
-* {
-  box-sizing: border-box;
-}
-
-@media only screen and (min-width: 1024px) {
-  .imgcard {
-    width: 100%;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .imgcard {
-    float: left;
-    margin-right: 25px;
-    max-height: 300px;
-  }
-}
-
-.p-5 {
-  padding: 35px !important;
-}
-
-.btn-primary {
-  border-color: black;
-}
-
-.card-img-top {
-  border-radius: 0px;
-}
-
-@media only screen and (max-width: 1024px) {
-  .card-img-top {
-    margin-top: 0%;
-    height: 300px;
-    object-fit: cover;
-  }
-}
-
-.card {
-  margin: 0px;
-  border-radius: 0px;
-  padding: 0px;
-}
-
-.imgsmall {
-  text-align: left;
-  width: 100%;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-@media only screen and (max-width: 1024px) {
-  .btn {
-    margin-top: 0%;
-  }
+.h2 {
+  margin-top: 10px;
 }
 </style>

@@ -3,10 +3,45 @@ import {
   getTranslatedProperty,
   getCategoryRoute,
 } from "@shopware-pwa/helpers-next";
+import { getSessionContext } from "@shopware-pwa/api-client";
+import { SessionContext } from "@shopware-pwa/types";
 
 const { navigationElements } = useNavigation({ type: "footer-navigation" });
 const localePath = useLocalePath();
 const { formatLink } = useInternationalization(localePath);
+const {
+  paymentMethods,
+  shippingMethods,
+  getPaymentMethods,
+  getShippingMethods,
+  createOrder,
+} = useCheckout();
+const {
+  refreshSessionContext,
+} = useSessionContext();
+const isLoading = reactive<{ [key: string]: boolean }>({});
+
+onMounted(async () => {
+  await refreshSessionContext();
+
+  isLoading["shippingMethods"] = true;
+  isLoading["paymentMethods"] = true;
+
+  Promise.any([
+    getPaymentMethods(),
+    getShippingMethods()
+  ]).finally(() => {
+    isLoading["shippingMethods"] = false;
+    isLoading["paymentMethods"] = false;
+    console.log(paymentMethods.value)
+  });
+});
+
+// Define getImageUrl method
+function getImageUrl(method: any) {
+  return method.media?.url || 'path/to/your/default/image.svg'; // Provide a fallback image URL
+}
+
 
 const gridColumns = computed<number>(() =>
   navigationElements.value
@@ -21,7 +56,7 @@ const gridColumns = computed<number>(() =>
         <section class="flex flex-col md:flex-row">
           <div class="p-3 grey md:w-3/9 w-full">
             <img src="@/assets/svg/phone_forwarded.svg">
-            <h5 class="mt-3">
+            <h5 class="mt-3 font-bold">
               Service-Hotline
             </h5>
             <p>
@@ -44,7 +79,7 @@ const gridColumns = computed<number>(() =>
           </div>
           <div class="p-3 grey md:w-3/9 w-full">
             <img src="@/assets/svg/local_police.svg">
-            <h5 class="mt-3">
+            <h5 class="mt-3 font-bold">
               Rechtliches
             </h5>
             <div>
@@ -85,7 +120,7 @@ const gridColumns = computed<number>(() =>
           </div>
           <div class="p-3 grey md:w-3/9 w-full">
             <img src="@/assets/svg/award_star.svg">
-            <h5 class="mt-3">
+            <h5 class="mt-3 font-bold">
               Sicher einkaufen
             </h5>
             <p>
@@ -97,6 +132,44 @@ const gridColumns = computed<number>(() =>
             </p>
           </div>
         </section>
+        <section class="flex flex-col md:flex-row mt-3">
+          <div class="p-3 grey md:w-3/9 w-full">
+            <img src="@/assets/svg/local_shipping1.svg">
+            <h5 class="mt-3 font-bold">
+              Versandarten
+            </h5>
+            <div v-if="isLoading.shippingMethods">
+              Loading payment methods...
+            </div>
+            <div v-else-if="shippingMethods">
+              <div class="flex mt-3">
+                <img v-for="method in shippingMethods" :src="getImageUrl(method)" :key="method.id" class="mr-3 max-w-15">
+              </div>
+            </div>
+          </div>
+          <div>
+          </div>
+          <div class="p-3 grey md:w-3/9 w-full">
+            <img src="@/assets/svg/credit_score.svg">
+            <h5 class="mt-3 font-bold">
+              Zahlungsarten
+            </h5>
+            <div v-if="isLoading.paymentMethods">
+              Loading payment methods...
+            </div>
+            <div v-else-if="paymentMethods">
+              <div class="flex mt-3">
+                <img v-for="method in paymentMethods" :src="getImageUrl(method)" :key="method.id" class="mr-3">
+              </div>
+            </div>
+          </div>
+          <div class="p-3 grey md:w-3/9 w-full mt-10">
+            <h5 class="mt-3 font-bold">
+              Wir sind Mitglied im:
+            </h5>
+            <img src="@/assets/svg/bdm.svg">
+          </div>
+        </section>
         <div class="mt-25">
           * Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten, wenn nicht anders angegeben.
           © 2023 AURIOPRINT – Alle Rechte vorbehalten.
@@ -105,3 +178,11 @@ const gridColumns = computed<number>(() =>
     </div>
   </footer>
 </template>
+<style scoped>
+.payment-method-icon {
+  width: 50px;
+  /* Adjust size as needed */
+  margin-right: 10px;
+  /* Spacing between icons */
+}
+</style>
