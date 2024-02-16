@@ -7,7 +7,6 @@ import { Product } from "@shopware-pwa/types";
 import { reactive } from 'vue';
 import { uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
 import { FirebaseStorage, ref as firebaseRef, StorageReference } from 'firebase/storage';
-import { ProductItem } from '../types/productItem';
 import { Voice } from '../types/voice';
 import { FileState } from '../types/fileState';
 import fetchedProduct from '../objects/fetchedProduct';
@@ -32,8 +31,6 @@ const files: FileState = reactive({
   2: { id: 'envolve', selected: false, name: '', file: undefined, uploaded: false, isloading: false, downloadLink: '' },
 });
 const priceString = ref('0');
-const shopwareAccessToken = "SWSCUHZMWNG2TTLINJFXMKG3TW"; // Make sure this is your actual JWT
-const apiUrl = "https://s23511.creoline.cloud/webdev-staging/store-api";
 const projectPriceString = ref('0');
 const productionTime = ref("1–3 Tage");
 const isOpen = ref(false);
@@ -49,17 +46,10 @@ const pagePrice = ref(0.15);
 const productQuantity = ref(1);
 const handlingVoice = ref(1);
 const pdf1 = ref('');
-const pdf2 = ref('');
 const storage = useNuxtApp().$firebaseStorage as FirebaseStorage;// Access Firebase Storage instance
-const progress1 = ref(null);
-const isUpload1 = ref(false);
-const isUpload2 = ref(false);
 const isUpload3 = ref(false);
 const voicePagePrice = ref(0.15);
-const access_token = ref('');
 const projectType = ref(1);
-const uploadValue = ref(0);
-const uploadValue2 = ref(0);
 const uploadValue3 = ref(0);
 const productName = ref("");
 const format = ref('true');
@@ -74,11 +64,8 @@ const bindingTypePrice = ref(0);
 const weight = ref(0);
 const swEndPoint = ref("");
 const accesstoken = ref("");
-const pdfData1 = ref<PdfData>({ name: "" });
-const pdfData2 = ref<PdfData>({ name: "" });
 const pdfData3 = ref<PdfData>({ name: "" });
 const isLoading = ref(false);
-const products = ref<ProductItem[]>([]);
 const voices = ref<Voice[]>([]); // Array of 'Voice'
 const baseVoicePrice = ref(16.4);
 
@@ -94,20 +81,6 @@ if (typeof swEnvironment.public.shopware.shopwareEndpoint === 'string' && typeof
 } else {
   console.error('shopware_endpoint is not a string');
 }
-const close = () => {
-  isOpen.value = false;
-  const stickyBar = document.getElementById("stickyBar");
-  if (stickyBar) {
-    stickyBar.classList.add('sticky-top');
-  }
-};
-const open = () => {
-  isOpen.value = true;
-  const stickyBar = document.getElementById("stickyBar");
-  if (stickyBar) {
-    stickyBar.classList.remove('sticky-top');
-  }
-};
 
 const authenticate = async () => {
   const authData = {
@@ -160,7 +133,6 @@ const validate = () => {
   if (projectType.value === 1) {
     if (pdf1.value === "" || productName.value === "") {
       errorMassage.value = "Bitte laden Sie eine Notendatei hoch und vergeben Sie einen Projektnamen, bevor Sie das Produkt in Ihren Warenkorb legen.";
-      open();
       return false;
     } else {
       return true;
@@ -168,7 +140,6 @@ const validate = () => {
   } else if (projectType.value === 2) {
     if (pdf1.value === "" || productName.value === "" || voices.value.length === 0) {
       errorMassage.value = "Bitte laden Sie eine Notendatei hoch, vergeben sie einen Projektnamen und fügen Sie eine Stimme hinzu bevor Sie das Produkt in Ihren Warenkorb legen";
-      open();
       return false;
     } else {
       return true;
@@ -176,7 +147,6 @@ const validate = () => {
   } else if (projectType.value === 3 || productName.value === "") {
     if (voices.value.length === 0) {
       errorMassage.value = "Bitte vergeben Sie eine Stimmenbezeichnung und laden Sie eine Notendatei hoch, bevor Sie die Stimme dem Projekt hinzufügen.";
-      open();
       return false;
     } else {
       return true;
@@ -386,7 +356,6 @@ const calculatePrice = () => {
   if (pagesQuantitiy.value <= 84) {
     pagesToUse = 84;
   }
-
   if (projectType.value === 3) {
     price.value = totalVoicePrice.value + baseVoicePrice.value;
     singlePrice.value = totalVoicePrice.value + baseVoicePrice.value;
@@ -509,10 +478,6 @@ const reset = (full: boolean) => {
     productQuantity.value = 1;
     projectType.value = 1;
     productName.value = "";
-    pdf1.value = '';
-    pdf2.value = '';
-    pdfData1.value.name = "";
-    pdfData2.value.name = "";
   }
   productionTime.value = "1–3 Tage";
   enveloped.value = 'false';
