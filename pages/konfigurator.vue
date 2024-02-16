@@ -1,41 +1,35 @@
 <script setup lang="ts">
 import { ref, onBeforeMount } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import { useNuxtApp } from '#app';
 import axios from 'axios';
 import { Product } from "@shopware-pwa/types";
 import { reactive } from 'vue';
+import { uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
+import { FirebaseStorage, ref as firebaseRef, StorageReference } from 'firebase/storage';
+import { ProductItem } from '../types/productItem';
+import { Voice } from '../types/voice';
+import { FileState } from '../types/fileState';
+import fetchedProduct from '../objects/fetchedProduct';
+import pages from '../objects/pages';
+import voiceAmount from '../objects/voiceAmount';
+import discounts from '../objects/discounts';
 
-interface ProductItem {
-  product: any; // Replace 'any' with a more specific type if known
-  quantity: any;
-}
 
-interface Voice {
-  name: string;
-  url: string;
-  pages: number;
-  quantity: number;
-  uploadName: string;
-}
 interface PdfData {
   name: string;
   // Include other properties as needed, such as URL or size
 }
-
-interface FileState {
-  [key: number]: { selected: boolean; name: string };
-}
-
 const { pushSuccess } = useNotifications();
 const { codeErrorsNotification } = useCartNotification();
 
 // const route = useRoute();
 // Primitive values using ref
 const price = ref(0);
-// Using Record<number, boolean> to address TypeScript indexing issue
+
 const files: FileState = reactive({
-  1: { selected: false, name: '' },
-  2: { selected: false, name: '' },
+  1: { id: 'notes', selected: false, name: '', file: undefined, uploaded: false, isloading: false, downloadLink: '' }, // Assuming `file` is a File object
+  2: { id: 'envolve', selected: false, name: '', file: undefined, uploaded: false, isloading: false, downloadLink: '' },
 });
 const priceString = ref('0');
 const shopwareAccessToken = "SWSCUHZMWNG2TTLINJFXMKG3TW"; // Make sure this is your actual JWT
@@ -56,6 +50,7 @@ const productQuantity = ref(1);
 const handlingVoice = ref(1);
 const pdf1 = ref('');
 const pdf2 = ref('');
+const storage = useNuxtApp().$firebaseStorage as FirebaseStorage;// Access Firebase Storage instance
 const progress1 = ref(null);
 const isUpload1 = ref(false);
 const isUpload2 = ref(false);
@@ -84,241 +79,10 @@ const pdfData2 = ref<PdfData>({ name: "" });
 const pdfData3 = ref<PdfData>({ name: "" });
 const isLoading = ref(false);
 const products = ref<ProductItem[]>([]);
-const fetchedProduct = ref<Product>({
-  active: false,
-  apiAlias: 'product',
-  autoIncrement: 0,
-  available: false,
-  availableStock: null,
-  calculatedCheapestPrice: {
-    unitPrice: 0,
-    quantity: 0,
-    totalPrice: 0,
-    calculatedTaxes: [],
-    taxRules: [],
-    referencePrice: {
-      price: 0,
-      purchaseUnit: 0,
-      referenceUnit: '',
-      unitName: '',
-      apiAlias: undefined
-    },
-    hasRange: undefined,
-    listPrice: null,
-    regulationPrice: null,
-    apiAlias: '',
-    variantId: undefined
-  },
-  calculatedListingPrice: null,
-  calculatedMaxPurchase: 0,
-  calculatedPrice: {
-    unitPrice: 0,
-    quantity: 0,
-    totalPrice: 0,
-    calculatedTaxes: [],
-    taxRules: [],
-    referencePrice: {
-      price: 0,
-      purchaseUnit: 0,
-      referenceUnit: '',
-      unitName: '',
-      apiAlias: undefined
-    },
-    hasRange: undefined,
-    listPrice: null,
-    regulationPrice: null,
-    apiAlias: '',
-    variantId: undefined
-  },
-  calculatedPrices: [],
-  canonicalProduct: undefined,
-  canonicalProductId: null,
-  categories: null,
-  categoriesRo: null,
-  categoryIds: [],
-  categoryTree: null,
-  cheapestPrice: null,
-  childCount: null,
-  children: null,
-  cmsPage: null,
-  cmsPageId: null,
-  configuratorSettings: null,
-  cover: {
-    productId: '',
-    mediaId: '',
-    position: 0,
-    media: {
-      mimeType: '',
-      fileExtension: '',
-      fileSize: 0,
-      title: null,
-      metaData: {
-        hash: undefined,
-        type: 0,
-        width: 0,
-        height: 0
-      },
-      uploadedAt: null,
-      alt: null,
-      url: '',
-      fileName: '',
-      translations: null,
-      thumbnails: [],
-      hasFile: false,
-      private: false,
-      _uniqueIdentifier: undefined,
-      versionId: undefined,
-      translated: {
-        alt: null,
-        title: null,
-        customFields: null
-      },
-      createdAt: '',
-      updatedAt: null,
-      extensions: undefined,
-      id: '',
-      customFields: null,
-      apiAlias: 'media'
-    },
-    customFields: null,
-    _uniqueIdentifier: undefined,
-    versionId: '',
-    translated: [],
-    createdAt: '',
-    updatedAt: null,
-    extensions: undefined,
-    id: '',
-    apiAlias: 'product_media'
-  },
-  coverId: null,
-  createdAt: '',
-  crossSellings: null,
-  customFields: {},
-  updatedAt: null,
-  deliveryTime: {
-    id: '',
-    name: null,
-    min: 0,
-    max: 0,
-    unit: '',
-    shippingMethods: undefined,
-    translations: undefined,
-    translated: {
-      customFields: {},
-      name: ''
-    },
-    customFields: null,
-    createdAt: '',
-    updatedAt: null,
-    apiAlias: ''
-  },
-  deliveryTimeId: null,
-  description: null,
-  displayGroup: '',
-  downloads: undefined,
-  ean: null,
-  extensions: [],
-  height: null,
-  id: '',
-  isCloseout: null,
-  isNew: false,
-  keywords: null,
-  length: null,
-  listingPrices: null,
-  mainCategories: null,
-  manufacturer: null,
-  manufacturerId: null,
-  manufacturerNumber: null,
-  markAsTopseller: null,
-  maxPurchase: null,
-  media: [],
-  metaDescription: null,
-  metaTitle: null,
-  minPurchase: null,
-  name: null,
-  options: null,
-  packUnit: null,
-  packUnitPlural: null,
-  parent: null,
-  parentId: null,
-  parentVersionId: null,
-  price: null,
-  prices: null,
-  productManufacturerVersionId: null,
-  productNumber: '',
-  productReviews: null,
-  properties: null,
-  propertyIds: null,
-  purchasePrice: null,
-  purchaseSteps: null,
-  purchaseUnit: null,
-  ratingAverage: null,
-  referenceUnit: null,
-  releaseDate: null,
-  restockTime: 0,
-  sales: 0,
-  seoCategory: null,
-  seoUrls: null,
-  shippingFree: null,
-  sortedProperties: null,
-  states: [],
-  stock: 0,
-  streamIds: null,
-  streams: null,
-  tagIds: null,
-  tags: null,
-  tax: {
-    taxRate: 0,
-    name: '',
-    products: undefined,
-    customFields: null,
-    translated: [],
-    createdAt: '',
-    updatedAt: null,
-    position: 0,
-    id: '',
-    apiAlias: ''
-  },
-  taxId: null,
-  translated: {
-    name: null,
-    description: '',
-    metaDescription: null,
-    keywords: null,
-    metaTitle: null,
-    customFields: {},
-    packUnit: null,
-    packUnitPlural: null
-  },
-  translations: null,
-  unit: null,
-  unitId: null,
-  versionId: '',
-  weight: null,
-  width: null
-});
-
 const voices = ref<Voice[]>([]); // Array of 'Voice'
 const baseVoicePrice = ref(16.4);
-const voiceAmount = ref([
-  2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50
-]);
-const pages = ref([
-  8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140, 144, 148, 152, 156, 160, 164, 168, 172, 176, 180, 184, 188, 192, 196, 200, 204, 208, 212, 216, 220, 224, 228, 232, 236, 240, 244, 248, 252, 256, 260, 264, 268, 272, 276, 280, 284, 288, 292, 296, 300, 304, 308, 312, 316, 320, 324, 328, 332, 336, 340, 344, 348, 352, 356, 360, 364, 368, 372, 376, 380, 384, 388, 392, 396, 400
-]);
-const discounts = reactive([
-  { id: 1, discount: 0, amount: 1 },
-  { id: 2, discount: 0.45, amount: 2 },
-  { id: 3, discount: 0.55, amount: 10 },
-  { id: 4, discount: 0.63, amount: 25 },
-  { id: 5, discount: 0.68, amount: 50 },
-  { id: 6, discount: 0.70, amount: 75 },
-  { id: 7, discount: 0.72, amount: 100 },
-  { id: 8, discount: 0.74, amount: 150 },
-  { id: 9, discount: 0.75, amount: 200 },
-  { id: 10, discount: 0.76, amount: 250 }
 
-]);
+
 onMounted(() => {
   calculatePrice(); // Make sure calculatePrice is defined appropriately
 });
@@ -456,10 +220,10 @@ const addToCartProxy = async () => {
 };
 const getDesc = () => {
   let desc = `<span>Projekt Name: ${productName.value}</span><br/>` +
-    `<span>Link: <a href="${pdf1.value}">Downloadlink Notenheft</a></span><br/>`;
+    `<span>Link: <a href="${files[1].downloadLink}">Downloadlink Notenheft</a></span><br/>`;
 
-  if (pdf2.value) {
-    desc += `<span>Link: <a href="${pdf2.value}">Downloadlink Umschlag</a></span><br/>`;
+  if (files[2].downloadLink) {
+    desc += `<span>Link:<a href="${files[2].downloadLink}">Downloadlink Umschlag</a></span><br/>`;
   }
 
   desc += `<span>Seitenzahl: ${pagesQuantitiy.value}</span><br/><p>\n</p>`;
@@ -764,69 +528,81 @@ const reset = (full: boolean) => {
   calculatePrice();
 };
 
-const handleFileSelection = (event: Event, fileIndex: number) => {
-  const input = event.target as HTMLInputElement;
-  if (input.files?.length) {
-    const file = input.files[0];
-    files[fileIndex] = { selected: true, name: file.name };
+function getFileHeadline(fileIndex: number) {
+  const fileId = files[fileIndex].id;
+  if (fileId === 'notes') {
+    return 'Noten-PDF / Inhalt:*';
+  } else if (fileId === 'envolve') {
+    return 'ggf. Umschlagdatei:';
+  }
+  return ''; // Default return value if no id matches
+}
+
+const handleFileSelection = (event: any, fileIndex: any) => {
+  const file = event.target.files[0]; // Get the file
+  if (file) {
+    files[fileIndex] = { id: files[fileIndex].id, selected: true, name: file.name, file, uploaded: false, isloading: false, downloadLink: '' };
   }
 };
 
-const uploadFile = (fileIndex: number) => {
-  console.log(`Uploading file ${files[fileIndex].name}...`);
-  handleFileUpload(files[fileIndex], fetchedProduct.value.productNumber)
-  // Implement your upload logic here
-  // Optionally reset the file selection state if needed
-  files[fileIndex] = { selected: false, name: '' };
+// Upload file to Firebase Storage
+const uploadFile = async (fileIndex: any) => {
+  const fileData = files[fileIndex];
+  const storagePath: string = `uploads/${fileData.name}`;
+  const storageRef: StorageReference = firebaseRef(storage, storagePath);
+  files[fileIndex].isloading = true
+  if (!fileData.file) return;
+
+  try {
+    const uploadTask = uploadBytesResumable(storageRef, fileData.file);
+
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        // Optional: Update progress
+        files[fileIndex].progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(`${fileIndex}: Upload is ${files[fileIndex].progress}% done`);
+      },
+      (error) => {
+        console.error('Upload failed: ', error);
+      },
+      async () => {
+        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+        files[fileIndex].isloading = false
+        files[fileIndex].uploaded = true
+        files[fileIndex].downloadLink = downloadURL
+        console.log(`${fileIndex}: File available at`, downloadURL);
+        // Optional: Update your app's state with the download URL
+      }
+    );
+  } catch (error) {
+    console.error('Error uploading file: ', error);
+  }
+};
+const deleteFile = async (fileIndex: number) => {
+  const fileData = files[fileIndex];
+  const storagePath = `uploads/${fileData.name}`;
+  const storageRef = firebaseRef(storage, storagePath);
+  files[fileIndex].downloadLink = '';
+
+  try {
+    await deleteObject(storageRef);
+    console.log(`${fileIndex}: File successfully deleted`);
+
+    // Update your app's state here
+    files[fileIndex].isloading = false;
+    files[fileIndex].uploaded = false;
+    files[fileIndex].selected = false;
+    files[fileIndex].file = undefined;
+
+  } catch (error) {
+    console.error('Error deleting file: ', error);
+  }
 };
 
 const cancelSelection = (fileIndex: number) => {
   // Reset the selected state and file name for the input
-  files[fileIndex] = { selected: false, name: '' };
+  files[fileIndex] = { id: files[fileIndex].id, selected: false, name: '', uploaded: false, isloading: false, downloadLink: '' };
 };
-// Function to create a media object
-async function createMediaObject() {
-  const response = await axios.post(`${apiUrl}/media`, {
-    headers: {
-      "Content-Type": 'application/json',
-      "sw-access-key": 'SWSCUHZMWDM2TTLINJFXMKG3TW'
-    },
-  });
-  return response.data.data.id; // Assuming the response includes the media ID
-}
-
-// Function to upload a file to the created media object
-async function uploadFileToMedia(mediaId: any, file: any) {
-  const formData = new FormData();
-  formData.append('file', file);
-
-  await axios.post(`${apiUrl}/media/${mediaId}/upload`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-      "sw-access-key": 'SWSCUHZMWDM2TTLINJFXMKG3TW'
-    },
-  });
-}
-
-// Function to associate the media with a product
-async function associateMediaWithProduct(productId: any, mediaId: any) {
-  await axios.patch(`${apiUrl}/product/${productId}`, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-      "sw-access-key": 'SWSCUHZMWDM2TTLINJFXMKG3TW'
-    },
-  });
-}
-async function handleFileUpload(file: any, productId: any) {
-  try {
-    const mediaId = await createMediaObject();
-    await uploadFileToMedia(mediaId, file);
-    await associateMediaWithProduct(productId, mediaId);
-    console.log('File uploaded and associated with product successfully');
-  } catch (error) {
-    console.error('Error uploading file:', error);
-  }
-}
 
 // Define the count function to increment or decrement the quantity
 const count = (increase: boolean) => {
@@ -1015,7 +791,7 @@ export default {
               </div>
             </div>
           </div>
-          <div class="flex w-full pt-3">
+          <div v-if="projectType != 3" class="flex w-full pt-3">
             <!-- Column 1 (3/5) -->
             <div class="w-3/5 p-2">
               <h2>3. Papierformat*</h2>
@@ -1089,7 +865,7 @@ export default {
               </div>
             </div>
           </div>
-          <div class="flex w-full pt-3">
+          <div v-if="projectType != 3" class="flex w-full pt-3">
             <!-- Column 1 (3/5) -->
             <div class="w-3/5 p-2">
               <h2>4. Ausrichtung*</h2>
@@ -1122,7 +898,7 @@ export default {
               </div>
             </div>
           </div>
-          <div class="flex w-full pt-3">
+          <div v-if="projectType != 3" class="flex w-full pt-3">
             <!-- Column 1 (3/5) -->
             <div class="w-3/5 p-2">
               <h2>5. Farbigkeit Inhalt*</h2>
@@ -1153,7 +929,7 @@ export default {
               </div>
             </div>
           </div>
-          <div class="flex w-full pt-3">
+          <div v-if="projectType != 3" class="flex w-full pt-3">
             <!-- Column 1 (3/5) -->
             <div class="w-3/5 p-2">
               <h2>6. Seitenanzahl*</h2>
@@ -1185,7 +961,7 @@ export default {
               <!-- Second row, identical to the first row -->
             </div>
           </div>
-          <div class="flex w-full pt-3">
+          <div v-if="projectType != 3" class="flex w-full pt-3">
             <!-- Column 1 (3/5) -->
             <div class="w-3/5 p-2">
               <h2>7. Bindung*</h2>
@@ -1209,7 +985,7 @@ export default {
               <!-- Second row, identical to the first row -->
             </div>
           </div>
-          <div class="flex w-full pt-3">
+          <div v-if="projectType != 3" class="flex w-full pt-3">
             <!-- Column 1 (3/5) -->
             <div class="w-3/5 p-2">
               <h2>8. Umschlag</h2>
@@ -1252,7 +1028,12 @@ export default {
             </div>
             <!-- Column 2 (2/5) -->
             <div class="w-2/5 p-2 flex flex-col space-y-4 mt-5">
-              <div v-for="fileIndex in [1, 2]" :key="fileIndex" class="block">
+              <div v-for="fileIndex in [1, 2]" :key="fileIndex" class="block mb-3">
+                <div class="block mb-3 ml-3">
+                  <label class="block font-bold">
+                    {{ getFileHeadline(fileIndex) }}
+                  </label>
+                </div>
                 <label v-if="!files[fileIndex].selected" class="block">
                   <span class="sr-only">Upload File {{ fileIndex }}</span>
                   <input type="file" @change="handleFileSelection($event, fileIndex)" class="block w-full text-sm text-gray-900
@@ -1262,7 +1043,8 @@ export default {
                  file:bg-black-50 file:text-black-700
                  hover:file:bg-blue-100" />
                 </label>
-                <div v-else class="flex flex-col justify-between">
+                <div v-if="files[fileIndex].selected && !files[fileIndex].isloading && !files[fileIndex].uploaded"
+                  class="flex flex-col justify-between">
                   <button @click="uploadFile(fileIndex)" class="btn bg-black text-white rounded-full">
                     Upload: {{ files[fileIndex].name }}
                   </button>
@@ -1271,8 +1053,150 @@ export default {
                     Cancel
                   </button>
                 </div>
+                <div v-if="files[fileIndex].selected && files[fileIndex].isloading"
+                  class="flex flex-col justify-between ml-3">
+                  <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200 border border-black">
+                    <div :style="{ width: files[fileIndex].progress + '%' }" class="bg-blue-600 h-2.5 rounded-full"></div>
+                  </div>
+                </div>
+                <div v-if="files[fileIndex].selected && !files[fileIndex].isloading && files[fileIndex].uploaded"
+                  class="flex flex-col justify-between ">
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-800 ml-3">{{ files[fileIndex].name }}</span>
+                    <button @click="deleteFile(fileIndex)"
+                      class="ml-2 btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                      Delete
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+          <div v-if="projectType != 1" class="flex flex-col w-full mt-3">
+            <!-- Column 1 (3/5) -->
+            <div class="w-3/5 p-2">
+              <h2 v-if="projectType != 2">
+                3. Instrumentalstimmen*
+              </h2>
+              <h2 v-if="projectType != 3">
+                10. Instrumentalstimmen*
+              </h2>
+              <p class="pt-3">Wenn Ihr Projekt Instrumentalstimmen enthält, können Sie diese hier konfigurieren.</p>
+              <p class="pt-3">Bitte geben Sie an, wie viele Seiten die Stimmeneinleger haben.</p>
+              <p class="pt-3">Wählen Sie bitte zusätzlich aus, wie viele Exemplare von jeder Stimme pro Set enthalten sein
+                sollen (bspw. Orchestermusik: 8 Erste Violinen, 6 Zweite Violinen, etc.).</p>
+              <p class="pt-3">Bitte beachten Sie, dass wir Instrumentalstimmen, die später in ein Heft eingelegt werden,
+                am rechten Rand 3–5 mm kleiner schneiden, damit diese nicht überstehen.</p>
+            </div>
+            <div class="flex w-full mt-3">
+              <div class="w-1/2 p-2">
+                <p class="pt-3">Stimme benennen (bspw. »Violine 1«)</p>
+                <div class="w-2/5 mt-5">
+                  <input placeholder="Stimmenname eingeben ..." class=" p-3" type="string" v-model="voiceName">
+                </div>
+              </div>
+              <div class="w-1/2 p-2">
+                <div class="flex flex-col">
+                  <div class="flex mt-3">
+                    <p>Seitenanzahl Inhalt:</p>
+                    <div class="min-w-10 ml-10">
+                      <select id="mySelect" class="form-select mt-1 block w-full" v-model="voicePages">
+                        <option selected v-bind:value="4">4</option>
+                        <option v-for="item in pages" v-bind:value="item">{{ item }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="flex mt-5">
+                    <p>Exemplare pro Set:</p>
+                    <div class="min-w-13 ml-11">
+                      <select id="mySelect" class="form-select mt-1 block w-full" v-model="voiceQuantity">
+                        <option selected v-bind:value="1">1</option>
+                        <option v-for="item in voiceAmount" v-bind:value="item">{{ item }}</option>
+                      </select>
+                    </div>
+
+                  </div>
+                  <div class="flex mt-5">
+                    <p class="pt-2">Noten-PDF / Inhalt:</p>
+                    <label class="block">
+                      <span class="sr-only">Upload File </span>
+                      <input type="file" class="block w-full text-sm text-gray-900
+                 file:mr-4 file:py-2 file:px-4
+                 file:rounded-full file:border-0
+                 file:text-sm file:font-semibold
+                 file:bg-black-50 file:text-black-700
+                 hover:file:bg-blue-100" />
+                    </label>
+                    <!--  @click="deletePdf3" -->
+                    <button class="btn grey rounded-full">
+                      <img src="@/assets/svg/plusBlack.svg" alt="Delete" class="transform rotate-45">
+                    </button>
+                  </div>
+                  <div class="mt-5">
+                    <div v-if="pdfData3 == null">
+                      <!-- @click="voiceUpload" -->
+                      <button class="btn btn-secondary">
+                        <img src="@/assets/svg/plusBlack.svg" alt="Upload" class="mr-2">Datei wählen
+                      </button>
+                    </div>
+                    <div v-if="pdfData3 != null && isUpload3 == false">
+                      <div>{{ pdfData3.name }}</div>
+                      <div>
+                      </div>
+                    </div>
+                    <div v-if="isUpload3 == true">
+                      <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+                        <div
+                          class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
+                          :style="{ width: uploadValue3 + '%' }">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- //@click="addVoice()" -->
+                  <button class="btn bg-black text-white rounded-full">
+                    <img src="@/assets/svg/iconWhite.svg" alt="Add" class="mr-2">
+                    <span>Stimme Hinzufügen</span>
+                  </button>
+                  <p class="pt-4">
+                    Sie können beliebig viele weitere Instrumentalstimmen hinzufügen.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="w-full pt-4">
+              <h3 class="pl-2">Hinzugefügte Stimmen:</h3>
+              <div class="overflow-x-auto relative">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      <th scope="col" class="py-3 px-6">Stimmenname:</th>
+                      <th scope="col" class="py-3 px-6">Seitenanzahl Inhalt:</th>
+                      <th scope="col" class="py-3 px-6">Exemplare pro Set:</th>
+                      <th scope="col" class="py-3 px-6">Datei Name:</th>
+                      <th scope="col" class="py-3 px-6">Löschen:</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <client-only>
+                      <tr v-for="(voice, index) in voices"
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="py-4 px-6">{{ voice.name }}</td>
+                        <td class="py-4 px-6">{{ voice.pages }}</td>
+                        <td class="py-4 px-6">{{ voice.quantity }}</td>
+                        <td class="py-4 px-6">{{ voice.uploadName }}</td>
+                        <td class="py-4 px-6">
+                          <!-- <button @click.prevent="removeVoice(index)" class="p-0 m-0 bg-transparent">
+                            <img src="@/assets/svg/plusBlack.svg" alt="Delete" class="transform rotate-45">
+                          </button> -->
+                        </td>
+                      </tr>
+                    </client-only>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
           </div>
           <div class="flex w-full pt-3">
             <!-- Column 1 (3/5) -->
@@ -1373,8 +1297,9 @@ export default {
                   </tr>
                 </thead>
                 <tbody>
+                  <!-- @click="setAmount(discount.amount)" -->
                   <tr class="border-0" style="cursor: pointer;" :id="'discountgroup' + discount.id"
-                    v-for="(discount, index) in discounts" @click="setAmount(discount.amount)">
+                    v-for="(discount, index) in discounts">
                     <th v-if="discount.amount == 1" scope="">1</th>
                     <th v-if="discount.amount > 1 && discount.amount <= 200" scope="">{{
                       discount.amount }} – {{ discounts[index + 1].amount - 1 }}</th>
@@ -1441,245 +1366,6 @@ export default {
 
       </div>
     </div>
-  </div>
-  <div>
-    <!--Prouct Cusomizer Sections-->
-    <section class="pt-5">
-      <div class="container justify-center">
-
-        <div>
-
-          <div>
-            <div>
-              <div>
-
-              </div>
-              <div>
-
-              </div>
-            </div>
-            <div class="w-100 pt-5"></div>
-            <div>
-              <div>
-
-              </div>
-
-
-              <div v-if="projectType != 3" class="w-100 pt-5"></div>
-              <div v-if="projectType != 3">
-                <h2>9. Notenupload*</h2>
-                <p>Hier laden Sie nun die Druckdaten als PDF auf unseren Server – ganz bequem und einfach.
-                  Ihre Daten werden verschlüsselt übertragen.
-                  Wir prüfen diese auf Druckbarkeit und melden uns ggf. per E-Mail, falls etwas nicht
-                  passen sollte.</p>
-              </div>
-              <div v-if="projectType != 3" class="col mt-4">
-                <div>
-                  <div class="col-auto">
-                    <p>Noten-PDF /Inhalt:*</p>
-                  </div>
-                  <div>
-                    <div v-if="pdfData1 == null">
-                      <div>
-                        <button class="btn btn uploadBtn" style="color: black !important;" @click="click1"> <img
-                            src="@/assets/svg/plusBlack.svg" alt="Avatar" style=" margin-right: 5px;">Datei
-                          wählen</button>
-                        <input type="file" ref="input1" style="display: none" @change="previewImage"
-                          accept="application/pdf">
-                      </div>
-                    </div>
-                    <div v-if="pdfData1 != null && isUpload1 == false">
-                      <div class="col-auto">
-                        {{ pdfData1.name }}
-                      </div>
-                      <div class="col-auto">
-                        <button class="btn btn uploadBtn" style="color: black !important; margin-left:5px"
-                          @click="deletePdf">
-                          <img src="@/assets/svg/plusBlack.svg" alt="Avatar" style="transform: rotate(45deg);">
-                        </button>
-                      </div>
-                    </div>
-                    <div v-if="isUpload1 == true">
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-striped" role="progressbar"
-                          :style="{ width: uploadValue + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class=" mt-5">
-                  <div class="col-auto">
-                    <p>ggf. <br> Umschlagdatei:</p>
-                  </div>
-                  <div>
-                    <div v-if="pdfData2 == null">
-                      <div v-if="pdfData2 == null">
-                        <button class="btn btn uploadBtn ms-0 ms-xl-3" style="color: black !important;" @click="click2">
-                          <img src="@/assets/svg/plusBlack.svg" alt="Avatar" style="margin-right: 5px;">Datei wählen
-                        </button>
-                        <input type="file" ref="input2" style="display: none" @change="previewImage2"
-                          accept="application/pdf">
-                      </div>
-                    </div>
-                    <div v-if="pdfData2 != null && isUpload2 == false">
-                      <div>
-                        {{ pdfData2.name }}
-                      </div>
-                      <div>
-                        <button class="btn btn uploadBtn" style="color: black !important;  margin-left:5px "
-                          @click="deletePdf2">
-                          <img src="@/assets/svg/plusBlack.svg" alt="Avatar" style="transform: rotate(45deg);">
-                        </button>
-                      </div>
-                    </div>
-                    <div v-if="isUpload2 == true">
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-striped" role="progressbar"
-                          :style="{ width: uploadValue2 + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class=" pt-5" v-if="projectType != 1">
-              <div>
-                <h2 v-if="projectType == 2">10. Instrumentalstimmen*</h2>
-                <h2 v-if="projectType == 3">3. Instrumentalstimmen*</h2>
-                <p>Wenn Ihr Projekt Instrumentalstimmen enthält, können Sie diese hier konfigurieren.
-                </p>
-                <p>
-                  Bitte geben Sie an, wie viele Seiten die Stimmeneinleger haben.
-                </p>
-                <p>Wählen Sie bitte zusätzlich aus, wie viele Exemplare von jeder Stimme pro Set enthalten
-                  sein sollen (bspw. Orchestermusik: 8 Erste Violinen, 6 Zweite Violinen, etc.).
-                </p>
-                <p>
-                  Bitte beachten Sie, dass wir Instrumentalstimmen, die später in ein Heft eingelegt
-                  werden, am rechten Rand 3–5 mm kleiner schneiden, damit diese nicht überstehen.
-                </p>
-              </div>
-              <div class="w-100 pt-2"></div>
-              <div class=" col-md-6">
-                <p>
-                <p class="thick inline"> Stimme benennen </p>(bspw. »Violine 1«)
-                </p>
-                <input type="string" class=" p-3" placeholder="Stimmenname eingeben ..." v-model="voiceName"
-                  style="    width: 250px;border-width: 1px; border-radius:5px; border-style: solid; border-color: black; margin-top: 20px;">
-              </div>
-              <div>
-                <div>
-                  <div>
-                    <p>Seitenanzahl Inhalt:</p>
-                    <p>Exemplare pro Set:</p>
-                    <p class="pt-2">Noten-PDF / Inhalt:</p>
-                  </div>
-                  <div>
-                    <p>
-                      <select id="mySelect" class="custom-select selectBtn" v-model="voicePages">
-                        <option selected v-bind:value="4"> 4
-                        </option>
-                        <option v-for="item in pages" v-bind:value="item">{{ item }}
-                        </option>
-                      </select>
-                    </p>
-                    <p>
-                      <select id="mySelect" class="custom-select selectBtn" v-model="voiceQuantity">
-                        <option selected v-bind:value="1"> 1
-                        </option>
-                        <option v-for="item in voiceAmount" v-bind:value="item">{{ item }}
-                        </option>
-                      </select>
-                    </p>
-                    <p>
-                    <div v-if="pdfData3 == null">
-                      <div v-if="pdfData3 == null">
-                        <button class="btn btn uploadBtn" style="color: black !important" @click="voiceUpload"> <img
-                            src="@/assets/svg/plusBlack.svg" alt="Avatar" style="margin-right: 5px;">Datei wählen
-                        </button>
-                        <input type="file" ref="input3" style="display: none" @change="previewImage3"
-                          accept="application/pdf">
-                      </div>
-                    </div>
-                    <div v-if="pdfData3 != null && isUpload3 == false">
-                      <div>
-                        {{ pdfData3.name }}
-                      </div>
-                      <div>
-                        <button class="btn btn uploadBtn" style="color: black !important; margin-left:5px"
-                          @click="deletePdf3">
-                          <img src="@/assets/svg/plusBlack.svg" alt="Avatar" style="transform: rotate(45deg);">
-                        </button>
-                      </div>
-                    </div>
-                    <div v-if="isUpload3 == true">
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-striped" role="progressbar"
-                          :style="{ width: uploadValue3 + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                        </div>
-                      </div>
-                    </div>
-                    </p>
-                  </div>
-                  <button class="btn btn uploadBtn" @click="addVoice()"
-                    style="background-color: black !important; margin-right: 5px;"> <img src="@/assets/svg/iconWhite.svg"
-                      alt="Avatar">
-                    <p class="inline mt-1" style="color: white;">
-                      Stimme
-                      Hinzufügen
-                    </p>
-                  </button>
-                  <p class="pt-4">
-                    Sie können beliebig viele weitere
-                    Instrumentalstimmen hinzufügen.
-                  </p>
-                </div>
-              </div>
-              <p class="hidden red-font" id="error-voice">
-                Vergeben Sie der Stimme einen Namen und laden Sie eine Notendatei für die Stimme hoch, bevor
-                Sie die Stimme dem Projekt hinzufügen
-              </p>
-            </div>
-            <div v-if="projectType != 1">
-              <div class="col-md-12 pt-4 ">
-                <h3 class="ps-2">Hinzugefügte Stimmen:</h3>
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Stimmenname:</th>
-                      <th>Seitenanzahl Inhalt:</th>
-                      <th>Exemplare pro Set:</th>
-                      <th>Datei Name:</th>
-                      <th>Löschen:</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <client-only>
-                      <tr v-for="(voice, index) in voices">
-                        <td>{{ voice.name }}</td>
-                        <td>{{ voice.pages }}</td>
-                        <td>{{ voice.quantity }}</td>
-                        <td>{{ voice.uploadName }}</td>
-                        <td>
-                          <button @click.prevent="removeVoice(index)" class="btn"
-                            style="background-color: transparent !important; padding: 0; margin: 0"><img
-                              src="@/assets/svg/plusBlack.svg" alt="Avatar" style="transform: rotate(45deg);"></button>
-                        </td>
-                      </tr>
-                    </client-only>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--Sektion mit 3 Karten und Bider-->
   </div>
 </template>
 <style>
