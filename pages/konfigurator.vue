@@ -29,17 +29,19 @@ const price = ref(0);
 const files: FileState = reactive({
   1: { id: 'notes', selected: false, name: '', file: undefined, uploaded: false, isloading: false, downloadLink: '' }, // Assuming `file` is a File object
   2: { id: 'envolve', selected: false, name: '', file: undefined, uploaded: false, isloading: false, downloadLink: '' },
+  3: { id: 'Voice', selected: false, name: '', file: undefined, uploaded: false, isloading: false, downloadLink: '' },
+});
+
+const voiceFile: FileState = reactive({
+  // Assuming `file` is a File object
 });
 const priceString = ref('0');
 const projectPriceString = ref('0');
 const productionTime = ref("1–3 Tage");
-const isOpen = ref(false);
 const enveloped = ref('false');
 const discount = ref(1);
+const currentDiscountId = ref(2);
 const pagesQuantitiy = ref(4);
-const voiceName = ref("");
-const voicePages = ref(4);
-const voiceQuantity = ref(1);
 const handlingPrice = ref(3.8);
 const singlePrice = ref(4.29);
 const pagePrice = ref(0.15);
@@ -47,15 +49,12 @@ const productQuantity = ref(1);
 const handlingVoice = ref(1);
 const pdf1 = ref('');
 const storage = useNuxtApp().$firebaseStorage as FirebaseStorage;// Access Firebase Storage instance
-const isUpload3 = ref(false);
 const voicePagePrice = ref(0.15);
 const projectType = ref(1);
-const uploadValue3 = ref(0);
 const productName = ref("");
 const format = ref('true');
 const paperFormat = ref(1);
 const color = ref('false');
-const voicePrice = ref(0);
 const envelopedPrice = ref(0);
 const bindingType = ref("true");
 const errorMassage = ref("");
@@ -64,14 +63,22 @@ const bindingTypePrice = ref(0);
 const weight = ref(0);
 const swEndPoint = ref("");
 const accesstoken = ref("");
-const pdfData3 = ref<PdfData>({ name: "" });
 const isLoading = ref(false);
 const voices = ref<Voice[]>([]); // Array of 'Voice'
+const newVoice = ref({
+  name: '',
+  url: '',
+  pages: 4, // Default value, adjust as needed
+  quantity: 1, // Default value, adjust as needed
+  uploadName: '',
+  downloadUrl: '',
+});
 const baseVoicePrice = ref(16.4);
 
 
 onMounted(() => {
-  calculatePrice(); // Make sure calculatePrice is defined appropriately
+  calculatePrice();
+  updateCurrentDiscountId(discount.value); // Make sure calculatePrice is defined appropriately
 });
 
 const swEnvironment = useRuntimeConfig(); // Nuxt 3 way to access runtime config
@@ -202,7 +209,7 @@ const getDesc = () => {
     desc += '<p><big>Stimmen</big></p>';
     voices.value.forEach(voice => {
       desc += `<span>Stimmenbezeichnung: ${voice.name}</span><br/>` +
-        `<span>Link: <a href="${voice.url}">Downloadlink</a></span><br/>` +
+        `<span>Link: <a href="${voice.downloadUrl}">Downloadlink</a></span><br/>` +
         `<span>Seitenanzahl Inhalt: ${voice.pages}</span><br/>` +
         `<span>Exemplare pro Set: ${voice.quantity}</span><br/><p>\n</p>`;
     });
@@ -518,6 +525,7 @@ const uploadFile = async (fileIndex: any) => {
   files[fileIndex].isloading = true
   if (!fileData.file) return;
 
+
   try {
     const uploadTask = uploadBytesResumable(storageRef, fileData.file);
 
@@ -525,7 +533,6 @@ const uploadFile = async (fileIndex: any) => {
       (snapshot) => {
         // Optional: Update progress
         files[fileIndex].progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`${fileIndex}: Upload is ${files[fileIndex].progress}% done`);
       },
       (error) => {
         console.error('Upload failed: ', error);
@@ -535,7 +542,6 @@ const uploadFile = async (fileIndex: any) => {
         files[fileIndex].isloading = false
         files[fileIndex].uploaded = true
         files[fileIndex].downloadLink = downloadURL
-        console.log(`${fileIndex}: File available at`, downloadURL);
         // Optional: Update your app's state with the download URL
       }
     );
@@ -564,6 +570,11 @@ const deleteFile = async (fileIndex: number) => {
   }
 };
 
+const removeVoice = (index: number) => {
+  // Removes the item at the specified index
+  voices.value.splice(index, 1);
+};
+
 const cancelSelection = (fileIndex: number) => {
   // Reset the selected state and file name for the input
   files[fileIndex] = { id: files[fileIndex].id, selected: false, name: '', uploaded: false, isloading: false, downloadLink: '' };
@@ -577,11 +588,47 @@ const count = (increase: boolean) => {
       productQuantity.value = productQuantity.value + 1;
     }
   } else {
-    if (productQuantity.value > 0) { // Ensures productQuantity does not go below min
+    if (productQuantity.value > 1) { // Ensures productQuantity does not go below min
       productQuantity.value = productQuantity.value - 1;
     }
   }
+  updateCurrentDiscountId(productQuantity.value);
 };
+
+function updateCurrentDiscountId(productQuantity: number) {
+
+  // Sort discounts by amount to ensure they are in the correct order
+  const sortedDiscounts = discounts.slice().sort((a, b) => a.amount - b.amount);
+
+  // Find the discount that applies to the given product quantity
+  for (const discount of sortedDiscounts) {
+    if (productQuantity >= discount.amount) {
+      currentDiscountId.value = discount.id;
+    } else {
+      // Since discounts are sorted, we can break early if the quantity is less than the current discount amount
+      break;
+    }
+  }
+}
+
+function setAmount(amount: number) {
+  // Set the product quantity to the lowest amount of the selected discount group
+  productQuantity.value = amount;
+
+  // Then, call updateCurrentDiscountId with the new quantity
+  updateCurrentDiscountId(productQuantity.value);
+}
+
+function addVoice(index: number) {
+  newVoice.value.downloadUrl = files[index].downloadLink
+  newVoice.value.uploadName = files[index].name
+  voices.value.push({ ...newVoice.value });
+  // Reset form
+  newVoice.value = { name: '', url: '', pages: 4, quantity: 1, uploadName: '', downloadUrl: '' };
+  newVoice.value.uploadName = files[index].name
+  files[index] = { id: 'Voice', selected: false, name: '', file: undefined, uploaded: false, isloading: false, downloadLink: '' };
+  calculatePrice();
+}
 
 // Watchers
 watch(projectType, () => {
@@ -614,10 +661,10 @@ watch(pagesQuantitiy, () => {
 });
 
 watch(productQuantity, (newValue) => {
-  if (newValue < 0) {
-    console.log(productQuantity.value)
-    productQuantity.value = 0;
+  if (newValue < 1) {
+    productQuantity.value = 1;
   }
+  updateCurrentDiscountId(productQuantity.value);
   calculatePrice();
 });
 
@@ -1053,82 +1100,93 @@ export default {
               <p class="pt-3">Bitte beachten Sie, dass wir Instrumentalstimmen, die später in ein Heft eingelegt werden,
                 am rechten Rand 3–5 mm kleiner schneiden, damit diese nicht überstehen.</p>
             </div>
-            <div class="flex w-full mt-3">
-              <div class="w-1/2 p-2">
-                <p class="pt-3">Stimme benennen (bspw. »Violine 1«)</p>
-                <div class="w-2/5 mt-5">
-                  <input placeholder="Stimmenname eingeben ..." class=" p-3" type="string" v-model="voiceName">
+            <form @submit.prevent="addVoice(3)" class="mt-3">
+              <div class="flex w-full mt-3">
+                <div class="w-1/2 p-2">
+                  <p class="pt-3">Stimme benennen (bspw. »Violine 1«)</p>
+                  <div class="w-2/5 mt-5">
+                    <input placeholder="Stimmenname eingeben ..." class=" p-3" type="string" v-model="newVoice.name"
+                      required>
+                  </div>
                 </div>
-              </div>
-              <div class="w-1/2 p-2">
-                <div class="flex flex-col">
-                  <div class="flex mt-3">
-                    <p>Seitenanzahl Inhalt:</p>
-                    <div class="min-w-10 ml-10">
-                      <select id="mySelect" class="form-select mt-1 block w-full" v-model="voicePages">
-                        <option selected v-bind:value="4">4</option>
-                        <option v-for="item in pages" v-bind:value="item">{{ item }}</option>
-                      </select>
+                <div class="w-1/2 p-2">
+                  <div class="flex flex-col">
+                    <div class="flex mt-3">
+                      <p>Seitenanzahl Inhalt:</p>
+                      <div class="min-w-10 ml-10">
+                        <select id="mySelect" class="form-select mt-1 block w-full" v-model="newVoice.pages">
+                          <option selected v-bind:value="4">4</option>
+                          <option v-for="item in pages" v-bind:value="item">{{ item }}</option>
+                        </select>
+                      </div>
                     </div>
-                  </div>
-                  <div class="flex mt-5">
-                    <p>Exemplare pro Set:</p>
-                    <div class="min-w-13 ml-11">
-                      <select id="mySelect" class="form-select mt-1 block w-full" v-model="voiceQuantity">
-                        <option selected v-bind:value="1">1</option>
-                        <option v-for="item in voiceAmount" v-bind:value="item">{{ item }}</option>
-                      </select>
-                    </div>
+                    <div class="flex mt-5">
+                      <p>Exemplare pro Set:</p>
+                      <div class="min-w-13 ml-11">
+                        <select id="mySelect" class="form-select mt-1 block w-full" v-model="newVoice.quantity">
+                          <option selected v-bind:value="1">1</option>
+                          <option v-for="item in voiceAmount" v-bind:value="item">{{ item }}</option>
+                        </select>
+                      </div>
 
-                  </div>
-                  <div class="flex mt-5">
-                    <p class="pt-2">Noten-PDF / Inhalt:</p>
-                    <label class="block">
-                      <span class="sr-only">Upload File </span>
-                      <input type="file" class="block w-full text-sm text-gray-900
+                    </div>
+                    <div class="flex flex-col space-y-4 mt-5">
+                      <div v-for="fileIndex in [3]" :key="fileIndex" class="block mb-3">
+                        <div class="block mb-3">
+                          <label class="block font-bold">
+                            {{ getFileHeadline(1) }}
+                          </label>
+                        </div>
+                        <label v-if="!files[fileIndex].selected" class="block">
+                          <span class="sr-only">Upload File {{ fileIndex }}</span>
+                          <input type="file" required @change="handleFileSelection($event, fileIndex)" class="block w-full text-sm text-gray-900
                  file:mr-4 file:py-2 file:px-4
                  file:rounded-full file:border-0
                  file:text-sm file:font-semibold
                  file:bg-black-50 file:text-black-700
                  hover:file:bg-blue-100" />
-                    </label>
-                    <!--  @click="deletePdf3" -->
-                    <button class="btn grey rounded-full">
-                      <img src="@/assets/svg/plusBlack.svg" alt="Delete" class="transform rotate-45">
-                    </button>
-                  </div>
-                  <div class="mt-5">
-                    <div v-if="pdfData3 == null">
-                      <!-- @click="voiceUpload" -->
-                      <button class="btn btn-secondary">
-                        <img src="@/assets/svg/plusBlack.svg" alt="Upload" class="mr-2">Datei wählen
-                      </button>
-                    </div>
-                    <div v-if="pdfData3 != null && isUpload3 == false">
-                      <div>{{ pdfData3.name }}</div>
-                      <div>
-                      </div>
-                    </div>
-                    <div v-if="isUpload3 == true">
-                      <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                        <div
-                          class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-                          :style="{ width: uploadValue3 + '%' }">
+                        </label>
+                        <div v-if="files[fileIndex].selected && !files[fileIndex].isloading && !files[fileIndex].uploaded"
+                          class="flex flex-col justify-between">
+                          <button @click="uploadFile(fileIndex)" class="btn bg-black text-white rounded-full">
+                            Upload: {{ files[fileIndex].name }}
+                          </button>
+                          <button @click="cancelSelection(fileIndex)"
+                            class="btn border border-black text-black grey rounded-full mt-3">
+                            Cancel
+                          </button>
+                        </div>
+                        <div v-if="files[fileIndex].selected && files[fileIndex].isloading"
+                          class="flex flex-col justify-between">
+                          <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200 border border-black">
+                            <div :style="{ width: files[fileIndex].progress + '%' }"
+                              class="bg-blue-600 h-2.5 rounded-full"></div>
+                          </div>
+                        </div>
+                        <div v-if="files[fileIndex].selected && !files[fileIndex].isloading && files[fileIndex].uploaded"
+                          class="flex flex-col justify-between ">
+                          <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-800">{{ files[fileIndex].name }}</span>
+                            <button @click.prevent="deleteFile(fileIndex)"
+                              class="ml-2 btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+                              Delete
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
+                    <!-- //@click="addVoice()" -->
+                    <button class="btn bg-black text-white rounded-full" type="submit">
+                      <img src="@/assets/svg/iconWhite.svg" alt="Add" class="mr-2">
+                      <span>Stimme Hinzufügen</span>
+                    </button>
+                    <p class="pt-4">
+                      Sie können beliebig viele weitere Instrumentalstimmen hinzufügen.
+                    </p>
                   </div>
-                  <!-- //@click="addVoice()" -->
-                  <button class="btn bg-black text-white rounded-full">
-                    <img src="@/assets/svg/iconWhite.svg" alt="Add" class="mr-2">
-                    <span>Stimme Hinzufügen</span>
-                  </button>
-                  <p class="pt-4">
-                    Sie können beliebig viele weitere Instrumentalstimmen hinzufügen.
-                  </p>
                 </div>
               </div>
-            </div>
+            </form>
             <div class="w-full pt-4">
               <h3 class="pl-2">Hinzugefügte Stimmen:</h3>
               <div class="overflow-x-auto relative">
@@ -1151,9 +1209,9 @@ export default {
                         <td class="py-4 px-6">{{ voice.quantity }}</td>
                         <td class="py-4 px-6">{{ voice.uploadName }}</td>
                         <td class="py-4 px-6">
-                          <!-- <button @click.prevent="removeVoice(index)" class="p-0 m-0 bg-transparent">
+                          <button @click.prevent="removeVoice(index)" class="p-0 m-0 bg-transparent">
                             <img src="@/assets/svg/plusBlack.svg" alt="Delete" class="transform rotate-45">
-                          </button> -->
+                          </button>
                         </td>
                       </tr>
                     </client-only>
@@ -1264,7 +1322,9 @@ export default {
                 <tbody>
                   <!-- @click="setAmount(discount.amount)" -->
                   <tr class="border-0" style="cursor: pointer;" :id="'discountgroup' + discount.id"
-                    v-for="(discount, index) in discounts">
+                    v-for="(discount, index) in discounts"
+                    :class="{ 'highlight-discount': discount.id === currentDiscountId }"
+                    @click="setAmount(discount.amount)">
                     <th v-if="discount.amount == 1" scope="">1</th>
                     <th v-if="discount.amount > 1 && discount.amount <= 200" scope="">{{
                       discount.amount }} – {{ discounts[index + 1].amount - 1 }}</th>
@@ -1344,6 +1404,10 @@ input[type="number"]::-webkit-outer-spin-button {
 /* For Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.highlight-discount {
+  background-color: white;
 }
 </style>
     

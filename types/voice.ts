@@ -4,4 +4,5 @@ export interface Voice {
   pages: number;
   quantity: number;
   uploadName: string;
+  downloadUrl: string;
 }
