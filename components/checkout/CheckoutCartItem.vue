@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { getSmallestThumbnailUrl } from "@shopware-pwa/helpers-next";
 import { LineItem } from "@shopware-pwa/types";
+import propertyMappings from '../../objects/propertyMappings'
+import { watchEffect } from 'vue';
+
 
 const props = withDefaults(
   defineProps<{
@@ -13,7 +16,7 @@ const props = withDefaults(
 );
 
 const { cartItem } = toRefs(props);
-
+const propertieStrings: any = ref([]);
 const isLoading = ref(false);
 const { codeErrorsNotification } = useCartNotification();
 
@@ -25,12 +28,31 @@ const {
   isPromotion,
   changeItemQuantity,
 } = useCartItem(cartItem);
-
-onMounted(() => {
-  console.log(cartItem.value.payload)
+const getIds = () => {
   const payload: any = cartItem.value.payload
-  console.log(payload.propertyIds)
+  const propertyIds = payload.propertyIds
+
+  if (propertyIds) {
+    propertieStrings.value = [];
+    Object.values(propertyIds).forEach((id: any) => {
+      // Search through each mapping to find the property
+      Object.values(propertyMappings).forEach((mapping: any) => {
+        Object.values(mapping).forEach((property: any) => {
+          if (property.id === id) {
+            propertieStrings.value.push({ "id": property.category, "name": property.name });
+          }
+        });
+      });
+    });
+  }
+};
+onMounted(() => {
+  getIds();
 })
+watchEffect(() => {
+  getIds();
+});
+
 
 const quantity = ref();
 syncRefs(itemQuantity, quantity);
@@ -67,13 +89,17 @@ const removeCartItem = async () => {
     <div>
       <div class="flex flex-col lg:flex-row justify-between text-base font-medium text-gray-900">
         <h3 class="text-base" data-testid="cart-product-name">
-          {{ cartItem.label }}
+          <strong class="mr-1">ProjektTitel: </strong> {{ cartItem.label }}
           <span v-if="isPromotion"
             class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">Promotion</span>
         </h3>
         <SharedPrice v-if="itemTotalPrice" :value="itemTotalPrice" data-testid="cart-product-price" />
       </div>
-
+      <div v-if="propertieStrings" class="flex flex-col items-start">
+        <p v-for="(property, index) in propertieStrings" :key="index" class="flex items-center text-left mt-1">
+          <strong class="mr-1">{{ property.id }}: </strong> <span>{{ property.name }}</span>
+        </p>
+      </div>
       <p v-if="itemOptions" class="mt-1 text-sm text-gray-500" data-testid="cart-product-options">
         <span v-for="option in itemOptions" :key="option.group" class="mr-2">
           {{ option.group }}: {{ option.option }}

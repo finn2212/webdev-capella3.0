@@ -11,6 +11,7 @@ import fetchedProduct from '../objects/fetchedProduct';
 import pages from '../objects/pages';
 import voiceAmount from '../objects/voiceAmount';
 import discounts from '../objects/discounts';
+import propertyMappings from '../objects/propertyMappings'
 
 
 interface PdfData {
@@ -36,7 +37,7 @@ const voiceFile: FileState = reactive({
 const priceString = ref('0');
 const projectPriceString = ref('0');
 const productionTime = ref("1–3 Tage");
-const enveloped = ref('false');
+const enveloped = ref(false);
 const discount = ref(1);
 const currentDiscountId = ref(2);
 const pagesQuantitiy = ref(4);
@@ -50,9 +51,9 @@ const storage = useNuxtApp().$firebaseStorage as FirebaseStorage;// Access Fireb
 const voicePagePrice = ref(0.15);
 const projectType = ref(1);
 const productName = ref("");
-const format = ref('true');
+const format = ref(true);
 const paperFormat = ref(1);
-const color = ref('false');
+const color = ref(false);
 const envelopedPrice = ref(0);
 const bindingType = ref("true");
 const errorMassage = ref("");
@@ -80,7 +81,6 @@ const formValidations = reactive({
   // Other messages...
 });
 const baseVoicePrice = ref(16.4);
-
 
 onMounted(() => {
   calculatePrice();
@@ -294,60 +294,31 @@ const fetchProduct = async (productNumber: string) => {
 
 const getProperties = () => {
   let ids = [];
+  const formatKey = format.value ? 'true' : 'false';
+  const colorKey = color.value ? 'true' : 'false';
+  const bindingTypesKey = bindingType.value ? 'true' : 'false';
+  const envelopesKey = enveloped.value ? 'true' : 'false';
 
-  if (projectType.value == 1) {
-    ids.push({ id: 'a2dcd3008de644c784d2cdfec32d91d0' });
-  } else if (projectType.value == 2) {
-    ids.push({ id: '92c1ed6e0a11440aa5c544d87fc780c9' });
-  } else if (projectType.value == 3) {
-    ids.push({ id: '587a3d6981404ed4b9de471d120e14ad' });
+
+  if (projectType.value >= 1 && projectType.value <= 3) {
+    ids.push({ id: propertyMappings.projectTypes[projectType.value].id });
   }
 
-  if (format.value === 'false') {
-    ids.push({ id: 'e1d6ac670a3442448644bc34a7f0d469' });
-  } else if (format.value === 'true') {
-    ids.push({ id: 'bb3741f73af54d46b1d0808f74f3923d' });
-  }
+  // Format
+  ids.push({ id: propertyMappings.formats[formatKey].id });
 
-  if (color.value === 'true') {
-    ids.push({ id: 'cfdae0f64bf240a6ae5202db7579f8a0' });
-  } else if (color.value === 'false') {
-    ids.push({ id: '7c2ad08862fb4011ae45d912c1ca4c3d' });
-  }
-  switch (paperFormat.value) {
-    case 1:
-      ids.push({ id: 'bdac9a79733341129bdc32cceaa29ddb' });
-      break;
-    case 2:
-      ids.push({ id: 'afe5b55949fc41d399ac39e5ff24f4b6' });
-      break;
-    case 3:
-      ids.push({ id: '6753f984ea17467794b4068f294053be' });
-      break;
-    case 4:
-      ids.push({ id: '4ddf6e278920458cba821346e53b04e9' });
-      break;
-    case 5:
-      ids.push({ id: '2866e65da9a749cd88a84412e212f12a' });
-      break;
-    case 6:
-      ids.push({ id: '378502b6aa384914b27369996fabd0bc' });
-      break;
-    default:
-      ids.push({ id: 'bdac9a79733341129bdc32cceaa29ddb' });
-      break;
-  }
+  // Color
+  ids.push({ id: propertyMappings.colors[colorKey].id });
 
-  if (bindingType.value === 'true') {
-    ids.push({ id: 'd5e18caaadd34f70877e38b742ad22ff' });
-  } else if (bindingType.value === 'false') {
-    ids.push({ id: 'b5559576c3634ab0ba178c92194b5691' });
-  }
+  // bindingTypes
+  ids.push({ id: propertyMappings.bindingTypes[bindingTypesKey].id });
 
-  if (enveloped.value === 'true') {
-    ids.push({ id: '28e2313979804380b8f303e0f21ffcad' });
-  } else if (enveloped.value === 'false') {
-    ids.push({ id: '242e68c2dfde4ec2afe3fd478e2a0f85' });
+  // bindingTypes
+  ids.push({ id: propertyMappings.envelopes[envelopesKey].id });
+
+  // Paper Format
+  if (propertyMappings.paperFormatMappings[paperFormat.value]) {
+    ids.push({ id: propertyMappings.paperFormatMappings[paperFormat.value].id });
   }
 
   return ids;
@@ -423,7 +394,7 @@ const calculateDiscount = () => {
 };
 
 const setPagePrice = () => {
-  if (color.value === 'false') {
+  if (!color.value) {
     pagePrice.value = paperFormat.value < 4 ? 0.15 : 0.25;
   } else {
     pagePrice.value = paperFormat.value < 4 ? 0.20 : 0.30;
@@ -431,7 +402,7 @@ const setPagePrice = () => {
 };
 
 const setBinding = () => {
-  bindingType.value = (pagesQuantitiy.value >= 88 || format.value === 'false' || paperFormat.value > 3) ? 'false' : 'true';
+  bindingType.value = (pagesQuantitiy.value >= 88 || !format.value || paperFormat.value > 3) ? 'false' : 'true';
 };
 
 const setBindingPrice = () => {
@@ -493,11 +464,11 @@ const reset = (full: boolean) => {
     files[3] = { id: 'Voice', name: '', file: undefined, uploaded: false, isloading: false, downloadLink: '' };
   }
   productionTime.value = "1–3 Tage";
-  enveloped.value = 'false';
+  enveloped.value = false;
   discount.value = 1;
-  format.value = 'true';
+  format.value = true;
   paperFormat.value = 1;
-  color.value = 'false';
+  color.value = false;
   bindingType.value = "true";
   voices.value = [];
   bindingTypePrice.value = 0;
@@ -683,9 +654,9 @@ watch(price, () => {
 });
 
 watch(enveloped, (val) => {
-  if (val === "true") {
+  if (val) {
     envelopedPrice.value = 1.5;
-  } else if (val === "false") {
+  } else if (!val) {
     envelopedPrice.value = 0;
   }
   calculatePrice();
@@ -725,6 +696,7 @@ useBreadcrumbs([
 export default {
   name: "konfigurator",
 };
+
 </script>
     
 <template>
@@ -1092,7 +1064,7 @@ export default {
                  file:rounded-full file:border-0
                  file:text-sm file:font-semibold
                  file:bg-black-50 file:text-black-700
-                 hover:file:bg-blue-100" :required="fileIndex === 1 || enveloped === 'true'" />
+                 hover:file:bg-blue-100" :required="fileIndex === 1 || enveloped" />
                   </label>
                   <div v-if="files[fileIndex].isloading" class="flex flex-col justify-between ml-3">
                     <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200 border border-black">

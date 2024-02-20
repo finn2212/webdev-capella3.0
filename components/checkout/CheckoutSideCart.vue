@@ -6,6 +6,7 @@ const props = defineProps<{
 const { cartItems, totalPrice, isEmpty } = useCart();
 const localePath = useLocalePath();
 const { formatLink } = useInternationalization(localePath);
+
 </script>
 
 <template>
@@ -13,7 +14,7 @@ const { formatLink } = useInternationalization(localePath);
     <aside class="flex-1 overflow-y-auto py-6 px-4 sm:px-6 mt-10">
       <div class="flex items-start justify-between">
         <h2 id="slide-over-title" class="text-lg font-medium text-gray-900 py-0">
-          Shopping cart
+          Einkaufswagen
         </h2>
         <div class="ml-3 flex h-7 items-center">
           <button type="button" class="-m-2 p-2 bg-transparent text-gray-400 hover:text-gray-500 "
@@ -40,11 +41,11 @@ const { formatLink } = useInternationalization(localePath);
 
     <aside aria-label="Side Cart Links" class="border-t border-gray-200 py-6 px-4 sm:px-6">
       <div class="flex justify-between text-base font-medium text-gray-900">
-        <p>Subtotal</p>
+        <p>Zwischensumme</p>
         <SharedPrice :value="totalPrice" data-testid="cart-subtotal" />
       </div>
       <p class="mt-0.5 text-sm text-gray-500">
-        Shipping and taxes calculated at checkout.
+        Versand und Steuern werden an der Kasse berechnet.
       </p>
       <div class="mt-6">
         <NuxtLink
@@ -53,23 +54,23 @@ const { formatLink } = useInternationalization(localePath);
             'bg-gray': isEmpty,
             'hover:bg-gray': isEmpty,
           }" :to="formatLink(isEmpty ? '' : '/checkout')" data-testid="cart-checkout-link">
-          Checkout
+          Bezahlen
         </NuxtLink>
 
         <NuxtLink class="flex items-center justify-center py-3 text-sm font-medium text-brand-dark"
           :to="formatLink(`/checkout/cart`)" data-testid="cart-checkout-shopping-cart" @click="props.controller.close">
-          Go to shopping cart
+          Zum Warenkorb
         </NuxtLink>
       </div>
-      <div class="mt-6 flex justify-center text-center text-sm text-brand-dark">
+      <!-- <div class="mt-6 flex justify-center text-center text-sm text-brand-dark">
         <p>
           or
           <button type="button" class="font-medium bg-transparent" data-testid="cart-continue-button"
             @click="props.controller.close">
-            Continue Shopping<span aria-hidden="true"> &rarr;</span>
+            Weiter<span aria-hidden="true"> &rarr;</span>
           </button>
         </p>
-      </div>
+      </div> -->
     </aside>
   </LayoutSidebar>
 </template>
