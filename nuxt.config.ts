@@ -2,14 +2,14 @@
 export default defineNuxtConfig({
   runtimeConfig: {
     shopware: {
-      shopwareEndpoint: "https://s23511.creoline.cloud/webdev-staging"
+      shopwareEndpoint: "https://s23511.creoline.cloud/webdev-staging",
     },
     public: {
       shopware: {
         shopwareEndpoint: "https://s23511.creoline.cloud/webdev-staging",
         shopwareAccessToken: "SWSCUHZMWDM2TTLINJFXMKG3TW",
         devStorefrontUrl: "",
-      }
+      },
     },
   },
 
@@ -22,24 +22,15 @@ export default defineNuxtConfig({
         "Cache-Control": "no-cache, no-store, must-revalidate",
       },
     },
-    "/checkout/**": {
-    },
-    "/login": {
-    },
-    "/register": {
-    },
-    "/reset-password": {
-    },
-    "/wishlist": {
-    },
-    "/account": {
-    },
-    "/account/**": {
-    },
-    "/search": {
-    },
-    "/search/**": {
-    },
+    "/checkout/**": {},
+    "/login": {},
+    "/register": {},
+    "/reset-password": {},
+    "/wishlist": {},
+    "/account": {},
+    "/account/**": {},
+    "/search": {},
+    "/search/**": {},
     "/**": {
       isr: 60 * 60 * 24,
     },
@@ -62,7 +53,7 @@ export default defineNuxtConfig({
     "@shopware-pwa/cms-base",
     "@nuxt/devtools",
     "@nuxtjs/i18n",
-    '@nuxtjs/tailwindcss'
+    "@nuxtjs/tailwindcss",
   ],
 
   // components: true,
@@ -89,11 +80,13 @@ export default defineNuxtConfig({
   },
 
   css: [
-    '~/assets/css/tailwind.css',
-    '~/assets/css/styles.css',
+    "~/assets/css/tailwind.css",
+    "~/assets/css/styles.css",
     // 'bootstrap/dist/css/bootstrap.min.css' // needed to reset styles see https://unocss.dev/guide/style-reset (@unocss/reset)
   ],
-
+  plugins: [
+    "~/plugins/firebase.js", // Make sure the path matches your file's location
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -102,7 +95,7 @@ export default defineNuxtConfig({
   },
 
   headlessui: {
-    prefix: ''
+    prefix: "",
   },
 
   router: {
