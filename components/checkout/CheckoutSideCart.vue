@@ -10,7 +10,7 @@ const { formatLink } = useInternationalization(localePath);
 
 <template>
   <LayoutSidebar :controller="props.controller" side="right">
-    <aside class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
+    <aside class="flex-1 overflow-y-auto py-6 px-4 sm:px-6 mt-10">
       <div class="flex items-start justify-between">
         <h2 id="slide-over-title" class="text-lg font-medium text-gray-900 py-0">
           Shopping cart

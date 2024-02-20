@@ -1,7 +1,6 @@
 export interface FileState {
   [key: number]: {
     id: string;
-    selected: boolean;
     name: string;
     file?: File;
     uploaded: boolean;
