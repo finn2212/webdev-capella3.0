@@ -87,10 +87,8 @@ onBeforeMount(async () => {
         <p>{{ user?.email }}</p>
         <div class="mt-5">
           <NuxtLink
-            class="justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-brand-primary hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-primary mt-auto"
-            data-testid="my-account-change-profile-button"
-            :to="formatLink(`/account/profile`)"
-          >
+            class="justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-black hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-primary mt-auto"
+            data-testid="my-account-change-profile-button" :to="formatLink(`/account/profile`)">
             {{ $t("account.change") }}
           </NuxtLink>
         </div>
@@ -105,10 +103,8 @@ onBeforeMount(async () => {
         <p>{{ userDefaultPaymentMethod?.description }}</p>
         <div class="mt-5">
           <NuxtLink
-            class="justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-brand-primary hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-primary mt-auto"
-            data-testid="my-account-change-payment-method-button"
-            :to="formatLink(`/account/payment`)"
-          >
+            class="justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-black hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-primary mt-auto"
+            data-testid="my-account-change-payment-method-button" :to="formatLink(`/account/payment`)">
             {{ $t("account.change") }}
           </NuxtLink>
         </div>
@@ -118,23 +114,15 @@ onBeforeMount(async () => {
       <h3 class="border-b pb-3 font-bold mb-5">
         {{ $t("account.newsletterSettingHeader") }}
       </h3>
-      <div
-        v-if="confirmationNeeded"
-        class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3 mb-4"
-      >
+      <div v-if="confirmationNeeded"
+        class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3 mb-4">
         <p class="text-sm">
           {{ $t("newsletter.subscriptionInfo") }}
         </p>
       </div>
       <div class="flex">
-        <input
-          id="newsletter-checkbox"
-          v-model="newsletter"
-          name="newsletter-checkbox"
-          type="checkbox"
-          class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-          @click="updateNewsletterStatus"
-        />
+        <input id="newsletter-checkbox" v-model="newsletter" name="newsletter-checkbox" type="checkbox"
+          class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500" @click="updateNewsletterStatus" />
         <label for="newsletter-checkbox" class="pl-5 text-base mt--1">
           {{ $t("newsletter.subscriptionCheckbox") }}
         </label>
@@ -145,21 +133,13 @@ onBeforeMount(async () => {
         <h3 class="border-b pb-3 font-bold mb-3">
           {{ $t("account.defaultBillingAddressHeader") }}
         </h3>
-        <AccountAddressCard
-          v-if="userDefaultBillingAddress?.id"
-          :key="userDefaultBillingAddress.id"
-          :address="userDefaultBillingAddress"
-          :countries="getCountries"
-          :salutations="getSalutations"
-          :can-set-default="false"
-          :can-edit="false"
-        />
+        <AccountAddressCard v-if="userDefaultBillingAddress?.id" :key="userDefaultBillingAddress.id"
+          :address="userDefaultBillingAddress" :countries="getCountries" :salutations="getSalutations"
+          :can-set-default="false" :can-edit="false" />
         <div class="mt-5">
           <NuxtLink
-            class="justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-brand-primary hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-primary mt-auto"
-            data-testid="my-account-change-default-billing-address-button"
-            :to="formatLink(`/account/address`)"
-          >
+            class="justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-black hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-primary mt-auto"
+            data-testid="my-account-change-default-billing-address-button" :to="formatLink(`/account/address`)">
             {{ $t("account.change") }}
           </NuxtLink>
         </div>
@@ -168,21 +148,13 @@ onBeforeMount(async () => {
         <h3 class="border-b pb-3 font-bold mb-3">
           {{ $t("account.defaultShippingAddressHeader") }}
         </h3>
-        <AccountAddressCard
-          v-if="userDefaultShippingAddress?.id"
-          :key="userDefaultShippingAddress.id"
-          :address="userDefaultShippingAddress"
-          :countries="getCountries"
-          :salutations="getSalutations"
-          :can-set-default="false"
-          :can-edit="false"
-        />
+        <AccountAddressCard v-if="userDefaultShippingAddress?.id" :key="userDefaultShippingAddress.id"
+          :address="userDefaultShippingAddress" :countries="getCountries" :salutations="getSalutations"
+          :can-set-default="false" :can-edit="false" />
         <div class="mt-5">
           <NuxtLink
-            class="justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-brand-primary hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-primary mt-auto"
-            data-testid="my-account-change-default-shipping-address-button"
-            :to="formatLink(`/account/address`)"
-          >
+            class="justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-black hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-primary mt-auto"
+            data-testid="my-account-change-default-shipping-address-button" :to="formatLink(`/account/address`)">
             {{ $t("account.change") }}
           </NuxtLink>
         </div>

@@ -104,7 +104,7 @@ function render() {
     </section>
     <section>
       <div class="border-12 border-white">
-        <h1>
+        <h1 class="mt-5">
           So einfach geht’s
         </h1>
       </div>
@@ -150,7 +150,7 @@ function render() {
     </section>
     <section class="flex flex-col xl:flex-row">
       <div class="border-12 border-white xl:w-6/9 w-full">
-        <h1>
+        <h1 class="mt-5">
           Was ist capellaprint?
         </h1>
       </div>
@@ -307,7 +307,7 @@ function render() {
         <!-- Top Div with Text -->
 
         <div>
-          <h1 class="ml-3">
+          <h1 class="ml-3 mt-5  ">
             Konfigurieren Sie Ihr Notenheft
           </h1>
 
@@ -373,7 +373,7 @@ function render() {
       <!-- Right Column -->
       <div class="xl:w-3/9 w-full flex flex-col">
         <div>
-          <h1 class="ml-3">
+          <h1 class="ml-3 mt-5">
             Unser Tipp
           </h1>
         </div>
@@ -450,7 +450,7 @@ function render() {
     </section>
     <section class="flex flex-col xl:flex-row">
       <div class="border-12 border-white xl:w-6/9 w-full">
-        <h1>
+        <h1 class="mt-5">
           Unsere Topseller
         </h1>
       </div>

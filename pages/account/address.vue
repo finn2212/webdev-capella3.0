@@ -59,32 +59,19 @@ onBeforeMount(async () => {
         <div class="w-36 bg-gray-300 h-4 rounded-md" />
       </div>
       <template v-else>
-        <AccountAddressCard
-          v-for="address in customerAddresses"
-          :key="address.id"
-          :can-delete="true"
-          :address="address"
-          :countries="getCountries"
-          :salutations="getSalutations"
-          @success="refreshAddresses"
-        />
+        <AccountAddressCard v-for="address in customerAddresses" :key="address.id" :can-delete="true" :address="address"
+          :countries="getCountries" :salutations="getSalutations" @success="refreshAddresses" />
       </template>
     </div>
     <button
-      class="group relative justify-center py-2 px-4 my-8 border border-transparent text-sm font-medium rounded-md text-white bg-brand-primary hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-light"
-      type="submit"
-      data-testid="addresses-add-button"
-      @click="addAddressModalController.open"
-    >
+      class="group relative justify-center py-2 px-4 my-8 border border-transparent text-sm font-medium rounded-full text-white bg-black hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-light"
+      type="submit" data-testid="addresses-add-button" @click="addAddressModalController.open">
       {{ $t("account.addressAddNew") }}
     </button>
     <SharedModal :controller="addAddressModalController">
-      <SharedAccountAddressForm
-        @success="
-          async () =>
-            await refreshAddresses().then(addAddressModalController.close)
-        "
-      />
+      <SharedAccountAddressForm @success="async () =>
+        await refreshAddresses().then(addAddressModalController.close)
+        " />
     </SharedModal>
   </div>
 </template>

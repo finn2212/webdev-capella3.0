@@ -12,7 +12,16 @@ export default defineNuxtConfig({
       },
     },
   },
-
+  app: {
+    head: {
+      link: [
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap",
+        },
+      ],
+    },
+  },
   routeRules: {
     "/": {
       isr: 60 * 60 * 24,
