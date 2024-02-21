@@ -123,7 +123,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                 </p>
             </div>
             <div class="blue md:w-3/9 w-full border-12 border-white flex flex-col">
-                <img src="@/assets/images/pic4.png">
+                <img src="@/assets/images/pic4.png" class="smmax-h-xs object-cover">
                 <div class="flex flex-col flex-grow p-5"> <!-- Make this a flex container and let it grow -->
                     <h2>Notenheft DIN A4
                         Klammerheftung</h2>
@@ -157,7 +157,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                 </div>
             </div>
             <div class="blue md:w-3/9 w-full border-12 border-white flex flex-col">
-                <img src="@/assets/images/pic5.png">
+                <img src="@/assets/images/pic5.png" class="smmax-h-xs object-cover">
                 <div class="flex flex-col flex-grow p-5"> <!-- Make this a flex container and let it grow -->
                     <h2>Notenbuch DIN A4 Spiralbindung hoch</h2>
                     <!-- Image and Text 1 -->
@@ -287,52 +287,11 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     box-sizing: border-box;
 }
 
-
-@media only screen and (min-width: 1024px) {
-    .imgcard {
-        width: 100%;
-    }
-}
-
-@media only screen and (max-width: 1024px) {
-    .imgcard {
-        float: left;
-        margin-right: 25px;
+@media (max-width: 767px) {
+    .smmax-h-xs {
         max-height: 300px;
+        /* Example max-height for extra-small screens */
     }
-}
-
-.p-5 {
-    padding: 35px !important;
-}
-
-.btn-primary {
-    border-color: black;
-}
-
-.card-img-top {
-    border-radius: 0px;
-}
-
-@media only screen and (max-width: 1024px) {
-    .card-img-top {
-        margin-top: 0%;
-        height: 300px;
-        object-fit: cover;
-    }
-}
-
-
-.card {
-    margin: 0px;
-    border-radius: 0px;
-    padding: 0px;
-}
-
-
-.imgsmall {
-    text-align: left;
-    width: 100%;
 }
 
 

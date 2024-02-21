@@ -128,7 +128,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
         </div>
       </div>
       <div class="blue md:w-3/9 w-full border-12 border-white flex flex-col">
-        <img src="@/assets/images/pic4.png">
+        <img src="@/assets/images/pic4.png" class="smmax-h-xs object-cover">
         <div class="flex flex-col flex-grow p-5"> <!-- Make this a flex container and let it grow -->
           <h2>Notenbuch DIN A4 Spiralbindung hoch</h2>
           <!-- Image and Text 1 -->
@@ -161,7 +161,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
         </div>
       </div>
       <div class="blue md:w-3/9 w-full border-12 border-white flex flex-col">
-        <img src="@/assets/images/pic5.png">
+        <img src="@/assets/images/pic5.png" class="smmax-h-xs object-cover">
         <div class="flex flex-col flex-grow p-5"> <!-- Make this a flex container and let it grow -->
           <h2>Notenbuch DIN A4 Spiralbindung quer</h2>
           <!-- Image and Text 1 -->
