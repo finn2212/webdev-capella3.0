@@ -32,10 +32,13 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
           <img src="@/assets/images/pic11.png" alt="Avatar" class="w-full h-full object-cover">
         </div>
         <div class="flex flex-col md:w-3/9 w-full red p-5 border-12 border-white">
-          <img src="@/assets/svg/help.svg" alt="Avatar" class="max-w-15" />
-          <h2 class="mt-3 font-bold">
-            Wissenswertes
-          </h2>
+          <div class="flex">
+            <img src="@/assets/svg/help.svg" alt="Avatar" class="max-w-15" />
+            <h2 class="mt-1 ml-3 font-bold">
+              Wissenswertes
+            </h2>
+          </div>
+
           <p class="mt-3">
             Bitte beachten Sie unbedingt unsere Druckdatenvorgaben, die Sie
             hier herunterladen können.

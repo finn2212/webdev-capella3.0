@@ -198,7 +198,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       <div class="md:w-3/9 w-full border-12 border-white flex flex-col">
         <h2>
           Notenbuch Spiralbindung
-          Hochformat
+          <span class="text-red-500">Hochformat</span>
         </h2>
         <p class="pt-3">
           Sie können gängige Sonderformate für Musikalien produzieren lassen.
@@ -372,7 +372,8 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
       <div class="md:w-3/9 w-full border-12 border-white flex flex-col">
         <h2>
           Notenbuch Spiralbindung
-          Querformat
+          <span class="text-red-500">Querformat</span>
+
         </h2>
         <p class="pt-3">
           Auch für Notendruck im Querformat ist unsere Spiralbindung hervorragend geeignet.
