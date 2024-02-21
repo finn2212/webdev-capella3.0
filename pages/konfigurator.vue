@@ -702,7 +702,7 @@ export default {
 <template>
   <div class="max-w-screen-xl mx-auto">
     <section>
-      <div class="flex flex-col md:flex-row">
+      <div class="flex flex-col sm:flex-row">
         <div class="blue md:w-3/9 w-full border-12 border-white flex flex-col">
           <div class="flex flex-col flex-g p-5">
             <img src="@/assets/svg/verified.svg" alt="Avatar" class="max-w-11">
@@ -733,11 +733,12 @@ export default {
             </div>
           </div>
         </div>
-        <div class="md:w-3/9 w-full border-12 border-white flex flex-col">
-          <img class="w-full max-full" src="@/assets/images/pic9.png" alt="Card image cap">
+
+        <div class="flex flex-col sm:flex-row border-12 border-white">
+          <img class="w-full h-full object-cover smmax-h-xs" src="@/assets/images/pic9.png" alt="Card image cap">
         </div>
-        <div class="md:w-3/9 w-full border-12 border-white flex flex-col">
-          <img class="w-full max-full" src="@/assets/images/pic10.png" alt="Card image cap">
+        <div class="flex flex-col sm:flex-row border-12 border-white">
+          <img class="w-full h-full object-cover smmax-h-xs" src="@/assets/images/pic10.png" alt="Card image cap">
         </div>
       </div>
     </section>
@@ -752,9 +753,9 @@ export default {
       <form @submit.prevent="preCheck" class="mt-3">
         <div class="flex flex-col md:flex-row">
           <div class="grey md:w-6/9 w-full border-12 border-white flex flex-col p-4">
-            <div class="flex w-full pt-3">
+            <div class="flex flex-wrap pt-3">
               <!-- Column 1 (3/5) -->
-              <div class="w-3/5 p-2">
+              <div class="w-full sm:w-3/5 p-2">
                 <h2>
                   1. Projekttitel*
                 </h2>
@@ -765,9 +766,9 @@ export default {
                 <input required placeholder="Projekttitel eingeben ..." class=" p-3" type="string" v-model="productName">
               </div>
             </div>
-            <div class="flex w-full pt-3">
-              <!-- Column 1 (3/5) -->
-              <div class="w-3/5 p-2">
+            <div class="flex flex-wrap pt-3">
+              <!-- Column 1 (3/5 on sm and above) -->
+              <div class="w-full sm:w-3/5 p-2">
                 <h2>2. Art des Projekts*</h2>
                 <p>Zu Beginn ist es notwendig, zu wissen, um welche Art von Notenprojekt es sich handelt.</p>
                 <p class="mt-3">Wählen Sie zwischen den gebräuchlichsten Formen:</p>
@@ -777,47 +778,44 @@ export default {
                   <li class="text-gray-700">Stimmauszüge / Instrumentalstimmen ohne Partitur</li>
                 </ul>
               </div>
-              <!-- Column 2 (2/5) -->
-              <div class="w-2/5 p-2 flex flex-col mt-8">
-                <!-- First row -->
-                <div class="flex"> <!-- Added margin-bottom for spacing between rows -->
-                  <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
+              <!-- Column 2 (2/5 on sm and above) -->
+              <div class="w-full sm:w-2/5 p-2"><!-- Removed mt-5 and added sm:mt-0 for responsiveness -->
+                <!-- Rows with radio options -->
+                <div class="flex mb-3"> <!-- Use mb-3 for spacing between rows consistently -->
+                  <div class="w-3/5">
                     <p class="font-bold">Notenheft ohne Instrumentalstimmen</p>
                   </div>
-                  <div class="flex-1" style="flex-basis: 30% ">
-                    <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <div class="w-2/5">
                     <input type="radio" id="option1" value="1" v-model="projectType" />
                   </div>
                 </div>
-                <!-- Second row, identical to the first row -->
-                <div class="flex mt-3">
-                  <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
-                    <p class="font-bold">Notenheft mit
-                      Instrumentalstimmen</p> <!-- Adjust content as needed -->
+                <!-- Repeat for other rows -->
+                <div class="flex mb-3">
+                  <div class="w-3/5">
+                    <p class="font-bold">Notenheft mit Instrumentalstimmen</p>
                   </div>
-                  <div class="flex-1" style="flex-basis: 30% ">
-                    <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <div class="w-2/5">
                     <input type="radio" id="option2" value="2" v-model="projectType" />
                   </div>
                 </div>
-                <div class="flex mt-3">
-                  <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
-                    <p class="font-bold">Stimmensatz / Chorsatz</p> <!-- Adjust content as needed -->
+                <div class="flex mb-3">
+                  <div class="w-3/5">
+                    <p class="font-bold">Stimmensatz / Chorsatz</p>
                   </div>
-                  <div class="flex-1" style="flex-basis: 30% ">
-                    <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
+                  <div class="w-2/5">
                     <input type="radio" id="option3" value="3" v-model="projectType" />
                   </div>
                 </div>
               </div>
             </div>
-            <div v-if="projectType != 3" class="flex w-full pt-3">
+
+            <div v-if="projectType != 3" class="flex flex-wrap pt-3">
               <!-- Column 1 (3/5) -->
-              <div class="w-3/5 p-2">
+              <div class="w-full sm:w-3/5 p-2">
                 <h2>3. Papierformat*</h2>
                 <p>Bitte wählen Sie das Format aus, das die Noten haben. Sie können zwischen gebräuchlichen
                   musikalientypischen Papierformaten wählen.</p>
-                <p class="mt-3">Bitte beachten Sie: Wenn Sie unterschiedliche Formate innerhalb eines Projekts haben
+                <p class=" mt-3">Bitte beachten Sie: Wenn Sie unterschiedliche Formate innerhalb eines Projekts haben
                   (bspw.
                   Partitur in DIN A3 und Stimmen in DIN A4), legen Sie bitte für jedes Format ein neues Projekt an.</p>
                 <p class="mt-3">Beispiel:</p>
@@ -827,7 +825,7 @@ export default {
                 </ul>
               </div>
               <!-- Column 2 (2/5) -->
-              <div class="w-2/5 p-2 flex flex-col">
+              <div class="w-full sm:w-2/5 p-2">
                 <!-- First row -->
                 <div class="flex pt-8"> <!-- Added margin-bottom for spacing between rows -->
                   <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
@@ -886,17 +884,17 @@ export default {
                 </div>
               </div>
             </div>
-            <div v-if="projectType != 3" class="flex w-full pt-3">
+            <div v-if="projectType != 3" class="flex flex-wrap pt-3">
               <!-- Column 1 (3/5) -->
-              <div class="w-3/5 p-2">
+              <div class="w-full sm:w-3/5 p-2">
                 <h2>4. Ausrichtung*</h2>
                 <p>Bitte geben Sie nun an, ob die Noten im Hoch– oder im Querformat angelegt sind.</p>
-                <p class="mt-3">Bitte beachten Sie, dass Sie innerhalb eines Projekts die Ausrichtungen nicht mischen
+                <p class=" mt-3">Bitte beachten Sie, dass Sie innerhalb eines Projekts die Ausrichtungen nicht mischen
                   können.
                 </p>
               </div>
               <!-- Column 2 (2/5) -->
-              <div class="w-2/5 p-2 flex flex-col mt-8">
+              <div class="w-full sm:w-2/5 p-2">
                 <!-- First row -->
                 <div class="flex "> <!-- Added margin-bottom for spacing between rows -->
                   <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
@@ -919,12 +917,12 @@ export default {
                 </div>
               </div>
             </div>
-            <div v-if="projectType != 3" class="flex w-full pt-3">
+            <div v-if="projectType != 3" class="flex flex-wrap pt-3">
               <!-- Column 1 (3/5) -->
-              <div class="w-3/5 p-2">
+              <div class="w-full sm:w-3/5 p-2">
                 <h2>5. Farbigkeit Inhalt*</h2>
                 <p>Ihre Noten können im Innenteil entweder schwarzweiß oder farbig gedruckt werden.</p>
-                <p class="mt-3">Falls Ihr Notenprojekt einen Umschlag hat, wird dieser ohne Aufpreis farbig gedruckt.
+                <p class=" mt-3">Falls Ihr Notenprojekt einen Umschlag hat, wird dieser ohne Aufpreis farbig gedruckt.
                   Instrumentalstimmen werden generell schwarzweiß gedruckt.</p>
               </div>
               <!-- Column 2 (2/5) -->
@@ -950,21 +948,22 @@ export default {
                 </div>
               </div>
             </div>
-            <div v-if="projectType != 3" class="flex w-full pt-3">
+            <div v-if="projectType != 3" class="flex flex-wrap pt-3">
               <!-- Column 1 (3/5) -->
-              <div class="w-3/5 p-2">
+              <div class="w-full sm:w-3/5 p-2">
                 <h2>6. Seitenanzahl*</h2>
                 <p>Bitte geben Sie die Gesamtseitenanzahl Ihrer Datei an. Aus produktionstechnischen Gründen muss diese
                   immer
                   durch 4 teilbar sein.</p>
-                <p class="mt-3">Sie können zwischen 4 und 400 Seiten Umfang wählen. Bitte beachten Sie, dass wir Ihr Heft
+                <p class=" mt-3">Sie können zwischen 4 und 400 Seiten Umfang wählen. Bitte beachten Sie, dass wir Ihr
+                  Heft
                   in
                   den Formaten DIN A4, Klavierauszug und Concert bei weniger als 88 Seiten Inhalt standardmäßig
                   klammerheften.
                 </p>
               </div>
               <!-- Column 2 (2/5) -->
-              <div class="w-2/5 p-2 flex flex-col mt-8">
+              <div class="w-full sm:w-2/5 p-2">
                 <!-- First row -->
                 <div class="flex"> <!-- Added margin-bottom for spacing between rows -->
                   <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
@@ -983,17 +982,17 @@ export default {
                 <!-- Second row, identical to the first row -->
               </div>
             </div>
-            <div v-if="projectType != 3" class="flex w-full pt-3">
+            <div v-if="projectType != 3" class="flex flex-wrap pt-3">
               <!-- Column 1 (3/5) -->
-              <div class="w-3/5 p-2">
+              <div class="w-full sm:w-3/5 p-2">
                 <h2>7. Bindung*</h2>
                 <p>Bitte beachten Sie, dass bei den Formaten DIN B4, DIN A3 und Dirigent sowie bei allen Querformaten und
                   bei
                   mehr als 88 Seiten Inhalt nur Spiralbindung verfügbar ist.</p>
-                <p class="mt-3">Wählen Sie zwischen den gebräuchlichsten Formen:</p>
+                <p class=" mt-3">Wählen Sie zwischen den gebräuchlichsten Formen:</p>
               </div>
               <!-- Column 2 (2/5) -->
-              <div class="w-2/5 p-2 flex flex-col mt-8">
+              <div class="w-full sm:w-2/5 p-2">
                 <!-- First row -->
                 <div class="flex "> <!-- Added margin-bottom for spacing between rows -->
                   <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
@@ -1007,16 +1006,16 @@ export default {
                 <!-- Second row, identical to the first row -->
               </div>
             </div>
-            <div v-if="projectType != 3" class="flex w-full pt-3">
+            <div v-if="projectType != 3" class="flex flex-wrap pt-3">
               <!-- Column 1 (3/5) -->
-              <div class="w-3/5 p-2">
+              <div class="w-full sm:w-3/5 p-2">
                 <h2>8. Umschlag</h2>
                 <p>Unser hochweißer Umschlagkarton mit 260g/m² gibt Farben brillant wieder und besitzt ein hervorragendes
                   Aufschlagverhalten. Die einseitig matte Oberfläche lässt sich hervorragend bedrucken und bricht auch bei
                   starker Beanspruchung nicht auf.</p>
               </div>
               <!-- Column 2 (2/5) -->
-              <div class="w-2/5 p-2 flex flex-col mt-8">
+              <div class="w-full sm:w-2/5 p-2">
                 <!-- Second row, identical to the first row -->
                 <div class="flex">
                   <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
@@ -1038,9 +1037,9 @@ export default {
                 </div>
               </div>
             </div>
-            <div v-if="projectType != 3" class="flex w-full mt-3">
+            <div v-if="projectType != 3" class="flex flex-wrap pt-3">
               <!-- Column 1 (3/5) -->
-              <div class="w-3/5 p-2">
+              <div class="w-full sm:w-3/5 p-2">
                 <h2>
                   9. Notenupload*
                 </h2>
@@ -1050,7 +1049,7 @@ export default {
                   nicht passen sollte.</p>
               </div>
               <!-- Column 2 (2/5) -->
-              <div class="w-2/5 p-2 flex flex-col space-y-4 mt-5">
+              <div class="w-full sm:w-2/5 p-2">
                 <div v-for="fileIndex in [1, 2]" :key="fileIndex" class="block mb-3">
                   <div class="block mb-3 ml-3">
                     <label class="block font-bold">
@@ -1085,9 +1084,9 @@ export default {
                 </div>
               </div>
             </div>
-            <div v-if="projectType != 1" class="flex flex-col w-full mt-3">
+            <div v-if="projectType != 1" class="flex flex-wrap pt-3">
               <!-- Column 1 (3/5) -->
-              <div class="w-3/5 p-2">
+              <div class="w-full sm:w-3/5 p-2">
                 <h2 v-if="projectType != 2">
                   3. Instrumentalstimmen*
                 </h2>
@@ -1216,15 +1215,15 @@ export default {
               </div>
 
             </div>
-            <div class="flex w-full pt-3">
+            <div class="flex flex-wrap pt-3">
               <!-- Column 1 (3/5) -->
-              <div class="w-3/5 p-2">
+              <div class="w-full sm:w-3/5 p-2">
                 <h2>10. In den Warenkorb*</h2>
                 <p>Bitte legen Sie das Projekt nun in den Warenkorb. Sie können danach noch weitere Projekte anlegen und
                   gemeinsam in einer Lieferung versandkostenoptimiert bestellen.</p>
               </div>
               <!-- Column 2 (2/5) -->
-              <div class="w-2/5 p-2 flex flex-col mt-8">
+              <div class="w-full sm:w-2/5 p-2">
                 <!-- Second row, identical to the first row -->
                 <button v-if="!isLoading" type="submit" class="btn bg-black text-white rounded-full">
                   <img src="@/assets/svg/plus.svg" alt="Avatar" style="margin-right: 10px;">Jetzt
@@ -1308,7 +1307,7 @@ export default {
               <div class="pt-4">
                 <table class="table border-0" style="font-size:small ; border-style: hidden !important;">
                   <thead>
-                    <tr class="">
+                    <tr>
                       <th scope="col">Auflage</th>
                       <th scope="col">Preis / Stck.</th>
                       <th scope="col">Sie sparen:</th>
@@ -1404,6 +1403,13 @@ input[type="number"] {
 
 .highlight-discount {
   background-color: white;
+}
+
+@media (max-width: 639px) {
+  .smmax-h-xs {
+    max-height: 300px;
+    /* Example max-height for extra-small screens */
+  }
 }
 </style>
     
