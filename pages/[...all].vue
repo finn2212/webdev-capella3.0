@@ -191,7 +191,8 @@ function render() {
           <div class="carousel w-full">
             <!-- Slide 1 -->
             <div id="slide1" class="carousel-item relative w-full" v-show="firstSlideIndex === 1">
-              <img src="@/assets/images/pic2.png" class="w-full h-auto min-h-full object-cover" alt="Bildbeschreibung">
+              <img src="@/assets/images/pic2.png" class="w-full h-auto min-h-full object-cover smmax-h-xl"
+                alt="Bildbeschreibung">
               <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <button @click="moveToSlide1(2)" class="btn btn-circle">❮</button>
                 <button @click="moveToSlide1(2)" class="btn btn-circle">❯</button>
@@ -199,7 +200,7 @@ function render() {
             </div>
             <!-- Slide 2 -->
             <div id="slide2" class="carousel-item relative w-full" v-show="firstSlideIndex === 2">
-              <img src="@/assets/images/sebastianQuote.jpeg" class="w-full h-auto min-h-full object-cover"
+              <img src="@/assets/images/sebastianQuote.jpeg" class="w-full h-auto min-h-full object-cover smmax-h-xl"
                 alt="Bildbeschreibung">
               <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <button @click="moveToSlide1(1)" class="btn btn-circle">❮</button>
@@ -352,7 +353,8 @@ function render() {
           <div class="carousel w-full">
             <!-- Slide 1 -->
             <div id="slide1" class="carousel-item relative w-full" v-show="slideIndex === 1">
-              <img src="@/assets/images/pic3.png" class="w-full h-auto min-h-full object-cover" alt="Bildbeschreibung">
+              <img src="@/assets/images/pic3.png" class="w-full h-auto min-h-full object-cover smmax-h-xl"
+                alt="Bildbeschreibung">
               <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <button @click="moveToSlide(2)" class="btn btn-circle">❮</button>
                 <button @click="moveToSlide(2)" class="btn btn-circle">❯</button>
@@ -360,7 +362,7 @@ function render() {
             </div>
             <!-- Slide 2 -->
             <div id="slide2" class="carousel-item relative w-full" v-show="slideIndex === 2">
-              <img src="@/assets/images/sebastianQuote.jpeg" class="w-full h-auto min-h-full object-cover"
+              <img src="@/assets/images/sebastianQuote.jpeg" class="w-full h-auto min-h-full object-cover smmax-h-xl"
                 alt="Bildbeschreibung">
               <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <button @click="moveToSlide(1)" class="btn btn-circle">❮</button>
@@ -457,7 +459,7 @@ function render() {
     </section>
     <section class="flex flex-col md:flex-row">
       <div class="blue md:w-3/9 w-full border-12 border-white flex flex-col">
-        <img src="@/assets/images/pic6.png">
+        <img src="@/assets/images/pic6.png" class="object-cover smmax-h-xs">
         <div class="flex flex-col flex-grow p-5"> <!-- Make this a flex container and let it grow -->
           <h2>Notenheft DIN A4
             Klammerheftung</h2>
@@ -490,7 +492,7 @@ function render() {
         </div>
       </div>
       <div class="pink md:w-3/9 w-full border-12 border-white flex flex-col">
-        <img src="@/assets/images/pic6.png">
+        <img src="@/assets/images/pic6.png" class="object-cover smmax-h-xs">
         <div class="flex flex-col flex-grow p-5"> <!-- Make this a flex container and let it grow -->
           <h2>Stimmenheft DIN A4 Klammerheftung ohne Umschlag</h2>
           <!-- Image and Text 1 -->
@@ -522,7 +524,7 @@ function render() {
         </div>
       </div>
       <div class="pink md:w-3/9 w-full border-12 border-white flex flex-col">
-        <img src="@/assets/images/pic6.png">
+        <img src="@/assets/images/pic6.png" class="object-cover smmax-h-xs">
         <div class="flex flex-col flex-grow p-5"> <!-- Make this a flex container and let it grow -->
           <h2>Notenbuch DIN A4 Spiralbindung hoch</h2>
           <!-- Image and Text 1 -->
@@ -556,3 +558,18 @@ function render() {
     </section>
   </div>
 </template>
+<style>
+@media (max-width: 767px) {
+  .smmax-h-xs {
+    max-height: 300px;
+    /* Example max-height for extra-small screens */
+  }
+}
+
+@media (max-width: 1280px) {
+  .smmax-h-xl {
+    max-height: 500px;
+    /* Example max-height for extra-small screens */
+  }
+}
+</style>
