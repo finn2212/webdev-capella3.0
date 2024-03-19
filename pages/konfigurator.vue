@@ -41,9 +41,10 @@ const enveloped = ref(false);
 const discount = ref(1);
 const currentDiscountId = ref(2);
 const pagesQuantitiy = ref(4);
-const handlingPrice = ref(3.8);
-const singlePrice = ref(4.29);
-const pagePrice = ref(0.15);
+const handlingPrice = ref(18.69);
+const pagePrice = ref(0.14);
+const pagePriceLow = ref(0.14);
+const pagePriceHigh = ref(0.2);
 const productQuantity = ref(1);
 const handlingVoice = ref(1);
 const pdf1 = ref('');
@@ -53,7 +54,7 @@ const projectType = ref(1);
 const productName = ref("");
 const format = ref(true);
 const paperFormat = ref(1);
-const color = ref(false);
+const color = ref('true');
 const envelopedPrice = ref(0);
 const bindingType = ref("true");
 const errorMassage = ref("");
@@ -196,6 +197,7 @@ const createAndFetch = async () => {
 const { addToCart, quantity } = useAddToCart(fetchedProduct);
 
 const addToCartProxy = async () => {
+  quantity.value = productQuantity.value;
   await addToCart();
 };
 const getDesc = () => {
@@ -334,70 +336,44 @@ const calculatePrice = () => {
   calculateProjectPrice();
 
   let pagesToUse = pagesQuantitiy.value;
-  if (pagesQuantitiy.value <= 84) {
-    pagesToUse = 84;
-  }
   if (projectType.value === 3) {
     price.value = totalVoicePrice.value + baseVoicePrice.value;
-    singlePrice.value = totalVoicePrice.value + baseVoicePrice.value;
   } else {
-    price.value = (pagePrice.value * pagesToUse) + handlingPrice.value + bindingTypePrice.value + totalVoicePrice.value + envelopedPrice.value;
+    price.value = handlingPrice.value / productQuantity.value + ((pagePrice.value * pagesToUse) + bindingTypePrice.value + totalVoicePrice.value + envelopedPrice.value);
     if (discount.value !== 1) {
-      price.value *= (1 - discount.value);
+      price.value = handlingPrice.value / productQuantity.value + ((1 - discount.value) * (pagePrice.value * pagesToUse) + bindingTypePrice.value + totalVoicePrice.value + envelopedPrice.value);
     }
-    singlePrice.value = handlingPrice.value + (pagePrice.value * pagesToUse) + bindingTypePrice.value + totalVoicePrice.value + envelopedPrice.value;
   }
 };
 
 const calculateDiscount = () => {
-  if (productQuantity.value === 1) {
-    discount.value = 1;
-    productionTime.value = "1–3 Tage";
-    //setDiscountGroup(1);
-  } else if (productQuantity.value > 1 && productQuantity.value < 10) {
-    discount.value = 0.45;
-    productionTime.value = "1–3 Tage";
-    //setDiscountGroup(2);
-  } else if (productQuantity.value > 9 && productQuantity.value < 24) {
-    discount.value = 0.55;
-    productionTime.value = "1–3 Tage";
-    //setDiscountGroup(3);
-  } else if (productQuantity.value > 24 && productQuantity.value < 50) {
-    discount.value = 0.63;
-    productionTime.value = "1–3 Tage";
-    //setDiscountGroup(4);
-  } else if (productQuantity.value > 49 && productQuantity.value < 75) {
-    discount.value = 0.68;
-    productionTime.value = "1–3 Tage";
-    //setDiscountGroup(5);
-  } else if (productQuantity.value > 74 && productQuantity.value < 100) {
-    discount.value = 0.70;
-    productionTime.value = "1–3 Tage";
-    //setDiscountGroup(6);
-  } else if (productQuantity.value > 99 && productQuantity.value < 150) {
-    discount.value = 0.72;
-    productionTime.value = "3–5 Tage";
-    //setDiscountGroup(7);
-  } else if (productQuantity.value > 149 && productQuantity.value < 200) {
-    discount.value = 0.74;
-    productionTime.value = "3–5 Tage";
-    //setDiscountGroup(8);
-  } else if (productQuantity.value > 199 && productQuantity.value < 250) {
-    discount.value = 0.75;
-    productionTime.value = "3–5 Tage";
-    //setDiscountGroup(9);
-  } else if (productQuantity.value >= 250) {
-    discount.value = 0.76;
-    productionTime.value = "3–5 Tage";
-    //setDiscountGroup(10);
+  // Find the discount entry that matches the product quantity.
+  const discountEntry = discounts.find(discount => productQuantity.value <= discount.amount);
+  console.log(discountEntry.discount)
+
+  // If a matching discount entry is found, use its values.
+  // Otherwise, apply the default or last known discount rate for quantities not explicitly covered.
+  if (discountEntry) {
+    discount.value = discountEntry.discount;
+    productionTime.value = productQuantity.value >= 100 ? "3–5 Tage" : "1–3 Tage";
+  } else {
+    // Assuming the discounts array is sorted in ascending order by amount,
+    // the last entry would contain the highest quantity discount available.
+    const lastDiscountEntry = discounts[discounts.length - 1];
+    discount.value = lastDiscountEntry.discount;
+    productionTime.value = productQuantity.value >= 100 ? "3–5 Tage" : "1–3 Tage";
   }
+
+  // Optional: update discount group based on the found entry or a default.
+  // This would be where you'd call setDiscountGroup(discountEntry ? discountEntry.id : defaultGroupId);
 };
 
+
 const setPagePrice = () => {
-  if (!color.value) {
-    pagePrice.value = paperFormat.value < 4 ? 0.15 : 0.25;
+  if (color.value === "true") {
+    pagePrice.value = paperFormat.value < 4 ? pagePriceLow.value : pagePriceHigh.value;
   } else {
-    pagePrice.value = paperFormat.value < 4 ? 0.20 : 0.30;
+    pagePrice.value = paperFormat.value < 4 ? pagePriceLow.value + 5 : pagePriceHigh.value + 5;
   }
 };
 
@@ -468,7 +444,7 @@ const reset = (full: boolean) => {
   discount.value = 1;
   format.value = true;
   paperFormat.value = 1;
-  color.value = false;
+  color.value = 'false';
   bindingType.value = "true";
   voices.value = [];
   bindingTypePrice.value = 0;
@@ -574,7 +550,6 @@ const cancelSelection = (fileIndex: number) => {
 const count = (increase: boolean) => {
   if (increase) {
     if (productQuantity.value < 300) {
-      console.log(productQuantity.value) // Ensures productQuantity does not exceed max
       productQuantity.value = productQuantity.value + 1;
     }
   } else {
@@ -701,7 +676,7 @@ export default {
 
 <template>
   <div class="max-w-screen-xl mx-auto">
-    <section>
+    <section class="mt-10">
       <div class="flex flex-col sm:flex-row">
         <div class="blue md:w-3/9 w-full border-12 border-white flex flex-col">
           <div class="flex flex-col flex-g p-5">
@@ -742,7 +717,7 @@ export default {
         </div>
       </div>
     </section>
-    <section>
+    <section class="mt-20">
       <div class="border-12 border-white">
         <h1>
           Konfigurieren Sie Ihr Notenheft
@@ -1310,7 +1285,7 @@ export default {
                   </div>
                 </div>
               </div>
-              <div class="pt-4">
+              <!-- <div class="pt-4">
                 <table class="table border-0" style="font-size:small ; border-style: hidden !important;">
                   <thead>
                     <tr>
@@ -1320,21 +1295,20 @@ export default {
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- @click="setAmount(discount.amount)" -->
                     <tr class="border-0" style="cursor: pointer;" :id="'discountgroup' + discount.id"
                       v-for="(discount, index) in discounts"
                       :class="{ 'highlight-discount': discount.id === currentDiscountId }"
                       @click="setAmount(discount.amount)">
                       <th v-if="discount.amount == 1" scope="">1</th>
-                      <th v-if="discount.amount > 1 && discount.amount <= 200" scope="">{{
-        discount.amount }} – {{ discounts[index + 1].amount - 1 }}</th>
-                      <th v-if="discount.amount > 200" scope="">Ab 250</th>
+                      <th v-if="discount.amount > 1 && discount.amount <= 9" scope="">{{
+        discount.amount }}</th>
+                      <th v-if="discount.amount > 9" scope="">Ab 10</th>
                       <td>€ {{ (singlePrice * (1 - discount.discount)).toFixed(2) }}</td>
-                      <td>{{ (discount.discount * 100).toFixed(0) }} %</td>
+                      <td>{{ (discount.discount * 100).toFixed(1) }} %</td>
                     </tr>
                   </tbody>
                 </table>
-              </div>
+              </div> -->
             </div>
             <div class="pink w-full mt-12 p-5" style=" margin-top: 20px;">
               <h1 class="font-bold">
@@ -1345,13 +1319,14 @@ export default {
               <h1 class="mt-2 font-bold">
                 Ab 50,- Euro
                 Einkaufswert
+
               </h1>
             </div>
           </div>
         </div>
       </form>
     </section>
-    <div class="flex flex-col md:flex-row">
+    <div class="flex flex-col md:flex-row mt-20">
       <div class="red md:w-3/9 w-full border-12 border-white flex flex-col">
         <div class="flex flex-col flex-g p-5">
           <div class="flex">
