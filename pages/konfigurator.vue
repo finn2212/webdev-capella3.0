@@ -373,7 +373,7 @@ const setPagePrice = () => {
   if (color.value === "true") {
     pagePrice.value = paperFormat.value < 4 ? pagePriceLow.value : pagePriceHigh.value;
   } else {
-    pagePrice.value = paperFormat.value < 4 ? pagePriceLow.value + 5 : pagePriceHigh.value + 5;
+    pagePrice.value = paperFormat.value < 4 ? pagePriceLow.value * 1.5 : pagePriceHigh.value * 1.5;
   }
 };
 
