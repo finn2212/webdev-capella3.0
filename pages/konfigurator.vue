@@ -691,14 +691,14 @@ useBreadcrumbs([
 
 </script>
 
-    
+
 <script lang="ts">
 export default {
   name: "konfigurator",
 };
 
 </script>
-    
+
 <template>
   <div class="max-w-screen-xl mx-auto">
     <section>
@@ -763,7 +763,8 @@ export default {
               </div>
               <!-- Column 2 (2/5) -->
               <div class="w-2/5 p-2 mt-5">
-                <input required placeholder="Projekttitel eingeben ..." class=" p-3" type="string" v-model="productName">
+                <input required placeholder="Projekttitel eingeben ..." class=" p-3" type="string"
+                  v-model="productName">
               </div>
             </div>
             <div class="flex flex-wrap pt-3">
@@ -986,7 +987,8 @@ export default {
               <!-- Column 1 (3/5) -->
               <div class="w-full sm:w-3/5 p-2">
                 <h2>7. Bindung*</h2>
-                <p>Bitte beachten Sie, dass bei den Formaten DIN B4, DIN A3 und Dirigent sowie bei allen Querformaten und
+                <p>Bitte beachten Sie, dass bei den Formaten DIN B4, DIN A3 und Dirigent sowie bei allen Querformaten
+                  und
                   bei
                   mehr als 88 Seiten Inhalt nur Spiralbindung verfügbar ist.</p>
                 <p class=" mt-3">Wählen Sie zwischen den gebräuchlichsten Formen:</p>
@@ -1010,8 +1012,10 @@ export default {
               <!-- Column 1 (3/5) -->
               <div class="w-full sm:w-3/5 p-2">
                 <h2>8. Umschlag</h2>
-                <p>Unser hochweißer Umschlagkarton mit 260g/m² gibt Farben brillant wieder und besitzt ein hervorragendes
-                  Aufschlagverhalten. Die einseitig matte Oberfläche lässt sich hervorragend bedrucken und bricht auch bei
+                <p>Unser hochweißer Umschlagkarton mit 260g/m² gibt Farben brillant wieder und besitzt ein
+                  hervorragendes
+                  Aufschlagverhalten. Die einseitig matte Oberfläche lässt sich hervorragend bedrucken und bricht auch
+                  bei
                   starker Beanspruchung nicht auf.</p>
               </div>
               <!-- Column 2 (2/5) -->
@@ -1045,7 +1049,8 @@ export default {
                 </h2>
                 <p>Hier laden Sie nun die Druckdaten als PDF auf unseren Server – ganz bequem und einfach. Ihre Daten
                   werden
-                  verschlüsselt übertragen. Wir prüfen diese auf Druckbarkeit und melden uns ggf. per E-Mail, falls etwas
+                  verschlüsselt übertragen. Wir prüfen diese auf Druckbarkeit und melden uns ggf. per E-Mail, falls
+                  etwas
                   nicht passen sollte.</p>
               </div>
               <!-- Column 2 (2/5) -->
@@ -1098,7 +1103,8 @@ export default {
                 <p class="pt-3">Wählen Sie bitte zusätzlich aus, wie viele Exemplare von jeder Stimme pro Set enthalten
                   sein
                   sollen (bspw. Orchestermusik: 8 Erste Violinen, 6 Zweite Violinen, etc.).</p>
-                <p class="pt-3">Bitte beachten Sie, dass wir Instrumentalstimmen, die später in ein Heft eingelegt werden,
+                <p class="pt-3">Bitte beachten Sie, dass wir Instrumentalstimmen, die später in ein Heft eingelegt
+                  werden,
                   am rechten Rand 3–5 mm kleiner schneiden, damit diese nicht überstehen.</p>
               </div>
               <div class="flex w-full mt-3">
@@ -1109,7 +1115,7 @@ export default {
                       @blur="validateNewVoiceName">
                   </div>
                   <div v-if="!formValidations.newVoiceNameValid" class="text-red-500">{{ validationMessages.newVoiceName
-                  }}</div>
+                    }}</div>
                 </div>
                 <div class="w-1/2 p-2">
                   <div class="flex flex-col">
@@ -1150,7 +1156,7 @@ export default {
                  hover:file:bg-blue-100" />
                         </label>
                         <div v-if="!formValidations.fileSelectedValid" class="text-red-500">{{
-                          validationMessages.fileSelected }}</div>
+        validationMessages.fileSelected }}</div>
                         <div v-if="files[fileIndex].isloading" class="flex flex-col justify-between">
                           <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200 border border-black">
                             <div :style="{ width: files[fileIndex].progress + '%' }"
@@ -1321,7 +1327,7 @@ export default {
                       @click="setAmount(discount.amount)">
                       <th v-if="discount.amount == 1" scope="">1</th>
                       <th v-if="discount.amount > 1 && discount.amount <= 200" scope="">{{
-                        discount.amount }} – {{ discounts[index + 1].amount - 1 }}</th>
+        discount.amount }} – {{ discounts[index + 1].amount - 1 }}</th>
                       <th v-if="discount.amount > 200" scope="">Ab 250</th>
                       <td>€ {{ (singlePrice * (1 - discount.discount)).toFixed(2) }}</td>
                       <td>{{ (discount.discount * 100).toFixed(0) }} %</td>
@@ -1331,12 +1337,12 @@ export default {
               </div>
             </div>
             <div class="pink w-full mt-12 p-5" style=" margin-top: 20px;">
-              <h1>
+              <h1 class="font-bold">
                 Kostenfreier
                 Versand
               </h1>
               <img src="@/assets/svg/local_shipping.svg" alt="Avatar" style=" margin-top: 150px; width: 10%; ">
-              <h1 class="mt-2">
+              <h1 class="mt-2 font-bold">
                 Ab 50,- Euro
                 Einkaufswert
               </h1>
@@ -1412,4 +1418,3 @@ input[type="number"] {
   }
 }
 </style>
-    
