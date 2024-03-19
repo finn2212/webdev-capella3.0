@@ -25,7 +25,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
 <template>
   <div class="max-w-screen-xl mx-auto">
-    <section>
+    <section class="mt-20">
       <div class="flex flex- md:flex-">
         <div class="md:w-6/9 w-full border-12 border-white">
           <!-- Replace with your image -->
@@ -61,9 +61,9 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
         </div>
       </div>
     </section>
-    <section>
+    <section class="mt-20">
       <div class="flex flex- md:flex-">
-        <div class="md:w-1/2 w-full border-12 border-white grey p-4">
+        <div class="md:w-1/3 w-full border-12 border-white grey p-6">
           <!-- Replace with your image -->
           <img src="@/assets/svg/history_edu.svg" style="margin-bottom: 25px" alt="Avatar" />
           <h2 class="mt-3 font-bold">Unser</h2>
@@ -80,8 +80,8 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             </div>
           </div>
         </div>
-        <div class="flex flex-col justify-end md:w-1/2 w-full border-12 border-white h-full">
-          <div>
+        <div class="flex flex-col justify-end md:w-2/3 w-full border-12 border-white">
+          <div class="mt-auto">
             <p class="text-black font-bold">Notenpapier für Partitur & Stimmen</p>
             <p class="text-black">
               Bei AURIOPRINT legen wir Wert auf erprobte, klassische
@@ -110,9 +110,9 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
         </div>
       </div>
     </section>
-    <section>
+    <section class="mt-10">
       <div class="flex flex- md:flex-">
-        <div class="md:w-1/2 w-full border-12 border-white darkblue p-4">
+        <div class="md:w-1/3 w-full border-12 border-white darkblue p-6">
           <!-- Replace with your image -->
           <img src="@/assets/svg/print.svg" style="margin-bottom: 25px" alt="Avatar" />
           <h2 class="mt-3 font-bold">Unser</h2>
@@ -125,7 +125,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             </div>
           </div>
         </div>
-        <div class="flex flex-col justify-end md:w-1/2 w-full border-12 border-white">
+        <div class="flex flex-col justify-end md:w-2/3 w-full border-12 border-white">
           <div class="mt-auto">
             <p class="text-black font-bold">Schnell, effizient, erstklassig</p>
             <p class="text-black">
@@ -146,9 +146,9 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
       </div>
     </section>
-    <section>
+    <section class="mt-10">
       <div class="flex flex- md:flex-">
-        <div class="md:w-1/2 w-full border-12 border-white yellow p-4">
+        <div class="md:w-1/3 w-full border-12 border-white yellow p-6">
           <!-- Replace with your image -->
           <img src="@/assets/svg/iron.svg" style="margin-bottom: 25px" alt="Avatar" />
           <h2 class="mt-3 font-bold">Das</h2>
@@ -163,7 +163,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             </div>
           </div>
         </div>
-        <div class="flex flex-col justify-end md:w-1/2 w-full border-12 border-white">
+        <div class="flex flex-col justify-end md:w-2/3 w-full border-12 border-white">
           <div class="mt-auto">
             <p class="text-black font-bold">Ein rechteckiger Buchrücken für Ihre Notenhefte</p>
             <p class="text-black">
@@ -173,7 +173,8 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
               Buchrücken nahekommenden Falz zusammen.
             </p>
             <p class="text-black m-0">
-              Diese Nachbehandlung erleichtert nicht nur das folgende Schneiden Ihres Notenhefts, was sich wiederum in der
+              Diese Nachbehandlung erleichtert nicht nur das folgende Schneiden Ihres Notenhefts, was sich wiederum in
+              der
               Genauigkeit widerspiegelt, sondern wertet Ihre Broschüre optisch enorm auf. Zudem sorgt der quadratische
               Rücken für ein noch besseres Aufschlagverhalten Ihrer Partitur.
             </p>
@@ -184,9 +185,9 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
         </div>
       </div>
     </section>
-    <section>
+    <section class="mt-10">
       <div class="flex flex- md:flex-">
-        <div class="md:w-1/2 w-full border-12 border-white pink p-4">
+        <div class="md:w-1/3 w-full border-12 border-white pink p-6">
           <!-- Replace with your image -->
           <img src="@/assets/svg/content_cut.svg" style="margin-bottom: 25px" alt="Avatar" />
           <h2 class="mt-3 font-bold">Maßarbeit für </h2>
@@ -199,7 +200,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           </div>
         </div>
-        <div class="flex flex-col justify-end md:w-1/2 w-full border-12 border-white">
+        <div class="flex flex-col justify-end md:w-2/3 w-full border-12 border-white">
           <div class="mt-auto">
             <p class="text-black font-bold">Instrumentalstimmen werden kleiner geschnitten</p>
             <p class="text-black">
@@ -210,17 +211,19 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             </p>
             <p class="text-black font-bold mt-3">Bitte beachten Sie dies bei der Anlage der Stimmenauszüge!</p>
             <p class="text-black mt-3">
-              Und noch etwas: Gar nicht so selten kommt es vor, dass Stimmen so umfangreich oder zahlreich sind, dass sie
-              selbst kleiner geschnitten nicht mehr ins Heft passen. Dann legen wir sie der Partitur bei und banderolieren
+              Und noch etwas: Gar nicht so selten kommt es vor, dass Stimmen so umfangreich oder zahlreich sind, dass
+              sie
+              selbst kleiner geschnitten nicht mehr ins Heft passen. Dann legen wir sie der Partitur bei und
+              banderolieren
               das gesamte Set mit einer Papierbanderole.
             </p>
           </div>
         </div>
       </div>
     </section>
-    <section>
+    <section class="mt-10">
       <div class="flex flex- md:flex-">
-        <div class="md:w-1/2 w-full border-12 border-white green p-4">
+        <div class="md:w-1/3 w-full border-12 border-white green p-6">
           <!-- Replace with your image -->
           <img src="@/assets/svg/surgical.svg" style="margin-bottom: 25px" alt="Avatar" />
           <h2 class="mt-3 font-bold">Sitzt, passt,
@@ -234,12 +237,13 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             </div>
           </div>
         </div>
-        <div class="flex flex-col justify-end md:w-1/2 w-full border-12 border-white">
+        <div class="flex flex-col justify-end md:w-2/3 w-full border-12 border-white">
           <div class="mt-auto">
             <p class="text-black font-bold">Beschnitt und Toleranzen</p>
             <p class="text-black">
               Wir produzieren Ihre Noten mit modernen Maschinen, die ein Höchstmaß an Präzision und Registerhaltigkeit
-              ermöglichen. Dennoch sind Toleranzbereiche beim Druck unvermeidbar; dies gilt sowohl für die Ränder als auch
+              ermöglichen. Dennoch sind Toleranzbereiche beim Druck unvermeidbar; dies gilt sowohl für die Ränder als
+              auch
               für die Passgenauigkeit von Vorder- zu Rückseite.
               Um ganz sicherzugehen, dass wichtige Elemente nicht abgeschnitten werden, legen Sie diese bitte mit
               mindestens 5 mm Abstand von jedem Rand (oben, unten, innen, außen) an!

@@ -24,13 +24,14 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 </script>
 <template>
     <div class="max-w-screen-xl mx-auto">
-        <section class="flex flex-col md:flex-row">
+        <section class="flex flex-col md:flex-row mt-20">
             <div class="md:w-3/9 w-full border-12 border-white flex flex-col">
                 <h2 class="font-bold">
                     Herzlich willkommen!
                 </h2>
                 <p class="pt-10">
-                    Vielen Dank für Ihr Interesse an capellaprint. Wir bieten Ihnen nicht nur erstklassige Druckqualität,
+                    Vielen Dank für Ihr Interesse an capellaprint. Wir bieten Ihnen nicht nur erstklassige
+                    Druckqualität,
                     sondern sind auch bei Fragen und Anregungen rund um das Thema Musikaliendruck gerne Ihre
                     Gesprächspartner.
                 </p>
@@ -52,7 +53,8 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                     <img src="@/assets/svg/audio_file.svg" class="max-w-12" alt="Avatar">
                     <h2 class="font-bold mt-3"> Fragen zu Ihren gedruckten Noten?</h2>
                     <!-- Image and Text 1 -->
-                    <p class="mt-5">Falls Sie Fragen zur korrekten Vorbereitung Ihrer Noten zum Druck haben, möchten wir Sie
+                    <p class="mt-5">Falls Sie Fragen zur korrekten Vorbereitung Ihrer Noten zum Druck haben, möchten wir
+                        Sie
                         bitten, sich zunächst unsere Druckdatenvorgaben herunterzuladen und aufmerksam durchzulesen:</p>
                     <a href=" https://firebasestorage.googleapis.com/v0/b/pocselfpublish.appspot.com/o/uploads%2FDruckdaten_Print_data_2023.pdf?alt=media&token=e8196ae8-3679-4f5a-9445-48d46724fc65"
                         target="_blank">
@@ -66,7 +68,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                 </div>
             </div>
         </section>
-        <section>
+        <section class="mt-20">
             <div class="flex flex-col md:flex-row">
                 <div class="flex flex-col md:w-3/9 w-full border-12 border-white pink p-5">
                     <img src="@/assets/svg/unknown_document.svg" class="max-w-12" alt="Avatar">
@@ -107,5 +109,3 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
     </div>
 </template>
 <style></style>
-
-

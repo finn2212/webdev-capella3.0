@@ -25,14 +25,14 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
 <template>
     <div class="max-w-screen-xl mx-auto">
-        <section>
+        <section class="pt-20">
             <div class="relative h-full w-full border-12 border-white">
                 <!-- Hero Image -->
                 <img src="@/assets/images/Booklet_machine.png" alt="Avatar"
                     class="object-cover w-full max-h-[350px] mx-auto">
             </div>
         </section>
-        <section>
+        <section class="pt-20">
             <div class="flex flex-col md:flex-row">
                 <div class="flex flex-col md:w-3/9 w-full border-12 border-white">
                     <h2>
@@ -62,8 +62,10 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                             Eigenschaften
                         </h1>
                         <p class="mt-5 flex-grow">
-                            Ihr Notenheft wird mit einem Squarefold, einem rechteckigen Broschürenrücken versehen, der dem
-                            Heft das Aussehen eines klebegebundenen Buchs verleiht. Der Qualitätsunterschied zur normalen
+                            Ihr Notenheft wird mit einem Squarefold, einem rechteckigen Broschürenrücken versehen, der
+                            dem
+                            Heft das Aussehen eines klebegebundenen Buchs verleiht. Der Qualitätsunterschied zur
+                            normalen
                             Heftung ist enorm!
                         </p>
                         <a href="https://firebasestorage.googleapis.com/v0/b/pocselfpublish.appspot.com/o/uploads%2FDruckdaten_Print_data_2023.pdf?alt=media&token=e8196ae8-3679-4f5a-9445-48d46724fc65"

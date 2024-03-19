@@ -25,13 +25,13 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
 <template>
   <div class="max-w-screen-xl mx-auto">
-    <section>
+    <section class="pt-20">
       <div class="relative h-full w-full border-12 border-white">
         <!-- Hero Image -->
         <img src="@/assets/images/spiralheader.png" alt="Avatar" class="object-cover w-full max-h-[350px] mx-auto">
       </div>
     </section>
-    <section>
+    <section class="pt-20">
       <div class="flex flex-col md:flex-row">
         <div class="flex flex-col md:w-3/9 w-full border-12 border-white">
           <h2>
@@ -45,7 +45,8 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
           <p class="pt-4">
             Spiralgebundene Partituren können sowohl im Hochformat als auch im Querformat hergestellt werden.
           </p>
-          <p class="pt-4"> Mit einem Seitenumfang ab 2 bis zu 400 Seiten Innenteil (und ggf. einem farbigen Umschlag, wenn
+          <p class="pt-4"> Mit einem Seitenumfang ab 2 bis zu 400 Seiten Innenteil (und ggf. einem farbigen Umschlag,
+            wenn
             Sie möchten) sind es wahre Alleskönner in unserem Produktportfolio.
           </p>
           </p>
@@ -58,7 +59,8 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             </h1>
             <p class="mt-5 flex-grow">
               Wir verwenden die für Musikalien besonders geeignete Coilbindung, die sich von der herkömmlichen
-              Spiralbindung oder gar Plastikkammbindung nicht nur durch edleres Aussehen, sondern und vor allem auch durch
+              Spiralbindung oder gar Plastikkammbindung nicht nur durch edleres Aussehen, sondern und vor allem auch
+              durch
               leises Umblättern und dadurch bessere Nutzbarkeit im Konzert auszeichnet.
             </p>
             <a href="https://firebasestorage.googleapis.com/v0/b/pocselfpublish.appspot.com/o/uploads%2FDruckdaten_Print_data_2023.pdf?alt=media&token=e8196ae8-3679-4f5a-9445-48d46724fc65"
@@ -106,7 +108,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
         </div>
       </div>
     </section>
-    <section class="flex flex-col md:flex-row">
+    <section class="flex flex-col md:flex-row mt-20">
       <div class="md:w-3/9 w-full border-12 border-white flex flex-col">
         <h2>
           Direkt zu den Topsellern
@@ -194,7 +196,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
         </div>
       </div>
     </section>
-    <section class="flex flex-col md:flex-row">
+    <section class="flex flex-col md:flex-row mt-20">
       <div class="md:w-3/9 w-full border-12 border-white flex flex-col">
         <h2>
           Notenbuch Spiralbindung
@@ -368,7 +370,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
         </div>
       </div>
     </section>
-    <section class="flex flex-col md:flex-row">
+    <section class="flex flex-col md:flex-row mt-20">
       <div class="md:w-3/9 w-full border-12 border-white flex flex-col">
         <h2>
           Notenbuch Spiralbindung

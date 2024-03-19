@@ -51,20 +51,20 @@ const gridColumns = computed<number>(() =>
 </script>
 <template>
   <footer>
-    <div class="grey pt-5 pb-5 mt-3">
+    <div class="grey pt-5 pb-5 mt-20">
       <div class="max-w-screen-xl mx-auto">
         <section class="flex flex-col md:flex-row">
           <div class="p-3 grey md:w-3/9 w-full">
             <img src="@/assets/svg/phone_forwarded.svg">
-            <h5 class="mt-3 font-bold">
+            <h2 class="mt-3 font-bold">
               Service-Hotline
-            </h5>
+            </h2>
             <p>
               Unterstützung und Beratung unter:
               <br>
-            <h5>
+            <h2>
               08294 / 8601888
-            </h5>
+            </h2>
             <br>
 
             Mo-Fr, 10:00 - 14:00 Uhr
@@ -79,9 +79,9 @@ const gridColumns = computed<number>(() =>
           </div>
           <div class="p-3 grey md:w-3/9 w-full">
             <img src="@/assets/svg/local_police.svg">
-            <h5 class="mt-3 font-bold">
+            <h2 class="mt-3 font-bold">
               Rechtliches
-            </h5>
+            </h2>
             <div>
               <div>
                 <NuxtLink class="a" to="/contact">
@@ -120,9 +120,9 @@ const gridColumns = computed<number>(() =>
           </div>
           <div class="p-3 grey md:w-3/9 w-full">
             <img src="@/assets/svg/award_star.svg">
-            <h5 class="mt-3 font-bold">
+            <h2 class="mt-3 font-bold">
               Sicher einkaufen
-            </h5>
+            </h2>
             <p>
               Bei capellaprint kaufen Sie sicher ein. Dies wird ermöglicht durch SSL-Verschlüsselung, bei der eine
               sichere Verbindung zwischen unserem Server und Ihrem Browser aufgebaut wird.
@@ -135,15 +135,16 @@ const gridColumns = computed<number>(() =>
         <section class="flex flex-col md:flex-row mt-3">
           <div class="p-3 grey md:w-3/9 w-full">
             <img src="@/assets/svg/local_shipping1.svg">
-            <h5 class="mt-3 font-bold">
+            <h2 class="mt-3 font-bold">
               Versandarten
-            </h5>
+            </h2>
             <div v-if="isLoading.shippingMethods">
               Loading payment methods...
             </div>
             <div v-else-if="shippingMethods">
               <div class="flex mt-3">
-                <img v-for="method in shippingMethods" :src="getImageUrl(method)" :key="method.id" class="mr-3 max-w-15">
+                <img v-for="method in shippingMethods" :src="getImageUrl(method)" :key="method.id"
+                  class="mr-3 max-w-15">
               </div>
             </div>
           </div>
@@ -151,9 +152,9 @@ const gridColumns = computed<number>(() =>
           </div>
           <div class="p-3 grey md:w-3/9 w-full">
             <img src="@/assets/svg/credit_score.svg">
-            <h5 class="mt-3 font-bold">
+            <h2 class="mt-3 font-bold">
               Zahlungsarten
-            </h5>
+            </h2>
             <div v-if="isLoading.paymentMethods">
               Loading payment methods...
             </div>
@@ -164,9 +165,9 @@ const gridColumns = computed<number>(() =>
             </div>
           </div>
           <div class="p-3 grey md:w-3/9 w-full mt-10">
-            <h5 class="mt-3 font-bold">
+            <h2 class="mt-3 font-bold">
               Wir sind Mitglied im:
-            </h5>
+            </h2>
             <img src="@/assets/svg/bdm.svg">
           </div>
         </section>

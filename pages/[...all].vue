@@ -70,10 +70,10 @@ function render() {
   return h("div", {}, "Loading...");
 }
 </script>
-  <!-- Your content here -->
+<!-- Your content here -->
 <template>
   <div class="max-w-screen-xl mx-auto">
-    <section>
+    <section class="mt-15">
       <div class="flex flex-col md:flex-row">
         <div class="md:w-6/9 w-full border-12 border-white">
           <!-- Replace with your image -->
@@ -84,7 +84,7 @@ function render() {
             Ihre Partituren, perfekt gedruckt
           </h2>
           <div class="w-full max-w-64 mb-5">
-            <p>
+            <p class="font-bold">
               Jetzt neu:
             </p>
             <p>
@@ -104,31 +104,24 @@ function render() {
     </section>
     <section>
       <div class="border-12 border-white">
-        <h1 class="mt-5">
+        <h1 class="mt-20 mb-5 font-bold">
           So einfach geht’s
         </h1>
       </div>
     </section>
     <section class="flex flex-col md:flex-row">
       <div class="flex flex-col p-5 grey md:w-3/9 w-full border-12 border-white">
-        <img src="@/assets/svg/function.svg" class="max-w-12" alt="Avatar">
+        <img src="@/assets/svg/function.svg" class="max-w-12 mb-5" alt="Avatar">
         <h2 class="mt-3">
           Schritt 1:
           Notenprojekt kalkulieren.
         </h2>
-        <p class="mb-5">
+        <p>
           Es ist ganz einfach: Mit unserem Konfigurator stellen Sie sich die perfekte Notenausgabe zusammen.
         </p>
-        <div class="mt-auto mt-5 max-w-40">
-          <NuxtLink to="/konfigurator"
-            class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
-            <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
-            {{ $t("startNow") }}
-          </NuxtLink>
-        </div>
       </div>
       <div class="p-5 grey md:w-3/9 w-full border-12 border-white">
-        <img src="@/assets/svg/backup.svg" alt="Avatar">
+        <img src="@/assets/svg/backup.svg" class="max-w-12 mb-10" alt="Avatar">
         <h2 class="mt-3">
           Schritt 2:
           Laden Sie Ihre Noten-PDF hoch.
@@ -138,19 +131,26 @@ function render() {
         </p>
       </div>
       <div class="p-5 grey md:w-3/9 w-full border-12 border-white">
-        <img src="@/assets/svg/flight.svg" alt="Avatar">
+        <img src="@/assets/svg/flight.svg" class="max-w-12 mb-10" alt="Avatar">
         <h2 class="mt-3">
           Schritt 3:
           Bestellen – schon fertig!
         </h2>
-        <p>
+        <p class="mb-5">
           Zuletzt bestellen Sie Ihre Noten ganz bequem online. Ein paar Tage später ist die Musikpost schon da!
         </p>
+        <div class="mt-auto mt-5 max-w-40">
+          <NuxtLink to="/konfigurator"
+            class="bg-black text-white rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
+            <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
+            {{ $t("startNow") }}
+          </NuxtLink>
+        </div>
       </div>
     </section>
     <section class="flex flex-col xl:flex-row">
       <div class="border-12 border-white xl:w-6/9 w-full">
-        <h1 class="mt-5">
+        <h1 class="mt-20 mb-5 font-bold">
           Was ist capellaprint?
         </h1>
       </div>
@@ -158,7 +158,7 @@ function render() {
     <section class="flex flex-col xl:flex-row">
       <!-- Left Column -->
       <div class="xl:w-6/9 w-full flex flex-col">
-        <div class="carousel w-full yellow p-5 border-12 border-white">
+        <div class="carousel w-full yellow p-20 border-12 border-white">
           <!-- Slide 1 -->
           <div id="slide1" class="carousel-item relative w-full flex flex-col" v-show="firstSlideIndex === 1">
             <h3 class="font-bold">»Spitzenqualität zu hervorragenden Preisen. Wir drucken nur noch hier«</h3>
@@ -285,12 +285,14 @@ function render() {
     </section>
     <section>
       <div class="pink p-5 border-12 border-white">
+
         <h2>
           Beste Druckqualität für Ihre Noten – made in Germany.
         </h2>
+        <img src="@/assets/svg/music_note.svg" alt="Avatar" class="mr-4 mt-5 mb-3">
         <div>
           <div class="col-7">
-            <p class="p-grid">
+            <p class="w-150">
               Für capellaprint haben sich capella-software und die spezialisierte Musikaliendruckerei AURIOPRINT aus
               Bayern zusammengeschlossen. AURIOPRINT fertigt für Musikverlage, Orchester und Komponisten weltweit
               Noten. Unter der Marke capellaprint bieten wir Ihnen gemeinsam ab sofort die bestmögliche Druckqualität
@@ -308,11 +310,11 @@ function render() {
         <!-- Top Div with Text -->
 
         <div>
-          <h1 class="ml-3 mt-5  ">
+          <h1 class="ml-3 mt-20 mb-5 font-bold">
             Konfigurieren Sie Ihr Notenheft
           </h1>
 
-          <div class="border-12 border-white yellow p-5">
+          <div class="border-12 border-white yellow p-20">
             <div class="carousel w-full">
               <!-- Slide 1 -->
               <div id="slide1" class="carousel-item relative w-full flex flex-col" v-show="slideIndex === 1">
@@ -331,7 +333,8 @@ function render() {
               </div>
               <!-- Slide 2 -->
               <div id="slide2" class="carousel-item relative w-full flex flex-col" v-show="slideIndex === 2">
-                <h3 class="font-bold">»Es macht mich stolz, mit unserer Musikaliendruckerei einen echten Mehrwert für alle
+                <h3 class="font-bold">»Es macht mich stolz, mit unserer Musikaliendruckerei einen echten Mehrwert für
+                  alle
                   capella-Nutzer:innen bieten zu können.«</h3>
                 <div class="flex flex-col md:flex-row items-start mt-4">
                   <p class="font-bold mr-2">
@@ -375,19 +378,19 @@ function render() {
       <!-- Right Column -->
       <div class="xl:w-3/9 w-full flex flex-col">
         <div>
-          <h1 class="ml-3 mt-5">
+          <h1 class="ml-3 mt-20 mb-5 font-bold">
             Unser Tipp
           </h1>
         </div>
         <div class="flex-grow pb-auto flex flex-col border-12 border-white p-5 blue">
           <div>
-            <div class="flex items-start mb-15 ">
+            <div class="flex flex-col items-start mb-15 ">
               <!-- Image on the Left -->
-              <img src="@/assets/svg/verified.svg" alt="Avatar" class="mr-4">
+              <img src="@/assets/svg/contact_support.svg" alt="Avatar" class="mr-4">
               <!-- Text Container on the Right -->
               <div>
-                <h2>
-                  Ihre Vorteile
+                <h2 class="mt-5">
+                  Häufige Fragen
                 </h2>
               </div>
             </div>
@@ -452,7 +455,7 @@ function render() {
     </section>
     <section class="flex flex-col xl:flex-row">
       <div class="border-12 border-white xl:w-6/9 w-full">
-        <h1 class="mt-5">
+        <h1 class="mt-20 mb-5 font-bold">
           Unsere Topseller
         </h1>
       </div>

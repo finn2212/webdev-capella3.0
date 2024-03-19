@@ -156,4 +156,13 @@ onMounted(() => {
 .grey {
   background: #F5F5F5;
 }
+
+.p-5 {
+  padding: 2rem !important;
+}
+
+h2 {
+  margin-bottom: 15px !important;
+  font-weight: bold;
+}
 </style>
