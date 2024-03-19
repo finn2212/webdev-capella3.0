@@ -1227,13 +1227,6 @@ export default {
           </div>
           <div class="flex flex-col md:w-3/9 sticky top-0 border-12 border-white">
             <div class="green w-full p-5">
-              <div>
-                <div class="pt-3">
-                  <p>Ihr Preis für die gewünschte Auflagenhöhe:</p>
-                  <h2 class="font-bold pt-3">€ {{ projectPriceString }}</h2>
-                  <p style="font-size: x-small;">Preis inkl. 7% MwSt., ggf. zzgl. Versandkosten</p>
-                </div>
-              </div>
               <div class="flex">
                 <div class="pt-3 w-1/2">
                   <p>Ihre Auflage:</p>
@@ -1255,6 +1248,13 @@ export default {
                   <p>Produktionsdauer:</p>
                   <h2 class="pt-3">{{ productionTime }} </h2>
                   <p style="font-size: x-small;">zzgl. Postlaufzeit</p>
+                </div>
+              </div>
+              <div>
+                <div class="pt-3">
+                  <p>Ihr Preis für die gewünschte Auflagenhöhe:</p>
+                  <h2 class="font-bold pt-3">€ {{ projectPriceString }}</h2>
+                  <p style="font-size: x-small;">Preis inkl. 7% MwSt., ggf. zzgl. Versandkosten</p>
                 </div>
               </div>
               <div>
