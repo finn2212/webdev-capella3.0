@@ -1228,13 +1228,6 @@ export default {
           <div class="flex flex-col md:w-3/9 sticky top-0 border-12 border-white">
             <div class="green w-full p-5">
               <div>
-                <div>
-                  <p>Ihr Preis pro Exemplar:</p>
-                  <h2 class="font-bold pt-3">€ {{ priceString }}</h2>
-                  <p style="font-size: x-small;">Preis inkl. 7% MwSt., ggf. zzgl. Versandkosten</p>
-                </div>
-              </div>
-              <div>
                 <div class="pt-3">
                   <p>Ihr Preis für die gewünschte Auflagenhöhe:</p>
                   <h2 class="font-bold pt-3">€ {{ projectPriceString }}</h2>
