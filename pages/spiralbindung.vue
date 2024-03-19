@@ -53,7 +53,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
         </div>
         <div class="md:w-6/9 flex w-full border-12 border-white green p-5">
           <div class="sm:w-1/2 p-4 flex flex-col">
-            <h1 class="flex items-center">
+            <h1 class="flex items-center font-bold">
               <img src="@/assets/svg/info.svg" alt="Avatar" class="pr-3">
               Eigenschaften
             </h1>
