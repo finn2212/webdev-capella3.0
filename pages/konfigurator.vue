@@ -1345,6 +1345,7 @@ export default {
               <h1 class="mt-2 font-bold">
                 Ab 50,- Euro
                 Einkaufswert
+
               </h1>
             </div>
           </div>
