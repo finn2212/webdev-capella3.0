@@ -63,7 +63,7 @@ const gridColumns = computed<number>(() =>
               Unterstützung und Beratung unter:
               <br>
             <h2>
-              08294 / 8601888
+              08294 / 8604974
             </h2>
             <br>
 
@@ -173,7 +173,7 @@ const gridColumns = computed<number>(() =>
         </section>
         <div class="mt-25">
           * Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten, wenn nicht anders angegeben.
-          © 2023 AURIOPRINT – Alle Rechte vorbehalten.
+          © 2024 AURIOPRINT – Alle Rechte vorbehalten.
         </div>
       </div>
     </div>

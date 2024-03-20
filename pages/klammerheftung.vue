@@ -46,13 +46,10 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                         Aufschlagverhalten.
                     </p>
                     <p>
-                    <p class="pt-4 font-bold">
                         Da wir unzählige Hefte produzieren, sind die Kosten so gering, dass wir diese Art der Bindung
                         ohne
-                    </p>
-
-                    Aufpreis anbieten können. Das macht das Notenbuch mit Klammerheftung zum absoluten
-                    Bestsellerprodukt!
+                        Aufpreis anbieten können. Das macht das Notenbuch mit Klammerheftung zum absoluten
+                        Bestsellerprodukt!
                     </p>
                 </div>
                 <div class="md:w-6/9 flex w-full border-12 border-white yellow p-5">
@@ -161,7 +158,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             <div class="blue md:w-3/9 w-full border-12 border-white flex flex-col">
                 <img src="@/assets/images/pic5.png" class="smmax-h-xs object-cover">
                 <div class="flex flex-col flex-grow p-5"> <!-- Make this a flex container and let it grow -->
-                    <h2>Notenbuch DIN A4 Spiralbindung hoch</h2>
+                    <h2>Stimmauszug DIN A4 Klammerheftung hoch</h2>
                     <!-- Image and Text 1 -->
                     <div class="flex items-center mt-4">
                         <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">

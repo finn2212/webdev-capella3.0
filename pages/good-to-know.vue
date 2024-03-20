@@ -120,7 +120,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
 
           <div class="mt-20 flex">
             <div>
-              <h2 class="font-bold">100+&#178;</h2>
+              <h2 class="font-bold">100+</h2>
               <p class="mt-3 font-bold">Druckseiten in Vollfarbe pro Minute</p>
             </div>
           </div>
