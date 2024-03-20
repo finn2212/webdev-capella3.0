@@ -179,7 +179,7 @@ const createAndFetch = async () => {
     console.log("Product Fetched. Adding Product to Cart...");
     await addToCartProxy();
     codeErrorsNotification();
-    pushSuccess(`${fetchedProduct.value.translated?.name} has been added to cart.`);
+    pushSuccess(`${fetchedProduct.value.translated?.name} wurde dem Warenkorb hinzugefügt`);
     //pushSuccess("Product successfully added to cart."); // Assuming pushSuccess is defined
   } catch (error) {
     if (error instanceof Error) {
@@ -718,8 +718,8 @@ export default {
     </section>
     <section class="mt-20">
       <div class="border-12 border-white">
-        <h1>
-          Konfigurieren Sie Ihr Notenheft
+        <h1 class="font-bold">
+          Konfigurieren Sie hier Ihr Notenheft:
         </h1>
       </div>
     </section>
@@ -930,7 +930,7 @@ export default {
                 <p>Bitte geben Sie die Gesamtseitenanzahl Ihrer Datei an. Aus produktionstechnischen Gründen muss diese
                   immer
                   durch 4 teilbar sein.</p>
-                <p class=" mt-3">Sie können zwischen 4 und 400 Seiten Umfang wählen. Bitte beachten Sie, dass wir Ihr
+                <p class="font-bold mt-3 text-red-500">Bitte beachten Sie, dass wir Ihr
                   Heft
                   in
                   den Formaten DIN A4, Klavierauszug und Concert bei weniger als 88 Seiten Inhalt standardmäßig
@@ -1302,6 +1302,19 @@ export default {
                 </table>
               </div> -->
             </div>
+            <div class="flex flex-col flex-g p-5 red  mt-6">
+              <div class="flex">
+                <img src="@/assets/svg/report.svg" class="max-w-10 mr-5" alt="Avatar">
+                <h2 class="mt-2">Bitte beachten:
+                </h2>
+              </div>
+
+              <p class="mt-12">Bitte nutzen Sie für den Export Ihrer Noten als PDF-Dateien die Funktion "Drucken mit
+                capellaprint" im Datei-Menü von capella.
+              </p>
+              <p class="mt-6 font-bold">Nur so kann eine fehlerfreie Druckproduktion gewährleistet werden!
+              </p>
+            </div>
             <div class="pink w-full mt-12 p-5" style=" margin-top: 20px;">
               <h1 class="font-bold">
                 Kostenfreier
@@ -1336,9 +1349,8 @@ export default {
             target="_blank">
             <button type="button" class="btn border border-black bg-black text-white rounded-full mt-3"
               style="width: 100%;">
-              <img src="@/assets/svg/download.svg" alt="Avatar"
-                style="height: 19px; margin-right: 10px; padding-left: 5px;">
-              <p class="inline mt-2">Maßvorgaben (PDF)</p>
+              <img src="@/assets/svg/download.svg" alt="Avatar" style="height: 19px;">
+              <p class="inline mt-1">Maßvorgaben (PDF)</p>
             </button>
           </a>
         </div>
@@ -1351,7 +1363,8 @@ export default {
         </h2>
         <p> Kommen Sie nicht weiter? Gerne sind wir für Sie da. Bitte schreiben Sie uns eine E-Mail:
         </p>
-        <h5 class="font-bold mt-3"> fragen@capellaprint.com
+        <h5 class="font-bold mt-3">
+          <a href="mailto:fragen@capellaprint.com">fragen@capellaprint.com</a>
         </h5>
         <p> Wir melden uns baldmöglichst bei Ihnen zurück. Gemeinsam finden wir eine Lösung!</p>
       </div>

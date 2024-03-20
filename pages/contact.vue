@@ -42,7 +42,9 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                     <h2 class="font-bold mt-3"> Fragen zur Bestellung?</h2>
                     <!-- Image and Text 1 -->
                     <p class="mt-5">Bei allgemeinen Fragen rund ums Thema Bestellung wenden Sie sich bitte an:</p>
-                    <p class="font-bold mt-3">fragen@capellaprint.com</p>
+                    <p class="font-bold mt-3">
+                        <a href="mailto:fragen@capellaprint.com">fragen@capellaprint.com</a>
+                    </p>
                     <p class="mt-3">Wir melden uns baldmöglichst bei Ihnen zurück. Gemeinsam finden wir eine
                         Lösung!
                     </p>
@@ -89,8 +91,8 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                         <p class="mt-3">Für den Fall, dass jetzt noch Fragen offen sind, steht Ihnen unser Partner
                             AURIOPRINT aus gerne
                             telefonisch zur Verfügung:</p>
-                        <p class="mt-3 font-bold">+49 (0)8294 – 8601888</p>
-                        <p class="mt-3">Mo–Do, 10–16 Uhr</p>
+                        <p class="mt-3 font-bold">+49 08294 / 8604974</p>
+                        <p class="mt-3">Mo–Do, 10–14 Uhr</p>
                     </div>
 
                     <div class="sm:w-1/2 p-4 flex flex-col">

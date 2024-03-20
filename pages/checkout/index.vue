@@ -434,7 +434,7 @@ const addAddressModalController = useModal();
       $t("checkout.guest") }}
                 </span>
                 <a href="#" class="text-brand-primary font-bold hover:text-brand-dark" data-testid="checkout-logout"
-                  aria-label="click here to log out" @click="invokeLogout">Gast Sitzung Beeenden</a>
+                  aria-label="click here to log out" @click="invokeLogout">Gastsitzung Beenden</a>
               </div>
 
               <span v-else>

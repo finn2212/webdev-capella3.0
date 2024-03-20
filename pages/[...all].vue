@@ -164,23 +164,20 @@ function render() {
             <h3 class="font-bold">»Spitzenqualität zu hervorragenden Preisen. Wir drucken nur noch hier«</h3>
             <div class="flex flex-col md:flex-row items-start mt-4">
               <p class="font-bold mr-2">
-                Dr. Dominik Hörnel,
+                Dieter Viehweider
               </p>
               <p>
-                Vorstandsvorsitzender, capella-software AG
+                MUNODI Edition
               </p>
             </div>
           </div>
           <!-- Slide 2 -->
           <div id="slide2" class="carousel-item relative w-full flex flex-col" v-show="firstSlideIndex === 2">
-            <h3 class="font-bold">»Es macht mich stolz, mit unserer Musikaliendruckerei einen echten Mehrwert für alle
-              capella-Nutzer:innen bieten zu können.«</h3>
+            <h3 class="font-bold">»Die Partituren sind übrigens sensationell in Haptik,
+              Aussehen und Nutzbarkeit.«</h3>
             <div class="flex flex-col md:flex-row items-start mt-4">
               <p class="font-bold mr-2">
-                Sebastian Gabriel,
-              </p>
-              <p>
-                Geschäftsführer AURIOPRINT
+                Alexander Mottok – – Chefdirigent, Deutsches Ärzteorchester
               </p>
             </div>
           </div>
@@ -311,7 +308,7 @@ function render() {
 
         <div>
           <h1 class="ml-3 mt-20 mb-5 font-bold">
-            Konfigurieren Sie Ihr Notenheft
+            »Ein attraktiver Service für Musiker«
           </h1>
 
           <div class="border-12 border-white yellow p-20">
