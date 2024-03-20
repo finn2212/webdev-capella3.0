@@ -39,6 +39,7 @@ onMounted(async () => {
 
 // Define getImageUrl method
 function getImageUrl(method: any) {
+  debugger;
   return method.media?.url || 'path/to/your/default/image.svg'; // Provide a fallback image URL
 }
 

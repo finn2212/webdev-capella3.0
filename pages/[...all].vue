@@ -226,7 +226,7 @@ function render() {
 
           <div class="flex items-start">
             <!-- Image on the Left -->
-            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-4">
+            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-4 mt-1">
 
             <!-- Text Container on the Right -->
             <div>
@@ -237,9 +237,9 @@ function render() {
               </p>
             </div>
           </div>
-          <div class="flex items-start">
+          <div class="flex items-start mt-6">
             <!-- Image on the Left -->
-            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-4">
+            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-4 mt-1">
 
             <!-- Text Container on the Right -->
             <div>
@@ -250,9 +250,9 @@ function render() {
               </p>
             </div>
           </div>
-          <div class="flex items-start">
+          <div class="flex items-start mt-6">
             <!-- Image on the Left -->
-            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-4">
+            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-4 mt-1">
 
             <!-- Text Container on the Right -->
             <div>
@@ -263,9 +263,9 @@ function render() {
               </p>
             </div>
           </div>
-          <div class="flex items-start">
+          <div class="flex items-start mt-6">
             <!-- Image on the Left -->
-            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-4">
+            <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-4 mt-1">
 
             <!-- Text Container on the Right -->
             <div>
