@@ -29,7 +29,7 @@ const promoCode = ref("");
         <button
           class="text-white bg-black hover:bg-blue-600 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-full"
           @click="addPromotionCodeHandler(promoCode)">
-          Add
+          Hinzufügen
         </button>
       </div>
     </div>

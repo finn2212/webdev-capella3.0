@@ -263,9 +263,9 @@ const addAddressModalController = useModal();
     </SharedModal>
     <SharedModal :controller="addAddressModalController">
       <SharedAccountAddressForm @success="
-        refreshAddresses();
-      addAddressModalController.close();
-      " />
+      refreshAddresses();
+    addAddressModalController.close();
+    " />
     </SharedModal>
     <div v-if="isCheckoutAvailable || isCartLoading" class="checkout-inner" :class="{
       'opacity-20': isCartLoading,
@@ -277,9 +277,6 @@ const addAddressModalController = useModal();
               <h3 class="text-lg font-medium text-gray-900 m-0">
                 {{ $t("checkout.personalInformationLabel") }}
               </h3>
-              <div class="text-sm text-gray-600">
-                {{ $t("checkout.personalInformationInfo") }}
-              </div>
             </div>
             <form v-if="!isUserSession" id="checkout-billing-address" class="grid gap-8" name="checkout-billing-address"
               method="post" @submit.prevent="invokeSubmit">
@@ -303,7 +300,7 @@ const addAddressModalController = useModal();
               <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6">
                   <label for="salutation" class="block text-sm font-medium text-gray-700">{{ $t("form.salutation")
-                  }}</label>
+                    }}</label>
                   <select id="salutation" v-model="state.salutationId" required name="salutation" autocomplete="on"
                     class="mt-1 block w-full p-2.5 border border-gray-300 text-gray-900 text-sm rounded-md shadow-sm focus:ring-brand-light focus:border-brand-light"
                     data-testid="checkout-pi-salutation-select" @blur="$v.salutationId.$touch()">
@@ -321,7 +318,7 @@ const addAddressModalController = useModal();
                 </div>
                 <div class="col-span-6 sm:col-span-3">
                   <label for="first-name" class="block text-sm font-medium text-gray-700">{{ $t("form.firstName")
-                  }}</label>
+                    }}</label>
                   <input id="first-name" v-model="state.firstName" type="text" required name="first-name"
                     :placeholder="$t('form.firstNamePlaceholder')"
                     class="mt-1 block w-full p-2.5 border border-gray-300 text-gray-900 text-sm rounded-md shadow-sm focus:ring-brand-light focus:border-brand-light"
@@ -333,7 +330,8 @@ const addAddressModalController = useModal();
                 </div>
 
                 <div class="col-span-6 sm:col-span-3">
-                  <label for="last-name" class="block text-sm font-medium text-gray-700">{{ $t("form.lastName") }}</label>
+                  <label for="last-name" class="block text-sm font-medium text-gray-700">{{ $t("form.lastName")
+                    }}</label>
                   <input id="last-name" v-model="state.lastName" type="text" required name="last-name"
                     :placeholder="$t('form.lastNamePlaceholder')"
                     class="mt-1 block w-full p-2.5 border border-gray-300 text-gray-900 text-sm rounded-md shadow-sm focus:ring-brand-light focus:border-brand-light"
@@ -350,25 +348,26 @@ const addAddressModalController = useModal();
                       data-testid="checkout-create-account-checkbox"
                       class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                     <label for="create-account" class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">{{
-                      $t("checkout.notCreateAccount") }}</label>
+      $t("checkout.notCreateAccount") }}</label>
                   </div>
                 </div>
 
                 <div class="col-span-6 sm:col-span-3">
                   <label for="email-address" class="block text-sm font-medium text-gray-700">{{ $t("form.email")
-                  }}</label>
+                    }}</label>
                   <input id="email-address" v-model="state.email" type="email" required name="email-address"
                     :placeholder="$t('form.emailPlaceholder')" autocomplete="off"
                     class="mt-1 block w-full p-2.5 border border-gray-300 text-gray-900 text-sm rounded-md shadow-sm focus:ring-brand-light focus:border-brand-light"
                     data-testid="checkout-pi-email-input" @blur="$v.email.$touch()" />
-                  <span v-if="$v.email.$error" class="pt-1 text-sm text-red-600 focus:ring-brand-primary border-gray-300">
+                  <span v-if="$v.email.$error"
+                    class="pt-1 text-sm text-red-600 focus:ring-brand-primary border-gray-300">
                     {{ $v.email.$errors[0].$message }}
                   </span>
                 </div>
                 <div class="col-span-6 sm:col-span-3">
                   <div v-if="!state.guest">
                     <label for="password" class="block text-sm font-medium text-gray-700">{{ $t("form.password")
-                    }}</label>
+                      }}</label>
                     <input id="password" v-model="state.password" autocomplete="off" type="password" name="password"
                       :placeholder="$t('form.passwordPlaceholder')"
                       class="mt-1 block w-full p-2.5 border border-gray-300 text-gray-900 text-sm rounded-md shadow-sm focus:ring-brand-light focus:border-brand-light"
@@ -381,8 +380,9 @@ const addAddressModalController = useModal();
                 </div>
 
                 <div class="col-span-6">
-                  <label for="street-address" class="block text-sm font-medium text-gray-700">{{ $t("form.streetAddress")
-                  }}</label>
+                  <label for="street-address" class="block text-sm font-medium text-gray-700">{{
+      $t("form.streetAddress")
+    }}</label>
                   <input id="street-address" v-model="state.billingAddress.street" type="text" required
                     name="street-address" :placeholder="$t('form.streetPlaceholder')" autocomplete="street-address"
                     class="mt-1 block w-full p-2.5 border border-gray-300 text-gray-900 text-sm rounded-md shadow-sm focus:ring-brand-light focus:border-brand-light"
@@ -395,7 +395,7 @@ const addAddressModalController = useModal();
 
                 <div class="col-span-6 sm:col-span-3">
                   <label for="postal-code" class="block text-sm font-medium text-gray-700">{{ $t("form.postalCode")
-                  }}</label>
+                    }}</label>
                   <input id="postal-code" v-model="state.billingAddress.zipcode" type="text" required name="postal-code"
                     :placeholder="$t('form.postalCodePlaceholder')" autocomplete="postal-code"
                     class="mt-1 block w-full p-2.5 border border-gray-300 text-gray-900 text-sm rounded-md shadow-sm focus:ring-brand-light focus:border-brand-light"
@@ -422,18 +422,27 @@ const addAddressModalController = useModal();
                   :state-id-validation="$v.billingAddress.countryStateId" class="col-span-6" />
               </div>
               <button type="submit"
-                class="flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-brand-primary hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-primary"
+                class="flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-black hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-primary"
                 data-testid="checkout-pi-submit-button">
                 {{ $t("form.save") }}
               </button>
             </form>
             <div v-else>
-              {{ $t("checkout.loggedInAs") }} {{ user?.firstName }}.
-              <span v-if="isGuestSession"
-                class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">{{
-                  $t("checkout.guest") }}.</span>
-              <a href="#" class="text-brand-primary font-bold hover:text-brand-dark" data-testid="checkout-logout"
-                aria-label="click here to log out" @click="invokeLogout">{{ $t("checkout.logOut") }}</a>.
+              <div v-if="isGuestSession">
+                <span
+                  class="bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">{{
+      $t("checkout.guest") }}
+                </span>
+                <a href="#" class="text-brand-primary font-bold hover:text-brand-dark" data-testid="checkout-logout"
+                  aria-label="click here to log out" @click="invokeLogout">Gast Sitzung Beeenden</a>
+              </div>
+
+              <span v-else>
+                {{ $t("checkout.loggedInAs") }} {{ user?.firstName }}.
+                <a href="#" class="text-brand-primary font-bold hover:text-brand-dark" data-testid="checkout-logout"
+                  aria-label="click here to log out" @click="invokeLogout">{{ $t("checkout.logOut") }}</a>
+              </span>
+
             </div>
           </div>
           <fieldset v-if="!isVirtualCart" class="grid gap-4 shadow px-4 py-5 bg-white sm:p-6 mb-8">
@@ -462,16 +471,17 @@ const addAddressModalController = useModal();
               <label :for="singleShippingMethod.id" :class="{ 'animate-pulse': isLoading[singleShippingMethod.id] }"
                 class="ml-2 block text-sm font-medium text-gray-700 w-full">
                 <div class="flex justify-between">
-                  <div>
+                  <div class="mt-2">
                     {{ singleShippingMethod.translated?.name }}
                     <span v-if="getShippingMethodDeliveryTime(singleShippingMethod)">({{
-                      getShippingMethodDeliveryTime(singleShippingMethod)
-                    }})</span>
-                    <span v-if="singleShippingMethod.translated?.description" class="italic text-sm text-gray-500 block">
+      getShippingMethodDeliveryTime(singleShippingMethod)
+    }})</span>
+                    <span v-if="singleShippingMethod.translated?.description"
+                      class="italic text-sm text-gray-500 block mt-3">
                       {{ singleShippingMethod.translated.description }}</span>
                   </div>
                   <div v-if="singleShippingMethod.media?.url">
-                    <img loading="lazy" :src="singleShippingMethod.media.url" alt="payment-image" />
+                    <img loading="lazy" :src="singleShippingMethod.media.url" alt="payment-image" class="max-w-14" />
                   </div>
                 </div>
               </label>
@@ -584,8 +594,8 @@ const addAddressModalController = useModal();
                     name="shipping-address" type="radio" class="focus:ring-brand-primary h-4 w-4 border-gray-300"
                     :data-testid="`checkout-shipping-address-${address.id}`" />
                   <label :for="`shipping-${address.id}`" :class="{
-                    'animate-pulse': isLoading[`shipping-${address.id}`],
-                  }" class="ml-2 field-label">
+      'animate-pulse': isLoading[`shipping-${address.id}`],
+    }" class="ml-2 field-label">
                     <AccountAddressCard :key="address.id" :address="address" :countries="getCountries"
                       :salutations="getSalutations" :can-set-default="false" @success="refreshAddresses()" />
                   </label>
@@ -610,7 +620,10 @@ const addAddressModalController = useModal();
                 data-testid="checkout-t&c-checkbox-tos" />
               <label for="tos" class="ml-2 block text-sm font-medium text-gray-700"
                 :class="{ 'text-red': !termsSelected && placeOrderTriggered }">
-                {{ $t("checkout.termsAdnConditionsLabel") }}
+                Ich habe die
+                <nuxt-link to="/agb" class="text-brand-primary hover:text-brand-primary-dark">Allgemeinen
+                  Geschäftsbedingungen</nuxt-link>
+                gelesen und akzeptiert.
               </label>
             </div>
 
@@ -631,9 +644,6 @@ const addAddressModalController = useModal();
               <h3 class="text-lg font-medium text-gray-900 m-0">
                 {{ $t("checkout.orderSummary") }}
               </h3>
-              <p class="text-sm text-gray-600">
-                {{ $t("checkout.orderSummaryLabel") }}
-              </p>
             </div>
             <ul role="list" class="-my-4 divide-y divide-gray-200 pl-0">
               <li v-for="cartItem in cartItems" :key="cartItem.id" class="flex py-6">
@@ -652,22 +662,21 @@ const addAddressModalController = useModal();
             </div>
 
             <div class="flex justify-between text-gray-900 font-medium">
-              <p>{{ $t("checkout.orderTotal") }}l</p>
+              <p>{{ $t("checkout.orderTotal") }}</p>
               <SharedPrice :value="totalPrice" data-testid="cart-subtotal" />
             </div>
 
             <div class="mt-4">
               <div class="text-right">
                 <span v-if="!isUserSession" class="text-sm text-gray-600">{{
-                  $t("checkout.loginRequired")
-                }}</span>
+      $t("checkout.loginRequired")
+    }}</span>
                 <button :disabled="!isUserSession" type="button" :class="{
-                  grayscale: !isUserSession,
-                  'opacity-50 cursor-not-allowed hover:bg-brand-primary':
-                    !isUserSession,
-                  'animate-pulse': isLoading['placeOrder'],
-                }"
-                  class="w-full flex justify-center py-2 px-4 border border-transparent font-medium rounded-full text-white bg-black focus:outline-none focus:ring-2 focus:ring-brand-primary"
+      grayscale: !isUserSession,
+      'opacity-50 cursor-not-allowed hover:bg-brand-primary':
+        !isUserSession,
+      'animate-pulse': isLoading['placeOrder'],
+    }" class="w-full flex justify-center py-2 px-4 border border-transparent font-medium rounded-full text-white bg-black focus:outline-none focus:ring-2 focus:ring-brand-primary"
                   data-testid="checkout-place-order-button" @click="placeOrder">
                   {{ $t("checkout.placeOrder") }}
                 </button>

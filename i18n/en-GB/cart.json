@@ -1,16 +1,16 @@
 {
   "cart": {
-    "checkout": "Checkout",
-    "header": "Shopping cart",
-    "itemsInCart": "items in cart",
-    "viewCart": "view bag",
-    "orderSummary": "Order summary",
-    "orderTotal": "Order total",
-    "subtotal": "Subtotal",
-    "shippingEstimate": "Shipping estimate",
-    "emptyCartLabel": "Your cart is empty!",
+    "checkout": "Zur Kasse gehen",
+    "header": "Warenkorb",
+    "itemsInCart": "Artikel im Warenkorb",
+    "viewCart": "Warenkorb anzeigen",
+    "orderSummary": "Bestellübersicht",
+    "orderTotal": "Gesamtbestellwert",
+    "subtotal": "Zwischensumme",
+    "shippingEstimate": "Versandkostenabschätzung",
+    "emptyCartLabel": "Ihr Warenkorb ist leer!",
     "messages": {
-      "addedToCart": "{p} has been added to cart."
+      "addedToCart": "{p} wurde dem Warenkorb hinzugefügt."
     }
   }
 }

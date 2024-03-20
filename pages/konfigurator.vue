@@ -349,7 +349,6 @@ const calculatePrice = () => {
 const calculateDiscount = () => {
   // Find the discount entry that matches the product quantity.
   const discountEntry = discounts.find(discount => productQuantity.value <= discount.amount);
-  console.log(discountEntry.discount)
 
   // If a matching discount entry is found, use its values.
   // Otherwise, apply the default or last known discount rate for quantities not explicitly covered.
@@ -1043,7 +1042,7 @@ export default {
                  file:rounded-full file:border-0
                  file:text-sm file:font-semibold
                  file:bg-black-50 file:text-black-700
-                 hover:file:bg-blue-100" :required="fileIndex === 1 || enveloped" />
+                 hover:file:bg-blue-100" :required="fileIndex === 1 || enveloped" accept="application/pdf" />
                   </label>
                   <div v-if="files[fileIndex].isloading" class="flex flex-col justify-between ml-3">
                     <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200 border border-black">
@@ -1057,7 +1056,7 @@ export default {
                       <span class="text-sm text-gray-800 ml-3">{{ files[fileIndex].name }}</span>
                       <button @click.prevent="deleteFile(fileIndex)"
                         class="ml-2 btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
-                        Delete
+                        Löschen
                       </button>
                     </div>
                   </div>
@@ -1128,7 +1127,7 @@ export default {
                  file:rounded-full file:border-0
                  file:text-sm file:font-semibold
                  file:bg-black-50 file:text-black-700
-                 hover:file:bg-blue-100" />
+                 hover:file:bg-blue-100" accept="application/pdf" />
                         </label>
                         <div v-if="!formValidations.fileSelectedValid" class="text-red-500">{{
         validationMessages.fileSelected }}</div>
@@ -1145,7 +1144,7 @@ export default {
                             <span class="text-sm text-gray-800">{{ files[fileIndex].name }}</span>
                             <button @click.prevent="deleteFile(fileIndex)"
                               class="ml-2 btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
-                              Delete
+                              Löschen
                             </button>
                           </div>
                         </div>

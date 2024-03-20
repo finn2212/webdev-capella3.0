@@ -33,7 +33,7 @@ const { formatLink } = useInternationalization(localePath);
             </li>
           </ul>
           <div v-else class="text-2xl text-center">
-            Your shopping cart is empty
+            Ihr Warenkorb ist leer!
           </div>
         </div>
       </div>
@@ -51,9 +51,9 @@ const { formatLink } = useInternationalization(localePath);
         <NuxtLink
           class="flex items-center justify-center rounded-full btn bg-black text-white border border-transparent px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-brand-dark"
           :class="{
-            'bg-gray': isEmpty,
-            'hover:bg-gray': isEmpty,
-          }" :to="formatLink(isEmpty ? '' : '/checkout')" data-testid="cart-checkout-link">
+    'bg-gray': isEmpty,
+    'hover:bg-gray': isEmpty,
+  }" :to="formatLink(isEmpty ? '' : '/checkout')" data-testid="cart-checkout-link">
           Bezahlen
         </NuxtLink>
 
