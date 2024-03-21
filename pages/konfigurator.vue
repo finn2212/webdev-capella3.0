@@ -12,6 +12,7 @@ import pages from '../objects/pages';
 import voiceAmount from '../objects/voiceAmount';
 import discounts from '../objects/discounts';
 import propertyMappings from '../objects/propertyMappings'
+import { getSessionContext } from "@shopware-pwa/api-client";
 
 
 interface PdfData {
@@ -20,6 +21,13 @@ interface PdfData {
 }
 const { pushSuccess } = useNotifications();
 const { codeErrorsNotification } = useCartNotification();
+const { apiInstance } = useShopwareContext();
+const sessionContextData = ref();
+const handlingPrice = ref(0);
+const pagePriceLow = ref(0);
+const pagePriceHigh = ref(0);
+const baseVoicePrice = ref(0);
+const voicePagePrice = ref(0);
 
 // const route = useRoute();
 // Primitive values using ref
@@ -41,15 +49,11 @@ const enveloped = ref(false);
 const discount = ref(1);
 const currentDiscountId = ref(2);
 const pagesQuantitiy = ref(4);
-const handlingPrice = ref(18.69);
-const pagePrice = ref(0.14);
-const pagePriceLow = ref(0.14);
-const pagePriceHigh = ref(0.2);
+const pagePrice = ref(0);
 const productQuantity = ref(1);
 const handlingVoice = ref(1);
 const pdf1 = ref('');
 const storage = useNuxtApp().$firebaseStorage as FirebaseStorage;// Access Firebase Storage instance
-const voicePagePrice = ref(0.15);
 const projectType = ref(1);
 const productName = ref("");
 const format = ref(true);
@@ -81,11 +85,18 @@ const formValidations = reactive({
   fileSelected: '', // Message for file input validation
   // Other messages...
 });
-const baseVoicePrice = ref(16.4);
 
-onMounted(() => {
-  calculatePrice();
+
+onMounted(async () => {
   updateCurrentDiscountId(discount.value); // Make sure calculatePrice is defined appropriately
+  sessionContextData.value = await getSessionContext(apiInstance);
+  const metaInfo = sessionContextData.value.salesChannel.customFields;
+  handlingPrice.value = metaInfo.custom_meta_handlingPrice || 0;
+  pagePriceLow.value = metaInfo.custom_meta_pagePriceLow || 0;
+  pagePriceHigh.value = metaInfo.custom_meta_pagePriceHigh || 0;
+  baseVoicePrice.value = metaInfo.custom_meta_voice_handling || 0;
+  voicePagePrice.value = metaInfo.custom_meta_baseVoicePrice || 0;
+  calculatePrice();
 });
 
 const swEnvironment = useRuntimeConfig(); // Nuxt 3 way to access runtime config
@@ -425,6 +436,7 @@ const calculateProjectPrice = () => {
   if (productQuantity.value === 0) {
     projectPriceString.value = priceString.value;
   } else {
+    debugger;
     projectPriceString.value = (price.value * productQuantity.value).toFixed(2).replace(".", ",");
   }
 };
@@ -443,13 +455,11 @@ const reset = (full: boolean) => {
   discount.value = 1;
   format.value = true;
   paperFormat.value = 1;
-  color.value = 'false';
+  color.value = 'true';
   bindingType.value = "true";
   voices.value = [];
   bindingTypePrice.value = 0;
   totalVoicePrice.value = 0;
-
-
   calculatePrice();
 };
 
@@ -612,7 +622,7 @@ function validateNewVoiceName() {
 
 // Watchers
 watch(projectType, () => {
-  reset(false);
+  reset(false)
 });
 
 watch(color, () => {
