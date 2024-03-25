@@ -44,7 +44,7 @@ const voiceFile: FileState = reactive({
 const priceString = ref('0');
 const projectPriceString = ref('0');
 const productionTime = ref("1–3 Tage");
-const enveloped = ref(false);
+const enveloped = ref('false');
 const discount = ref(1);
 const currentDiscountId = ref(2);
 const pagesQuantitiy = ref(4);
@@ -404,7 +404,7 @@ const calculateWeight = () => {
   if (paperFormat.value === 6 || paperFormat.value === 5) {
     weightPerPage = 6;
   }
-  if (enveloped.value && (paperFormat.value === 6 || paperFormat.value === 5)) {
+  if (enveloped.value == 'true' && (paperFormat.value === 6 || paperFormat.value === 5)) {
     envelopedWeight = 80;
   } else if (enveloped.value) {
     envelopedWeight = 40;
@@ -439,7 +439,7 @@ const reset = (full: boolean) => {
     files[3] = { id: 'Voice', name: '', file: undefined, uploaded: false, isloading: false, downloadLink: '' };
   }
   productionTime.value = "1–3 Tage";
-  enveloped.value = false;
+  enveloped.value = 'false';
   discount.value = 1;
   format.value = true;
   paperFormat.value = 1;
@@ -629,9 +629,9 @@ watch(price, () => {
 });
 
 watch(enveloped, (val) => {
-  if (val) {
+  if (val === 'true') {
     envelopedPrice.value = 1.5;
-  } else if (!val) {
+  } else {
     envelopedPrice.value = 0;
   }
   calculatePrice();
@@ -874,7 +874,7 @@ export default {
                 <!-- First row -->
                 <div class="flex "> <!-- Added margin-bottom for spacing between rows -->
                   <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
-                    <p class="font-bold">Notenheft Hochformat</p>
+                    <p class="font-bold">Hochformat</p>
                   </div>
                   <div class="flex-1" style="flex-basis: 30% ">
                     <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
@@ -884,7 +884,7 @@ export default {
                 <!-- Second row, identical to the first row -->
                 <div class="flex mt-3">
                   <div class="flex-1" style="flex-basis: 70%;"> <!-- Adjusted to 60% to reflect 3/5 -->
-                    <p class="font-bold">Notenheft Querformat</p> <!-- Adjust content as needed -->
+                    <p class="font-bold">Querformat</p> <!-- Adjust content as needed -->
                   </div>
                   <div class="flex-1" style="flex-basis: 30% ">
                     <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
@@ -1043,7 +1043,8 @@ export default {
                  file:rounded-full file:border-0
                  file:text-sm file:font-semibold
                  file:bg-black-50 file:text-black-700
-                 hover:file:bg-blue-100" :required="fileIndex === 1 || enveloped" accept="application/pdf" />
+                 hover:file:bg-blue-100" :required="fileIndex === 1 || enveloped === 'true'"
+                      accept="application/pdf" />
                   </label>
                   <div v-if="files[fileIndex].isloading" class="flex flex-col justify-between ml-3">
                     <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200 border border-black">

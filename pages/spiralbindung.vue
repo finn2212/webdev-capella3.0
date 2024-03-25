@@ -86,7 +86,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
             <!-- Repeat for each item -->
             <div class="flex items-center">
               <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-2">
-              <p> Seitenumfang von 2–300 Seiten + Umschlag möglich</p>
+              <p> Seitenumfang von 4–300 Seiten + Umschlag möglich</p>
             </div>
             <!-- Repeat for each item -->
             <div class="flex items-center">
@@ -176,7 +176,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
           <!-- Image and Text 3 -->
           <div class="flex items-center mt-4 mb-5">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p>2–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
+            <p>4–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
           </div>
 
           <!-- Button -->
@@ -286,7 +286,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
           <div class="flex items-center mt-4 mb-5">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
             <p>
-              2–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
+              4–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
           </div>
 
           <!-- Button -->
@@ -318,7 +318,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
           <!-- Image and Text 3 -->
           <div class="flex items-center mt-4 mb-5">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p> 2–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
+            <p> 4–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
           </div>
 
           <!-- Button -->
@@ -350,7 +350,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
           <!-- Image and Text 3 -->
           <div class="flex items-center mt-4 mb-5">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p>2–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
+            <p>4–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
           </div>
 
           <!-- Button -->
@@ -394,7 +394,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
           <!-- Image and Text 3 -->
           <div class="flex items-center mt-4 mb-5">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p> 2–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
+            <p> 4–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
           </div>
 
           <!-- Button -->
@@ -426,7 +426,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
           <!-- Image and Text 3 -->
           <div class="flex items-center mt-4 mb-5">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p>2–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
+            <p>4–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
           </div>
 
           <!-- Button -->
@@ -460,7 +460,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
           <!-- Image and Text 3 -->
           <div class="flex items-center mt-4 mb-5">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p>2–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
+            <p>4–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
           </div>
 
           <!-- Button -->
@@ -492,7 +492,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
           <!-- Image and Text 3 -->
           <div class="flex items-center mt-4 mb-5">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p> 2–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
+            <p> 4–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
           </div>
 
           <!-- Button -->
@@ -524,7 +524,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
           <!-- Image and Text 3 -->
           <div class="flex items-center mt-4 mb-5">
             <img src="@/assets/svg/heart_plus.svg" alt="Avatar" class="mr-3">
-            <p>2–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
+            <p>4–300 Seiten Inhalt + Deckblatt und Rückwand möglich</p>
           </div>
 
           <!-- Button -->
