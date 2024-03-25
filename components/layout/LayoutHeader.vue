@@ -32,27 +32,27 @@ watch(route, (newRoute) => {
           <!-- Menu Items -->
           <div class="hidden lg:flex space-x-4 ml-10">
             <NuxtLink
-              :class="{ 'text-brand-primary': activeRoute === '/konfigurator', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/konfigurator' }"
+              :class="{ 'text-brand-primary': activeRoute === '/konfigurator', 'text-gray-600 hover:text-brand-black': activeRoute !== '/konfigurator' }"
               to="/konfigurator">
               Notenheft konfigurieren
             </NuxtLink>
             <NuxtLink
-              :class="{ 'text-brand-primary': activeRoute === '/klammerheftung', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/klammerheftung' }"
+              :class="{ 'text-brand-primary': activeRoute === '/klammerheftung', 'text-gray-600 hover:text-brand-black': activeRoute !== '/klammerheftung' }"
               to="/klammerheftung">
               Noten mit Klammerheftung
             </NuxtLink>
             <NuxtLink
-              :class="{ 'text-brand-primary': activeRoute === '/spiralbindung', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/spiralbindung' }"
+              :class="{ 'text-brand-primary': activeRoute === '/spiralbindung', 'text-gray-600 hover:text-brand-black': activeRoute !== '/spiralbindung' }"
               to="/spiralbindung">
               Noten mit Spiralbindung
             </NuxtLink>
             <NuxtLink
-              :class="{ 'text-brand-primary': activeRoute === '/good-to-know', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/good-to-know' }"
+              :class="{ 'text-brand-primary': activeRoute === '/good-to-know', 'text-gray-600 hover:text-brand-black': activeRoute !== '/good-to-know' }"
               to="/good-to-know">
               Wissenswertes
             </NuxtLink>
             <NuxtLink
-              :class="{ 'text-brand-primary': activeRoute === '/contact', 'text-gray-600 hover:text-brand-primary': activeRoute !== '/contact' }"
+              :class="{ 'text-brand-primary': activeRoute === '/contact', 'text-gray-600 hover:text-brand-black': activeRoute !== '/contact' }"
               to="/contact">
               Kontakt
             </NuxtLink>

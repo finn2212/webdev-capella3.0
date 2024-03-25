@@ -58,7 +58,16 @@ export default {
       </aside>
     </div>
   </div>
-  <h1 v-else class="m-10 text-center text-2xl font-medium text-gray-900">
-    {{ $t("cart.emptyCartLabel") }}
-  </h1>
+  <div v-else class="flex flex-col items-center justify-center">
+    <h1 class="m-10 text-center text-2xl font-medium text-gray-900">
+      {{ $t("cart.emptyCartLabel") }}
+
+    </h1>
+    <NuxtLink to="/konfigurator"
+      class="bg-black text-white max-w-44 rounded-full py-2 px-4 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex items-center justify-start">
+      <img src="@/assets/svg/plus.svg" alt="Plus" class="mr-3" /> <!-- Icon -->
+      {{ $t("startNow") }}
+    </NuxtLink>
+
+  </div>
 </template>

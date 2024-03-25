@@ -161,7 +161,7 @@ function render() {
         <div class="carousel w-full yellow p-20 border-12 border-white">
           <!-- Slide 1 -->
           <div id="slide1" class="carousel-item relative w-full flex flex-col" v-show="firstSlideIndex === 1">
-            <h3 class="font-bold">»Spitzenqualität zu hervorragenden Preisen. Wir drucken nur noch hier«</h3>
+            <h3 class="font-bold">»Spitzenqualität zu hervorragenden Preisen. Wir drucken nur noch hier!«</h3>
             <div class="flex flex-col md:flex-row items-start mt-4">
               <p class="font-bold mr-2">
                 Dieter Viehweider

@@ -6,3 +6,8 @@ a {
 
 element.style {
 }
+
+.router-link-active{
+    color: black !important;
+    font-weight: bold !important;
+}

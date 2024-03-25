@@ -99,7 +99,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                         <img src="@/assets/svg/local_post_office.svg" class="max-w-12" alt="Avatar">
                         <h2 class="mt-5">Postanschrift</h2>
                         <p class="mt-3">Wir freuen uns auch über einen Brief von Ihnen. Diesen senden Sie bitte an:
-                            capellaprint</p>
+                        </p>
                         <p class="mt-3 font-bold">capellaprint</p>
                         <p class="mt-0 font-bold">c/o AURIOPRINT</p>
                         <p class="mt-3">Augsburger Straße 9</p>

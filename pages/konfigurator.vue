@@ -26,7 +26,6 @@ const sessionContextData = ref();
 const handlingPrice = ref(0);
 const pagePriceLow = ref(0);
 const pagePriceHigh = ref(0);
-const baseVoicePrice = ref(0);
 const voicePagePrice = ref(0);
 
 // const route = useRoute();
@@ -63,7 +62,6 @@ const envelopedPrice = ref(0);
 const bindingType = ref("true");
 const errorMassage = ref("");
 const totalVoicePrice = ref(0);
-const bindingTypePrice = ref(0);
 const weight = ref(0);
 const swEndPoint = ref("");
 const accesstoken = ref("");
@@ -97,7 +95,6 @@ onMounted(async () => {
   handlingPrice.value = metaInfo.custom_meta_handlingPrice || 0;
   pagePriceLow.value = metaInfo.custom_meta_pagePriceLow || 0;
   pagePriceHigh.value = metaInfo.custom_meta_pagePriceHigh || 0;
-  baseVoicePrice.value = metaInfo.custom_meta_voice_handling || 0;
   voicePagePrice.value = metaInfo.custom_meta_baseVoicePrice || 0;
   isLoadingPrice.value = false
   calculatePrice();
@@ -340,25 +337,26 @@ const calculatePrice = () => {
   calculateDiscount();
   setPagePrice();
   setBinding();
-  setBindingPrice();
   calculateVoicePrices();
   calculateWeight();
   calculateProjectPrice();
 
   let pagesToUse = pagesQuantitiy.value;
   if (projectType.value === 3) {
-    price.value = totalVoicePrice.value + baseVoicePrice.value;
+    price.value = totalVoicePrice.value + handlingPrice.value;
   } else {
-    price.value = handlingPrice.value / productQuantity.value + ((pagePrice.value * pagesToUse) + bindingTypePrice.value + totalVoicePrice.value + envelopedPrice.value);
+    price.value = handlingPrice.value / productQuantity.value + ((pagePrice.value * pagesToUse) + totalVoicePrice.value + envelopedPrice.value);
     if (discount.value !== 1) {
-      price.value = handlingPrice.value / productQuantity.value + ((1 - discount.value) * (pagePrice.value * pagesToUse) + bindingTypePrice.value + totalVoicePrice.value + envelopedPrice.value);
+      price.value = handlingPrice.value / productQuantity.value + ((1 - discount.value) * (pagePrice.value * pagesToUse) + totalVoicePrice.value + envelopedPrice.value);
     }
   }
 };
 
 const calculateDiscount = () => {
   // Find the discount entry that matches the product quantity.
-  const discountEntry = discounts.find(discount => productQuantity.value <= discount.amount);
+  const discountEntry = discounts.reduce((acc, discount) => {
+    return productQuantity.value >= discount.amount ? discount : acc;
+  }, discounts[0]);
 
   // If a matching discount entry is found, use its values.
   // Otherwise, apply the default or last known discount rate for quantities not explicitly covered.
@@ -388,14 +386,6 @@ const setPagePrice = () => {
 
 const setBinding = () => {
   bindingType.value = (pagesQuantitiy.value >= 88 || !format.value || paperFormat.value > 3) ? 'false' : 'true';
-};
-
-const setBindingPrice = () => {
-  if (bindingType.value === 'true') {
-    bindingTypePrice.value = 0;
-  } else {
-    bindingTypePrice.value = paperFormat.value < 4 ? 3.5 : 4.5;
-  }
 };
 
 const calculateVoicePrices = () => {
@@ -435,7 +425,6 @@ const calculateProjectPrice = () => {
   if (productQuantity.value === 0) {
     projectPriceString.value = priceString.value;
   } else {
-    debugger;
     projectPriceString.value = (price.value * productQuantity.value).toFixed(2).replace(".", ",");
   }
 };
@@ -457,7 +446,6 @@ const reset = (full: boolean) => {
   color.value = 'true';
   bindingType.value = "true";
   voices.value = [];
-  bindingTypePrice.value = 0;
   totalVoicePrice.value = 0;
   calculatePrice();
 };
@@ -625,6 +613,10 @@ watch(projectType, () => {
 });
 
 watch(color, () => {
+  calculatePrice();
+});
+
+watch(format, (val) => {
   calculatePrice();
 });
 
@@ -886,7 +878,7 @@ export default {
                   </div>
                   <div class="flex-1" style="flex-basis: 30% ">
                     <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
-                    <input type="radio" id="option1" value="true" v-model="format" />
+                    <input type="radio" id="option1" :value="true" v-model="format" />
                   </div>
                 </div>
                 <!-- Second row, identical to the first row -->
@@ -896,7 +888,7 @@ export default {
                   </div>
                   <div class="flex-1" style="flex-basis: 30% ">
                     <!-- Adjusted to 40% to reflect 2/5 and added margin-top for alignment -->
-                    <input type="radio" id="option2" value="false" v-model="format" />
+                    <input type="radio" id="option2" :value="false" v-model="format" />
                   </div>
                 </div>
               </div>
@@ -1179,7 +1171,7 @@ export default {
                         <th scope="col" class="py-3 px-6">Stimmenname:</th>
                         <th scope="col" class="py-3 px-6">Seitenanzahl Inhalt:</th>
                         <th scope="col" class="py-3 px-6">Exemplare pro Set:</th>
-                        <th scope="col" class="py-3 px-6">Datei Name:</th>
+                        <th scope="col" class="py-3 px-6">Dateiname:</th>
                         <th scope="col" class="py-3 px-6">Löschen:</th>
                       </tr>
                     </thead>

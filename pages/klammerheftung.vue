@@ -200,15 +200,12 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
                 <!-- New div that aligns at the bottom -->
                 <div class="mt-auto beige p-5">
                     <p>Mehr als 88 Seiten Inhalt? Querformat gesucht? Notenheft in DIN A3 oder größer?</p>
-                    <NuxtLink to="/konfigurator">
+                    <NuxtLink to="/spiralbindung">
                         <h2 class="mt-3">
                             Zu den
                             Notenheften mit Spiralbindung
                         </h2>
                         <img src="@/assets/svg/arrow_circle_right.svg" alt="Avatar" class="mt-3">
-                    </NuxtLink>
-                    <NuxtLink class="a" to="/konfigurator">
-
                     </NuxtLink>
                 </div>
             </div>

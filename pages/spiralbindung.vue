@@ -115,7 +115,7 @@ const routePath = route.path.replace(`${locale.value}`, "").replace("//", "/");
         <!-- New div that aligns at the bottom -->
         <div class="mt-auto beige p-5">
           <p> Weniger als 88 Seiten Inhalt? Günstigere Preise gesucht?</p>
-          <NuxtLink to="/konfigurator">
+          <NuxtLink to="/klammerheftung">
             <h2 class="mt-3">
               Zu den
               Notenheften mit Klammerheftung
