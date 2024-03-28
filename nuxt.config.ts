@@ -94,7 +94,7 @@ export default defineNuxtConfig({
   ],
   plugins: [
     "~/plugins/firebase.js", // Make sure the path matches your file's location
-    "~/plugins/cookiebot.js",
+    // "~/plugins/cookiebot.js",
   ],
   postcss: {
     plugins: {
