@@ -1226,7 +1226,7 @@ export default {
               </div>
             </div>
           </div>
-          <div class="flex flex-col md:w-3/9 sticky top-0 border-12 border-white">
+          <div class="flex flex-col md:w-3/9 sticky top-0 border-12 border-white custom-sticky-sidebar">
             <div class="green w-full p-5">
               <div class="flex">
                 <div class="pt-3 w-1/2">
@@ -1410,5 +1410,18 @@ input[type="number"] {
     max-height: 300px;
     /* Example max-height for extra-small screens */
   }
+}
+
+.custom-sticky-sidebar {
+  position: -webkit-sticky;
+  /* For Safari */
+  position: sticky;
+  top: 110px;
+  /* Adjust this value as needed */
+  height: auto;
+  /* Or set a specific height */
+  overflow-y: auto;
+  max-height: 100vh;
+  /* Prevents the sidebar from extending beyond the viewport */
 }
 </style>
